@@ -3,7 +3,7 @@ import FileHelper from '../lib/file-helper.js'
 
  import AppHelper from '../lib/app-helper.js'
 
-let outputConfig = FileHelper.readJSONFile('./market-api-server/output/baycOutputData.json')
+let outputConfig = FileHelper.readJSONFile('./market-api-server/config/baycOutputData.json')
  
 export default class PopulateCachedNFTTilesTask {
 
@@ -14,10 +14,10 @@ static async runTask(inputs, mongoInterface ){
 let collectionName = inputs.collectionName 
 
 if(collectionName.toLowerCase() == 'boredapes'){
-    outputConfig = FileHelper.readJSONFile('./market-api-server/output/baycOutputData.json')
+    outputConfig = FileHelper.readJSONFile('./market-api-server/config/baycOutputData.json')
 }
 if(collectionName.toLowerCase() == 'mutantapes'){
-    outputConfig = FileHelper.readJSONFile('./market-api-server/output/maycOutputData.json')
+    outputConfig = FileHelper.readJSONFile('./market-api-server/config/maycOutputData.json')
 }
 
 
