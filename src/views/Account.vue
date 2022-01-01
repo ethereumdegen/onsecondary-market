@@ -278,9 +278,9 @@ export default {
            let filterCollections  = ['boredapes','mutantapes'] 
 
 
-             console.log('filterNFTcontracts',filterNFTcontracts)
+             console.log('filterNFTcontracts',filterCollections)
  
-            let results = await StarflaskAPIHelper.resolveStarflaskQuery(  FrontendConfig.tokenDataApiRoot+ '/api/v1/apikey', {"requestType": "NFTTiles_by_owner", "input":{"publicAddress": this.profileAccountAddress, "filterNFTcontracts": filterNFTcontracts }  }   )
+            let results = await StarflaskAPIHelper.resolveStarflaskQuery(  FrontendConfig.tokenDataApiRoot+ '/api/v1/apikey', {"requestType": "NFTTiles_by_owner", "input":{"publicAddress": this.profileAccountAddress, "filterNFTcontracts": filterCollections }  }   )
 
             console.log('results',results )
 
