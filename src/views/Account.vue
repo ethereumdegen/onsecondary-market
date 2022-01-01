@@ -301,7 +301,7 @@ export default {
             this.personalOrdersArray = []
 
             
-            let filterCollections  = ['Cryptoadz','Cryptoflyz'] 
+            let filterCollections  = ['boredapes','mutantapes'] 
 
             let inputRequest = { "publicAddress": this.profileAccountAddress, "filterCollections": filterCollections  } 
  
