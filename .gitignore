@@ -2,8 +2,10 @@
 node_modules
 /dist
 
+
 public/images/boredapes/*
 public/images/mutantapes/* 
+market-api-server/output/*
 market-api-server/config/serverconfig.json
 *serverconfig.json
 
