@@ -44,6 +44,7 @@ let dataghostConfig = dataghostConfigFile[envmode]
     await PopulateTraitsTask.runTask({collectionName:'mutantapes'},mongoInterface)
     await PopulateCachedNFTTilesTask.runTask({collectionName:'mutantapes'},mongoInterface)
     }catch(e){
+      console.log(e)
       console.error('could not run all initial db tasks ')
     }
 

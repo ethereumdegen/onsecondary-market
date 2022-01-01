@@ -27,26 +27,29 @@ let tokenDataArray = []
 
 for(let [tokenId,traitsArray] of Object.entries(outputConfig)){
 
+  console.log('meep', tokenId)
+
     let contractAddress = AppHelper.contractCollectionNameToContractAddress(collectionName)
     contractAddress = AppHelper.toChecksumAddress(contractAddress)
 
     tokenDataArray.push({
           collectionName:  collectionName,
           contractAddress: contractAddress,
-          tokenId: tokenId,
-          nftTraits:traitsArray
+          tokenId: parseInt(tokenId),
+          nftTraits:traitsArray,
+          combinedAssetId: AppHelper.getCombinedAssetId(contractAddress,parseInt(tokenId))
      })
 
 }   
+
+console.log('tokenDataArray',tokenDataArray)
  
 const nftTilesModel =  mongoInterface.cachedNFTTileModel
  
 
-  try{
-    await nftTilesModel.insertMany(tokenDataArray,{ ordered: false })
-  }catch(e){
-      console.log(e)
-  } 
+  
+   let inserted = await nftTilesModel.insertMany(tokenDataArray,{ ordered: false })
+   console.log('inserted',inserted)
 
 
   let tilesMissingContractAddress = await nftTilesModel.find({contractAddress: {$exists:false}})
