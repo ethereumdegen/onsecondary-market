@@ -183,7 +183,7 @@ export default {
             this.recentOrdersArray = []
 
             
-            let filterCollections  = ['Cryptoadz','Cryptoflyz'] 
+            let filterCollections  = ['boredapes','mutantapes'] 
  
  
             let results = await StarflaskAPIHelper.resolveStarflaskQuery( 
@@ -234,7 +234,7 @@ export default {
             this.recentSalesArray = []
 
             
-            let filterCollections  = ['Cryptoadz','Cryptoflyz'] 
+            let filterCollections  = ['boredapes','mutantapes'] 
 
             
             let results = await StarflaskAPIHelper.resolveStarflaskQuery( 

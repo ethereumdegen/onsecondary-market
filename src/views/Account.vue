@@ -275,7 +275,7 @@ export default {
 
            
    
-            let filterNFTcontracts  = ['Cryptoadz','Cryptoflyz'] 
+           let filterCollections  = ['boredapes','mutantapes'] 
 
 
              console.log('filterNFTcontracts',filterNFTcontracts)
