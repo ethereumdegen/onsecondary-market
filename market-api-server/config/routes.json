@@ -1,0 +1,10 @@
+[
+  ["get /ping", "pong"],
+  ["post /mint", "mint"],
+  ["get /tokens", "getTokens"],
+  ["get /token/:tokenId/uri", "getTokenURI"],
+  ["get /token/:tokenId/metadata", "getTokenMetadata"],
+  ["post /token/:tokenId/transfer", "transfer"],
+  ["post /wallet/generate", "generateWallet"],
+  ["post /wallet/address", "getWalletPublicAddress"]
+]

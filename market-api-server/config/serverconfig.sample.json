@@ -1,0 +1,29 @@
+{
+    "development":{
+        "useHTTPS":false,
+        "chainId":4,
+        "dbName":"apes_development",
+        "web3provider":"https://eth-rinkeby.alchemyapi.io/v2/" 
+    },
+    "test":{
+        "useHTTPS":false,
+        "chainId":4,
+        "dbName":"apes_test",
+        "web3provider":"https://eth-rinkeby.alchemyapi.io/v2/" 
+    },
+    "staging":{
+        "useHTTPS":true,
+        "chainId":4,
+        "dbName":"apes_staging",
+        "web3provider":"https://eth-rinkeby.alchemyapi.io/v2/" 
+    },
+    "production":{
+        "useHTTPS":true,
+        "chainId":1,
+        "dbName":"apes_production",
+        "web3provider":"https://eth-mainnet.alchemyapi.io/v2/"
+    }
+    
+    
+   
+}

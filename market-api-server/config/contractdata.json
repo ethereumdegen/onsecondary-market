@@ -1,0 +1,35 @@
+{
+  "mainnet":{
+    "contracts":{
+      
+      "weth":{"name":"weth","address":"0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", "decimals":18 }, 
+ 
+      "blockstore":{"name":"blockstore", "address":"0x0419732028fa499200a0e36972e4c139e98d28e1"}, 
+       
+      "boredapes":{"name":"boredapes","address":"0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"}, 
+      "mutantapes":{"name":"mutantapes","address":"0x60e4d786628fea6478f785a6d7e704777c86a7c6"} ,
+      "phunkyapes":{"name":"phunkyapes","address":"0x176e0fe17314def59f0f06e976e1b74203be4a55"}
+    }
+
+
+  },
+  "rinkeby":{
+    "contracts":{
+      
+      "weth":{"name":"weth","address":"0xDf032Bc4B9dC2782Bb09352007D4C57B75160B15", "decimals":18 },
+     
+      "boredapes":{"name":"boredapes","address":"0x70BC4cCb9bC9eF1B7E9dc465a38EEbc5d73740FB"}, 
+      "mutantapes":{"name":"mutantapes","address":"0xfc957dcbe0785ababa07429e4fffe8ad58bd612d"},  
+ 
+      "phunkyapes":{"name":"phunkyapes","address":"0xfc957dcbe0785ababa07429e4fffe8ad58bd612d"},
+ 
+      "blockstore":{"name":"blockstore","address":"0x843f116649dda1222812ed6881175bd4206e1fad"} 
+
+      
+    }
+
+
+  }
+
+
+}

@@ -1,0 +1,62 @@
+{
+    "development":{
+        "vibeGraphConfig":{
+            "contracts":[
+          
+                {"address":"0x843f116649dda1222812ed6881175bd4206e1fad","startBlock":9300000, "type":"BlockStore"},
+                {"address":"0x70BC4cCb9bC9eF1B7E9dc465a38EEbc5d73740FB","name":"boredapesyachtclub","startBlock":9228750  , "type":"ERC721" },
+                {"address":"0xfc957dcbe0785ababa07429e4fffe8ad58bd612d","name":"mutantapes","startBlock":9463481   , "type":"ERC721" }  
+            
+            ],
+            "fineBlockGap":15,
+            "courseBlockGap":2000, 
+            "dbName":"vibegraph_development",
+            "subscribe": true,
+            "logging":true
+        },
+     
+        "chainId":4
+    },
+    "staging":{
+        "vibeGraphConfig":{
+            "contracts":[
+                {"address":"0x843f116649dda1222812ed6881175bd4206e1fad","startBlock":9300000, "type":"BlockStore"},
+                {"address":"0x70BC4cCb9bC9eF1B7E9dc465a38EEbc5d73740FB","name":"boredapesyachtclub","startBlock":9228750  , "type":"ERC721" },
+                {"address":"0xfc957dcbe0785ababa07429e4fffe8ad58bd612d","name":"mutantapes","startBlock":9463481   , "type":"ERC721" }  
+            
+
+            ],
+            "fineBlockGap":15,
+            "courseBlockGap":2000,
+            "dbName":"vibegraph_staging",
+            "subscribe": true,
+            "logging":true
+        },
+     
+        "chainId":4
+    },
+    "production":{
+
+        "vibeGraphConfig":{
+            "contracts":[
+                
+               
+            
+                {"address":"0x0419732028fa499200a0e36972e4c139e98d28e1","startBlock":13244370, "type":"BlockStore"}, 
+                {"address":"0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d","name":"boredapesyachtclub","startBlock":  12287507  , "type":"ERC721" } ,
+                {"address":"0x60e4d786628fea6478f785a6d7e704777c86a7c6","name":"mutantapes","startBlock":13117018  , "type":"ERC721" }  
+
+
+            ],
+            "fineBlockGap":15,
+            "courseBlockGap":2000,
+            "dbName":"vibegraph_production",
+            "subscribe": true,
+            "logging":false
+        }, 
+        "chainId":1
+    }
+    
+    
+   
+}
