@@ -6,7 +6,7 @@
               
          
             
-       <canvas id="canvasRegn" width="600" height="450"style="margin:100px;"></canvas>
+       <canvas id="canvasRegn" height="450" class="my-8" style="display:block"></canvas>
 
  </div>
  </template>
@@ -78,25 +78,38 @@ var fallingDrops = [];
     },
      setup() {
         var canvas = document.getElementById('canvasRegn');
+
+        window.addEventListener('resize', this.resizeCanvas, false);
+
+        this.resizeCanvas()
      
         if (canvas.getContext) {
                 ctx = canvas.getContext('2d');
             
-                //    imgBg = new Image();
-           // imgBg.src = "http://lorempixel.com/600/600/sports/";
+               
         setInterval(this.draw, 36);
         for (var i = 0; i < noOfDrops; i++) {
             var fallingDr = new Object();
             fallingDr["image"] =  new Image();
             fallingDr.image.src = '/images/banana.png';
                 
-            fallingDr["x"] = Math.random() * 600;
-            fallingDr["y"] = -400 + Math.random() * 630;
+            fallingDr["x"] = Math.random() * (canvas.width * 1.50);
+            fallingDr["y"] = -(canvas.width) + Math.random() * (canvas.width * 1.50);
             fallingDr["speed"] = 1 + Math.random() * 0.5;
             fallingDrops.push(fallingDr);
             }
 
         }
+    },
+
+    resizeCanvas(){
+        var canvas = document.getElementById('canvasRegn');
+        canvas.width = 600 
+
+        if( (window.innerWidth * 0.9) < 600){
+            canvas.width =(window.innerWidth * 0.9)
+        }
+
     }
 
 

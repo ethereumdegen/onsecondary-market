@@ -19,18 +19,18 @@
 
      <div class=" container mb-16 margin-center">
       
-       <div class="grid md:grid-flow-col mt-32">
+       <div class="grid md:grid-cols-2 mt-32">
 
          
 
 
-         <div class="  py-8">
+         <div class="column  py-8">
 
 
              
 
              <div class="w-row">
-             <FrontPageMedia  /> 
+               <FrontPageMedia  /> 
 
             </div>
 
@@ -43,7 +43,7 @@
          </div>
 
  
-         <div class="   column-2 w-col w-col-6 text-center ">
+         <div class="   column    text-center ">
 
               <div class="py-32 " style="width:50%; margin: 0 auto;"> 
               
