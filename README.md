@@ -30,6 +30,7 @@ npm run server
 ```
  
 ## copy images to dist 
+cd dist/images
 cp -r ../../../images/boredapes/* boredapes/
 cp -r ../../../images/mutantapes/* mutantapes/
 
