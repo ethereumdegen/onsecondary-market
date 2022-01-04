@@ -58,9 +58,9 @@ export default class AssetDataHelper {
   }  
 
   static getImageFolderNameFromCollectionName(cName){
-    if( cName && cName.toLowerCase() == 'mutantapes' ) return 'mutantapes'
+  //  if( cName && cName.toLowerCase() == 'mutantapes' ) return 'mutantapes'
 
-    return 'boredapes'
+    return cName.toLowerCase()
   } 
 
   static getProjectNameForAsset( contractAddress, tokenId   )
