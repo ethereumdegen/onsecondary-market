@@ -50,7 +50,13 @@ export default {
     getTitle(){
       if(this.nftData){
 
-        return this.nftData.collectionName.concat(' #').concat(this.nftTokenId)
+        let typeName = this.nftData.collectionName
+
+        if(typeName == 'boredapes'){typeName = 'Bored Ape'}
+        if(typeName == 'mutantapes'){typeName = 'Mutant Ape'}
+        
+
+        return typeName.concat(' #').concat(this.nftTokenId)
 
        }
           return ''

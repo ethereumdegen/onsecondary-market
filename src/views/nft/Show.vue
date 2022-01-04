@@ -242,7 +242,8 @@ export default {
 
       nftTraitsArray:[],
 
-      collectionName: undefined
+      collectionName: undefined,
+      imagesReadyToLoad: false
 
     }
   },
@@ -260,7 +261,8 @@ export default {
      this.nftContractAddress = FrontendHelper.lookupContractAddress(  this.collectionName, this.web3Plug.getContractDataForNetworkID(1)  )
       
       this.fetchTokenData() 
-       this.fetchOrdersForToken()
+
+      this.fetchOrdersForToken()
 
     
     
@@ -282,12 +284,11 @@ export default {
      
         await this.fetchTokenData() 
 
-        await this.fetchOrdersForToken()
+        await this.fetchOrdersForToken() 
 
 
-      
-        this.$forceUpdate();
-
+        this.imagesReadyToLoad = true 
+        this.$forceUpdate();  
        
 
 
@@ -310,7 +311,8 @@ export default {
 
      
       getImageURL(){
- 
+        if(!this.imagesReadyToLoad)return ''
+
         return AssetDataHelper.getImageURL(this.collectionName,this.nftTokenId) 
  
       },
@@ -322,6 +324,10 @@ export default {
         let typeName = this.getCollectionName()
         let tokenId = this.nftTokenId
 
+
+        if(typeName == 'boredapes'){typeName = 'Bored Ape'}
+        if(typeName == 'mutantapes'){typeName = 'Mutant Ape'}
+        
         return typeName + ' ' + '#' + tokenId
 
         //return 'unknown asset'
@@ -503,12 +509,15 @@ export default {
         }else(
           console.log('addy is ', this.nftContractAddress)
         )
-
-         await this.$refs.OffersList.checkForApproval() 
+        
+        if(this.$refs.OffersList){
+          await this.$refs.OffersList.checkForApproval() 
 
           //update the buy offers list 
          await this.$refs.OffersList.fetchBuyOffers() 
 
+        }
+         
 
         //update the buyout button 
          let response = await StarflaskAPIHelper.resolveStarflaskQuery( FrontendConfig.marketApiRoot+'/api/v1/apikey', {"requestType": "get_orders_for_token", "input":{"contractAddress":this.nftContractAddress,"tokenId":  this.nftTokenId}  }    )
