@@ -3,7 +3,7 @@ import FileHelper from '../lib/file-helper.js'
 
  import AppHelper from '../lib/app-helper.js'
 
-let outputConfig = FileHelper.readJSONFile('./market-api-server/config/baycOutputData.json')
+let outputConfig;  // = FileHelper.readJSONFile('./market-api-server/config/baycOutputData.json')
  
 export default class PopulateCachedNFTTilesTask {
 
@@ -11,39 +11,34 @@ export default class PopulateCachedNFTTilesTask {
 static async runTask(inputs, mongoInterface ){
 
     
-let collectionName = inputs.collectionName 
+ let collectionName = inputs.collectionName 
 
-if(collectionName.toLowerCase() == 'boredapes'){
-    outputConfig = FileHelper.readJSONFile('./market-api-server/config/baycOutputData.json')
-}
-if(collectionName.toLowerCase() == 'mutantapes'){
-    outputConfig = FileHelper.readJSONFile('./market-api-server/config/maycOutputData.json')
-}
-
-
-
-let tokenDataArray = []
+ 
+ outputConfig = FileHelper.readJSONFile(`./market-api-server/config/${collectionName.toLowerCase()}.json`)
   
 
-for(let [tokenId,traitsArray] of Object.entries(outputConfig)){
-   
+ let tokenDataArray = []
+    
 
-    let contractAddress = AppHelper.contractCollectionNameToContractAddress(collectionName)
-    contractAddress = AppHelper.toChecksumAddress(contractAddress)
+  for(let [tokenId,traitsArray] of Object.entries(outputConfig)){
+    
 
-    tokenDataArray.push({
-          collectionName:  collectionName,
-          contractAddress: contractAddress,
-          tokenId: parseInt(tokenId),
-          nftTraits:traitsArray,
-          combinedAssetId: AppHelper.getCombinedAssetId(contractAddress,parseInt(tokenId))
-     })
+      let contractAddress = AppHelper.contractCollectionNameToContractAddress(collectionName)
+      contractAddress = AppHelper.toChecksumAddress(contractAddress)
 
-}   
+      tokenDataArray.push({
+            collectionName:  collectionName,
+            contractAddress: contractAddress,
+            tokenId: parseInt(tokenId),
+            nftTraits:traitsArray,
+            combinedAssetId: AppHelper.getCombinedAssetId(contractAddress,parseInt(tokenId))
+      })
+
+  }   
  
- 
-const nftTilesModel =  mongoInterface.cachedNFTTileModel
- 
+  
+  const nftTilesModel =  mongoInterface.cachedNFTTileModel
+  
 
   try{
    let inserted = await nftTilesModel.insertMany(tokenDataArray,{ ordered: false })
@@ -71,8 +66,8 @@ const nftTilesModel =  mongoInterface.cachedNFTTileModel
 
   }
  
-  
- console.log(`PopulateCachedNFTTilesTask ${collectionName}: task complete.`)
+    
+  console.log(`PopulateCachedNFTTilesTask ${collectionName}: task complete.`)
     
 
 }

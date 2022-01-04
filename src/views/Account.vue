@@ -170,7 +170,7 @@ import Footer from './components/Footer.vue';
 import TabsBar from './components/TabsBar.vue';
 import GenericTable from './components/GenericTable.vue';
 
-//import BidPacketHelper from '../js/bidpacket-helper.js'
+ 
  
  import MathHelper from '../js/math-helper.js'
 
@@ -178,7 +178,9 @@ import GenericTable from './components/GenericTable.vue';
 const envName = process.env.NODE_ENV
 
 const FrontendConfig = require('../config/FrontendConfig.json')[envName]
-
+const SharedConfig = require('../../shared/sharedconfig.json')
+ 
+ 
  
 
 import AssetDataHelper from '../js/asset-data-helper'
@@ -275,7 +277,7 @@ export default {
 
            
    
-           let filterCollections  = ['boredapes','mutantapes'] 
+           let filterCollections  = SharedConfig.collectionNames
 
 
              console.log('filterNFTcontracts',filterCollections)
@@ -301,7 +303,7 @@ export default {
             this.personalOrdersArray = []
 
             
-            let filterCollections  = ['boredapes','mutantapes'] 
+            let filterCollections  = SharedConfig.collectionNames
 
             let inputRequest = { "publicAddress": this.profileAccountAddress, "filterCollections": filterCollections  } 
  

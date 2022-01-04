@@ -130,6 +130,7 @@ import Web3Plug from '../js/web3-plug.js'
 const envName = process.env.NODE_ENV
 
 const FrontendConfig = require('../config/FrontendConfig.json')[envName]
+ const SharedConfig = require('../../shared/sharedconfig.json')
  
  
 import StarflaskAPIHelper from '../js/starflask-api-helper'
@@ -183,7 +184,7 @@ export default {
             this.recentOrdersArray = []
 
             
-            let filterCollections  = ['boredapes','mutantapes'] 
+            let filterCollections  = SharedConfig.collectionNames 
  
  
             let results = await StarflaskAPIHelper.resolveStarflaskQuery( 
@@ -226,15 +227,14 @@ export default {
 
           },
 
-
-// {"requestType":"recent_sales_history", "input":{"filterCollections":["Cryptoadz"]}}
+ 
 
           async fetchRecentSales(){
 
             this.recentSalesArray = []
 
             
-            let filterCollections  = ['boredapes','mutantapes'] 
+            let filterCollections  =  SharedConfig.collectionNames 
 
             
             let results = await StarflaskAPIHelper.resolveStarflaskQuery( 

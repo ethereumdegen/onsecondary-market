@@ -25,6 +25,8 @@ let serverConfig = serverConfigFile[envmode]
 let dataghostConfigFile = FileHelper.readJSONFile('./market-api-server/config/dataghostconfig.json')
 let dataghostConfig = dataghostConfigFile[envmode]
 
+let sharedConfig =  FileHelper.readJSONFile('./shared/sharedconfig.json')
+
   async function start(){
 
 
@@ -37,14 +39,15 @@ let dataghostConfig = dataghostConfigFile[envmode]
 
     await GenerateContractDataLookupTask.runTask( )
     
- 
-    await PopulateTraitsTask.runTask({collectionName:'boredapes'},mongoInterface)
-    await PopulateCachedNFTTilesTask.runTask({collectionName:'boredapes'},mongoInterface)
 
+    
+    for(let name of sharedConfig.collectionNames){
+
+      await PopulateTraitsTask.runTask({collectionName: name},mongoInterface)
+      await PopulateCachedNFTTilesTask.runTask({collectionName: name},mongoInterface)
   
-  
-    await PopulateTraitsTask.runTask({collectionName:'mutantapes'},mongoInterface)
-    await PopulateCachedNFTTilesTask.runTask({collectionName:'mutantapes'},mongoInterface)
+    }
+ 
    
     console.log('boot vibegraph interface ', dataghostConfig.vibeGraphConfig.dbName)
 

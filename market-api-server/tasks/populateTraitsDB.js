@@ -5,7 +5,7 @@ import FileHelper from '../lib/file-helper.js'
  
  
 
-let outputConfig = FileHelper.readJSONFile('./market-api-server/config/baycOutputData.json')
+let outputConfig; // = FileHelper.readJSONFile('./market-api-server/config/baycOutputData.json')
  
 export default class PopulateTraitsTask {
 
@@ -14,12 +14,9 @@ static async runTask( inputs, mongoInterface ){
  
 let collectionName = inputs.collectionName 
 
-if(collectionName.toLowerCase() == 'boredapes'){
-    outputConfig = FileHelper.readJSONFile('./market-api-server/config/baycOutputData.json')
-}
-if(collectionName.toLowerCase() == 'mutantapes'){
-    outputConfig = FileHelper.readJSONFile('./market-api-server/config/maycOutputData.json')
-}
+ 
+    outputConfig = FileHelper.readJSONFile(`./market-api-server/config/${collectionName.toLowerCase()}.json`)
+ 
 
 
 let traitsTokenIdMap = { } 
@@ -28,7 +25,7 @@ let traitsTokenIdMap = { }
 
 for(let [tokenId,traitsArray] of Object.entries(outputConfig)){
 
-   // console.log('row value', tokenId, traitsArray )
+  
 
     for(let trait of traitsArray){
         let traitType = trait.trait_type.toString()

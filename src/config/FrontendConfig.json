@@ -4,8 +4,8 @@
         "marketApiRoot":"http://localhost:4000" 
     },
     "production":{
-        "tokenDataApiRoot":"https://api.baycmarket.io",
-        "marketApiRoot":"https://api.baycmarket.io" 
+        "tokenDataApiRoot":"https://doodles.onsecondary.com",
+        "marketApiRoot":"https://doodles.onsecondary.com" 
     }
    
 }
