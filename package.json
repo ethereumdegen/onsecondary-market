@@ -22,7 +22,7 @@
     "lint": "vue-cli-service lint",
     "test": "NODE_ENV=test mocha 'tests/**/*.js' --timeout 25000",
     "test:frontend": "vue-cli-service test:unit",
-    "fetchDoodleData": "node market-api-server/tasks/fetchCollectionDataDoodles.js",
+    "fetchDoodlesData": "node market-api-server/tasks/fetchCollectionDataDoodles.js",
     "fetchCoolcatsData": "node market-api-server/tasks/fetchCollectionDataCoolcats.js",
     "populateTraitsDB": "node market-api-server/tasks/populateTraitsDB.js"
   },

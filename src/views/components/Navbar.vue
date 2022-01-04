@@ -7,7 +7,7 @@
         
         </div>
         <router-link to="/" class='brand w-nav-brand w--current flex-grow inline text-xl text-gray-200 font-bold no-underline'>
-        🍌 BAYC Market
+        🖌️ Doodle Market
         </router-link>
 
  

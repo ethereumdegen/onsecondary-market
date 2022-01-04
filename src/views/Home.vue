@@ -73,14 +73,14 @@
 
                   <div class="w-row text-center my-8">  
             
-                      <router-link to="/collection/boredapes" class='text-gray-200 text-xl inline text-align:center' style="margin:0 auto;"> Shop Bored Apes </router-link>
+                      <router-link to="/collection/doodles" class='text-gray-200 text-xl inline text-align:center' style="margin:0 auto;"> Shop Doodles </router-link>
                         
                     
                   </div>
 
                     <div class="w-row text-center my-8">  
         
-                      <router-link to="/collection/mutantapes" class='text-gray-200 text-xl inline text-align:center ' style="margin:0 auto;"> Shop Mutants </router-link>
+                      <router-link to="/collection/coolcats" class='text-gray-200 text-xl inline text-align:center ' style="margin:0 auto;"> Shop Coolcats </router-link>
                         
                    </div>
 
