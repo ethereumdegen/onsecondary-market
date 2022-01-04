@@ -32,7 +32,7 @@ var fallingDrops = [];
 
 
     export default {
-    name: 'FrontPageMedia',
+    name: 'BananaMedia',
     props: [ ],
     data() {
         return {

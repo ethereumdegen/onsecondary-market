@@ -44,9 +44,9 @@ export default new Router({
     },
 
 
-    
+
     {
-      path: '/splash/',
+      path: '/splash/:collectionName',
       name: 'splash',
       component: Splash
     },
