@@ -69,7 +69,7 @@
 
 
           <div  class=" " v-if="!allOwnedNFTs || allOwnedNFTs.length == 0" >
-              No find Monkee. 🍌 
+              Nothing found. 
           </div>
 
 

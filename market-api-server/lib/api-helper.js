@@ -497,6 +497,10 @@
         static async findAllNFTTilesByTraitValue(collectionName,traitName,traitValue, currentPage, maxItemsPerPage,  mongoInterface){
             
             let allTiles = []
+            let totalGroupLength = 0
+
+            let {startIndex,endIndex} = APIHelper.getPagesStartEnd(currentPage, maxItemsPerPage )
+
 
            if( traitName && traitValue){
 
@@ -514,36 +518,16 @@
             }
   
 
-             allTiles = await mongoInterface.cachedNFTTileModel.find({collectionName: collectionName, tokenId: {$in:filterArray} })
-         
+             allTiles = await mongoInterface.cachedNFTTileModel.find({collectionName: collectionName, tokenId: {$in:filterArray} }).sort({buyoutPriceFromOrderId:1 ,lowestBuyoutPriceWei:-1}).skip(startIndex).limit( maxItemsPerPage )
+             totalGroupLength = filterArray.length
             }else{
            
-            allTiles = await mongoInterface.cachedNFTTileModel.find({collectionName: collectionName  })
-
+            allTiles = await mongoInterface.cachedNFTTileModel.find({collectionName: collectionName  }).sort({buyoutPriceFromOrderId:1 , lowestBuyoutPriceWei:-1}).skip(startIndex).limit( maxItemsPerPage )
+            totalGroupLength = await mongoInterface.cachedNFTTileModel.count({collectionName: collectionName  })
            }
            
-            //sort the tiles by buyout price, whatever 
-
-           
-            const nftTileBuyoutSort = (a,b)=> {
-
-                if(a.lowestBuyoutPriceWei && !b.lowestBuyoutPriceWei){
-                    return -1
-                 }
-                 if(b.lowestBuyoutPriceWei && !a.lowestBuyoutPriceWei){
-                     return 1
-                  }
-                 
-                 return (a.lowestBuyoutPriceWei) - (b.lowestBuyoutPriceWei)
-              }
-
-            allTiles.sort(nftTileBuyoutSort)
-
-            let totalGroupLength = allTiles.length
- 
-            let {startIndex,endIndex} = APIHelper.getPagesStartEnd(currentPage, maxItemsPerPage )
-
-            return {tiles: allTiles.slice(startIndex,endIndex), totalTilesInGroup: totalGroupLength }
+          
+            return {tiles: allTiles, totalTilesInGroup: totalGroupLength }
         }   
 
         static async findAllNFTTilesByOwner(ownerAddress, filterNFTCollections, mongoInterface){

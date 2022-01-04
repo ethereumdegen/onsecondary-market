@@ -203,6 +203,7 @@ export default class NFTTileManager  {
       await this.mongoInterface.marketOrdersModel.updateOne({_id: marketOrder._id}, {status: newMarketOrderStatus})
     }
 
+  
     async updateNftTilesFromMarketOrder(marketOrder){
 
       // find matching nft tile, update its buyout if it is lower and if this is valid 
@@ -223,8 +224,8 @@ export default class NFTTileManager  {
       if(marketOrder.status == 'valid'){
         
         if(marketOrder.isSellOrder){
-          if(matchingNFTTile && (!matchingNFTTile.lowestBuyoutPriceWei || !matchingNFTTile.buyoutPriceFromOrderId || matchingNFTTile.lowestBuyoutPriceWei > orderBuyoutPriceWei )){
-            await this.mongoInterface.cachedNFTTileModel.updateOne({_id: matchingNFTTile._id}, {lowestBuyoutPriceWei: orderBuyoutPriceWei, buyoutPriceFromOrderId: AppHelper.mongoIdToNumber(marketOrder._id) })
+          if(matchingNFTTile && (!matchingNFTTile.buyoutPriceSort || !matchingNFTTile.lowestBuyoutPriceWei || !matchingNFTTile.buyoutPriceFromOrderId || matchingNFTTile.lowestBuyoutPriceWei > orderBuyoutPriceWei )){
+            await this.mongoInterface.cachedNFTTileModel.updateOne({_id: matchingNFTTile._id}, {buyoutPriceSort: -1*orderBuyoutPriceWei , lowestBuyoutPriceWei: orderBuyoutPriceWei, buyoutPriceFromOrderId: AppHelper.mongoIdToNumber(marketOrder._id) })
           }
         }
         
@@ -238,7 +239,7 @@ export default class NFTTileManager  {
 
           
 
-             await this.mongoInterface.cachedNFTTileModel.findOneAndUpdate({_id: matchingNFTTile._id},   {lowestBuyoutPriceWei: null, buyoutPriceFromOrderId:null} )
+             await this.mongoInterface.cachedNFTTileModel.findOneAndUpdate({_id: matchingNFTTile._id},   {buyoutPriceSort: null, lowestBuyoutPriceWei: null, buyoutPriceFromOrderId:null} )
           
              
 

@@ -65,6 +65,9 @@ const CachedNFTTileSchema = new Schema({
   lowestBuyoutPriceWei: {
     type: Number
   },
+  buyoutPriceSort: {
+    type: Number
+  },
   buyoutPriceFromOrderId: {
     type: String
   },

@@ -65,6 +65,10 @@ static async runTask(inputs, mongoInterface ){
     await nftTilesModel.updateOne({_id:tile._id}  , {combinedAssetId:combinedAssetId} )
 
   }
+
+ 
+
+ 
  
     
   console.log(`PopulateCachedNFTTilesTask ${collectionName}: task complete.`)
