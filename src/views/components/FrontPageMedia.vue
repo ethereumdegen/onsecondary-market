@@ -104,10 +104,20 @@ var fallingDrops = [];
 
     resizeCanvas(){
         var canvas = document.getElementById('canvasRegn');
+        let windowWidth = window.innerWidth
+
+        console.log(windowWidth)
         canvas.width = 600 
 
-        if( (window.innerWidth * 0.9) < 600){
-            canvas.width =(window.innerWidth * 0.9)
+         if( (windowWidth ) < 700){
+            canvas.width = (windowWidth * 0.9)
+            return 
+        }
+
+
+        if( (windowWidth ) < 1100){
+            canvas.width = 400
+            return 
         }
 
     }
