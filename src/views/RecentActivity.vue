@@ -188,7 +188,7 @@ export default {
  
  
             let results = await StarflaskAPIHelper.resolveStarflaskQuery( 
-               FrontendConfig.tokenDataApiRoot+ '/api/v1/apikey',             
+               FrontendConfig.marketApiRoot+ '/api/v1/apikey',             
             {"requestType": "recent_activity",
              "input":{  "filterCollections": filterCollections  }  }   )
 
@@ -238,7 +238,7 @@ export default {
 
             
             let results = await StarflaskAPIHelper.resolveStarflaskQuery( 
-               FrontendConfig.tokenDataApiRoot+ '/api/v1/apikey',             
+               FrontendConfig.marketApiRoot+ '/api/v1/apikey',             
             {"requestType": "recent_sales_history",
              "input": {  "filterCollections": filterCollections  } }  )
 

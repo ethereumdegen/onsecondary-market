@@ -2,25 +2,25 @@
     "development":{
         "useHTTPS":false,
         "chainId":4,
-        "dbName":"doodles_development",
+        "dbName":"onsecondary_development",
         "web3provider":"https://eth-rinkeby.alchemyapi.io/v2/" 
     },
     "test":{
         "useHTTPS":false,
         "chainId":4,
-        "dbName":"doodles_test",
+        "dbName":"onsecondary_test",
         "web3provider":"https://eth-rinkeby.alchemyapi.io/v2/" 
     },
     "staging":{
         "useHTTPS":true,
         "chainId":4,
-        "dbName":"doodles_staging",
+        "dbName":"onsecondary_staging",
         "web3provider":"https://eth-rinkeby.alchemyapi.io/v2/" 
     },
     "production":{
         "useHTTPS":true,
         "chainId":1,
-        "dbName":"doodles_production",
+        "dbName":"onsecondary_production",
         "web3provider":"https://eth-mainnet.alchemyapi.io/v2/"
     }
     

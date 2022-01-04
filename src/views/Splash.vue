@@ -30,35 +30,7 @@
              
 
              <div class="w-row">
-
-                 <div class="pt-8 relative pb-2 mb-2" style="min-height:100px">
-                         
-                      <div  class="   text-white text-3xl p-2" style="   " > Most Popular Collections </div>
-
-                </div>
-
-
-                <div class="p-2">
-                  
-                 
-
-                  <div v-for="item of mainTiles" :key="item.name" class="inline-block">
-
-                    <router-link :to="'/collection/'+item.name" > 
-
-                      <div class="border-gray-200 border-2   p-2 m-2 "  > 
-                         <img :src="getImageURL(item.imgurl)" style="max-width:200px" />
-
-                         <div class="text-center text-white"> {{item.title}} </div>
-                      </div>  
-
-
-                    </router-link>
-
-                    
-                  </div>
-                  
-                </div>
+               <FrontPageMedia  /> 
 
             </div>
 
@@ -77,15 +49,16 @@
               
 
                  <div class="pt-8 relative pb-2 mb-2" style="min-height:100px">
-                         
-                      <div  class="   text-white text-3xl p-2" style="   " > On Secondary </div>
+                       
+                    <img  class=" text-2xl p-2"  src="@/assets/images/BAYC_header.png" />
+
 
                 </div>
 
               
                  <div class=" relative pb-2 mb-12" style="min-height:200px">
                        
-                    <div  class="   text-white text-2xl p-2" style="  background: #222b" > Open Source NFT Marketplace </div>
+                    <div  class="   text-white text-2xl p-2" style="  background: #222b" > Open Source Unofficial Marketplace </div>
 
 
                 </div>
@@ -98,7 +71,19 @@
                     </div>
 
 
-                
+                  <div class="w-row text-center my-8">  
+            
+                      <router-link to="/collection/doodles" class='text-gray-200 text-xl inline text-align:center' style="margin:0 auto;"> Shop Doodles </router-link>
+                        
+                    
+                  </div>
+
+                    <div class="w-row text-center my-8">  
+        
+                      <router-link to="/collection/coolcats" class='text-gray-200 text-xl inline text-align:center ' style="margin:0 auto;"> Shop Coolcats </router-link>
+                        
+                   </div>
+
 
                   </div> 
 
@@ -110,7 +95,8 @@
    </div>
 
 
-   
+  
+
 
    
 
@@ -128,30 +114,22 @@
 
 
 import Web3Plug from '../js/web3-plug.js' 
+
  
 import Navbar from './components/Navbar.vue';
  
 import Footer from './components/Footer.vue';
- 
+import FrontPageMedia from './components/FrontPageMedia.vue'
  
 
 export default {
   name: 'Home',
   props: [],
-  components: {Navbar, Footer },
+  components: {Navbar, Footer, FrontPageMedia},
   data() {
     return {
       web3Plug: new Web3Plug() ,
-      activePanelId: null,
-      
-      
-      mainTiles: [
-        {title:'Cryptoadz', name:'cryptoadz', imgurl: 'cryptoad.png'},
-        {title:'Cryptoflyz', name:'cryptoflyz', imgurl: 'cryptofly.png'},
-        {title:'Bored Apes', name:'boredapes', imgurl: 'boredape.png'},
-        {title:'Mutant Apes', name:'mutantape', imgurl: 'mutantape.png'} 
-
-      ]
+      activePanelId: null 
         
       
     }
@@ -186,7 +164,6 @@ export default {
    
    
   }, 
-
   methods: {
           setActivePanel(panelId){
               if(panelId == this.activePanelId){
@@ -202,9 +179,6 @@ export default {
 
 
           },
-          getImageURL(name){
-             return require('@/assets/images/' + name)
-          }
           
 
   }

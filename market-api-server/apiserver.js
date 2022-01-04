@@ -7,7 +7,7 @@ import DataGhost from './lib/dataghost.js'
 
 import FileHelper from './lib/file-helper.js'
 
-import ExpressServer from './lib/express-server.js'
+import ApiServer from './lib/api-server.js'
 
 import PopulateTraitsTask from './tasks/populateTraitsDB.js'
 import PopulateCachedNFTTilesTask from './tasks/populateCachedNFTTiles.js'
@@ -74,7 +74,7 @@ let sharedConfig =  FileHelper.readJSONFile('./shared/sharedconfig.json')
 
 
     //TODO: DO NOT pass vibegraph interface into this -> use the nft-tile-manager to coalesce all of the data into mongoInterface 
-    let expressServer = new ExpressServer(web3,mongoInterface,vibegraphInterface, serverConfig )
+    let apiServer = new ApiServer(web3,mongoInterface,vibegraphInterface, serverConfig )
       
     
     console.log('web3 ready with provider ',serverConfig.web3provider )

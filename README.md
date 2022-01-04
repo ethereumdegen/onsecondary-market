@@ -1,9 +1,9 @@
-# Doodles Market Web
+# Onsecondary Market  
  
  Deployed at https://doodles.onsecondary.com
  
   
- 
+ Monolithic repo for api server, image server, web server 
 
 
 ### TODO  

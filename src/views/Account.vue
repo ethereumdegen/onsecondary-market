@@ -282,7 +282,7 @@ export default {
 
              console.log('filterNFTcontracts',filterCollections)
  
-            let results = await StarflaskAPIHelper.resolveStarflaskQuery(  FrontendConfig.tokenDataApiRoot+ '/api/v1/apikey', {"requestType": "NFTTiles_by_owner", "input":{"publicAddress": this.profileAccountAddress, "filterNFTcontracts": filterCollections }  }   )
+            let results = await StarflaskAPIHelper.resolveStarflaskQuery(  FrontendConfig.marketApiRoot+ '/api/v1/apikey', {"requestType": "NFTTiles_by_owner", "input":{"publicAddress": this.profileAccountAddress, "filterNFTcontracts": filterCollections }  }   )
 
             console.log('results',results )
 
@@ -308,7 +308,7 @@ export default {
             let inputRequest = { "publicAddress": this.profileAccountAddress, "filterCollections": filterCollections  } 
  
             let results = await StarflaskAPIHelper.resolveStarflaskQuery( 
-               FrontendConfig.tokenDataApiRoot+ '/api/v1/apikey',             
+               FrontendConfig.marketApiRoot+ '/api/v1/apikey',             
             {"requestType": "personal_activity",
              "input":inputRequest }   )
 

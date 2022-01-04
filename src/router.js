@@ -7,10 +7,9 @@ import Home from './views/Home.vue'
 import Account from './views/Account.vue'
 import Dashboard from './views/Dashboard.vue'
 
-import Project from './views/Project.vue'
+import Splash from './views/Splash.vue'
 
-import ProjectsIndex from './views/ProjectsIndex.vue'
-
+ 
 import Collection from './views/Collection.vue'
 import NftShow from './views/nft/Show.vue'
 
@@ -44,19 +43,15 @@ export default new Router({
       component: Account
     },
 
+
+    
     {
-      path: '/projects/',
-      name: 'projectsIndex',
-      component: ProjectsIndex
+      path: '/splash/',
+      name: 'splash',
+      component: Splash
     },
 
-
-
-    {
-      path: '/project/:projectId',
-      name: 'project',
-      component: Project
-    },
+ 
 
     {
       path: '/collection/:collectionName',

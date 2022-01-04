@@ -194,14 +194,14 @@ export default class ExpressServer  {
       })*/
 
 
-
+/*
       const staticFileMiddleware = express.static('dist');
       app.use(staticFileMiddleware);
       app.use(history({
         disableDotRule: true,
         verbose: true
       }));
-      app.use(staticFileMiddleware);
+      app.use(staticFileMiddleware);*/
 
 
 

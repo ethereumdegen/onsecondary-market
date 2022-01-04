@@ -13,12 +13,21 @@
     "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "deploy": "node deploy.js",
-    "server": "NODE_ENV=production node market-api-server/server.js",
-    "server-staging": "NODE_ENV=staging node market-api-server/server.js",
-    "server-dev": "NODE_ENV=development node market-api-server/server.js",
-    "dataghost": "NODE_ENV=production node market-api-server/dataghost.js",
-    "dataghost-staging": "NODE_ENV=staging node market-api-server/dataghost.js",
-    "dataghost-dev": "NODE_ENV=development node market-api-server/dataghost.js",
+
+    "api": "NODE_ENV=production node market-api-server/apiserver.js",
+    "api-staging": "NODE_ENV=staging node market-api-server/apiserver.js",
+    "api-dev": "NODE_ENV=development node market-api-server/apiserver.js",
+
+  
+    
+    "webserver": "NODE_ENV=production node market-api-server/webserver.js",
+    "webserver-staging": "NODE_ENV=staging node market-api-server/webserver.js",
+    "webserver-dev": "NODE_ENV=development node market-api-server/webserver.js",
+
+
+    "imageserver": "node market-api-server/imageserver.js",
+     
+     
     "lint": "vue-cli-service lint",
     "test": "NODE_ENV=test mocha 'tests/**/*.js' --timeout 25000",
     "test:frontend": "vue-cli-service test:unit",

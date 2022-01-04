@@ -482,9 +482,9 @@ export default {
             let collectionName = this.collectionName
 
             
-            console.log('fetchTokenData', FrontendConfig.tokenDataApiRoot, collectionName)
+            console.log('fetchTokenData', FrontendConfig.marketApiRoot, collectionName)
 
-            let results = await StarflaskAPIHelper.resolveStarflaskQuery( FrontendConfig.tokenDataApiRoot+'/api/v1/apikey', {"requestType": "NFTTile_by_token_id", "input":{"collectionName":collectionName,"tokenId":  this.nftTokenId}  }    )
+            let results = await StarflaskAPIHelper.resolveStarflaskQuery( FrontendConfig.marketApiRoot+'/api/v1/apikey', {"requestType": "NFTTile_by_token_id", "input":{"collectionName":collectionName,"tokenId":  this.nftTokenId}  }    )
 
             console.log('fetchedTokenData',results )
 

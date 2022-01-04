@@ -3,7 +3,8 @@
 
 const assetLookup = require('../config/generated/contractlookup.json')
 
-
+const envName = process.env.NODE_ENV
+const FrontendConfig = require('../config/FrontendConfig.json')[envName]
   
 /*
 const assetLookup = {
@@ -48,10 +49,11 @@ export default class AssetDataHelper {
 
    static getImageURL( collectionName,tokenId   )
   {
+    let imageAPIRoot = FrontendConfig.imageApiRoot
 
     let folderName = AssetDataHelper.getImageFolderNameFromCollectionName( collectionName )
 
-    return `/images/${folderName}/${tokenId}.jpg` 
+    return `${imageAPIRoot}/images/${folderName}/${tokenId}.jpg` 
 
   }  
 
