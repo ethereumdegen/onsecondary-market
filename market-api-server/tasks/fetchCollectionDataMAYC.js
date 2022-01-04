@@ -14,7 +14,7 @@ import path from 'path'
  
 import FileHelper from '../lib/file-helper.js'
  
- const downloadImages = true 
+ const downloadImages = false 
  const writeTraitsFile = true 
  
 let fetchConfig = FileHelper.readJSONFile('./market-api-server/tasks/fetchConfig.json')
@@ -34,7 +34,7 @@ let failedRequestIds = []
 let traitsMap = {} 
   
 
-for(let tokenId=0; tokenId<20000; tokenId+=1){
+for(let tokenId=0; tokenId<30000; tokenId+=1){
 
 
     //let URI = `https://api.opensea.io/api/v1/assets?order_direction=desc&offset=${offset}&limit=50&collection=${collectionName}`

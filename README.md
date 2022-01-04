@@ -10,6 +10,7 @@
  
 - build a bot that can be run locally (easily) with html frontend for placing bids on certain types of toadz 
  
+ - update mayc config so it has 20k - 30k 
 
  mogrify -resize 631x631 ./*.jpg
 
