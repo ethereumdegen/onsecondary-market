@@ -14,13 +14,15 @@ import path from 'path'
  
 import FileHelper from '../lib/file-helper.js'
  
- const downloadImages = true 
+ const downloadImages = false 
  const writeTraitsFile = true 
  
 //let fetchConfig = FileHelper.readJSONFile('./market-api-server/tasks/fetchConfig.json')
  
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
  
+
+const collectionName = 'doodles'
 
 
 async function runTask(){
@@ -29,7 +31,6 @@ async function runTask(){
 
 let totalSupply = 10000
  
-  
 
 
 let tokenIds = [] 
@@ -77,7 +78,7 @@ for(let tokenId=0; tokenId<totalSupply; tokenId+=1){
 
 if(writeTraitsFile)
 {
-    fs.writeFileSync( path.join ( "./market-api-server/output/outputconfig.json" ) , JSON.stringify( traitsMap ) );
+    fs.writeFileSync( path.join ( `./market-api-server/output/${collectionName}.json` ) , JSON.stringify( traitsMap ) );
 }
  
 console.log('failed:',failedRequestIds)

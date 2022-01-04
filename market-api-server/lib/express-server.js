@@ -18,6 +18,8 @@ import APIHelper from './api-helper.js'
 import RouteLoader from './route-loader.js'
 import ApplicationManager from './application-manager.js'
 
+ 
+
 export default class ExpressServer  {
 
     constructor(web3, mongoInterface,vibegraphInterface,serverConfig){
@@ -29,8 +31,7 @@ export default class ExpressServer  {
  
 
         const app = express()
-
-        //var server = http.createServer(app);
+ 
 
         let envmode = process.env.NODE_ENV
 
@@ -38,8 +39,8 @@ export default class ExpressServer  {
 
         if(serverConfig.useHTTPS == true ){
           var server = https.createServer({
-            cert: fs.readFileSync('/home/andy/deploy/cert/baycmarket.io.pem'),
-            key: fs.readFileSync('/home/andy/deploy/cert/baycmarket.io.key')
+            cert: fs.readFileSync(`/home/andy/deploy/cert/${serverConfig.TLSCertName}.pem`),
+            key: fs.readFileSync(`/home/andy/deploy/cert/${serverConfig.TLSCertName}.key`)
           });
           console.log('--using https--')
          

@@ -16,12 +16,10 @@ import FileHelper from '../lib/file-helper.js'
  
  const downloadImages = false 
  const writeTraitsFile = true 
- 
-let fetchConfig = FileHelper.readJSONFile('./market-api-server/tasks/fetchConfig.json')
- 
+  
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
  
-
+const collectionName = 'coolcats'
 
 async function runTask(){
 
@@ -75,7 +73,7 @@ for(let tokenId=0; tokenId<30000; tokenId+=1){
 
 if(writeTraitsFile)
 {
-    fs.writeFileSync( path.join ( "./market-api-server/output/outputconfig.json" ) , JSON.stringify( traitsMap ) );
+    fs.writeFileSync( path.join ( `./market-api-server/output/${collectionName}.json` ) , JSON.stringify( traitsMap ) );
 }
  
 console.log('failed:',failedRequestIds)
