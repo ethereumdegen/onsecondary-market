@@ -2,7 +2,7 @@
   "name": "apes-market-web",
   "description": "NFT Exchange",
   "version": "0.1.0",
-  "type": "module",
+  "type": "module", 
   "postcss": {
     "plugins": {
       "tailwindcss": {},
