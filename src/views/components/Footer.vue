@@ -34,6 +34,7 @@
           <h3 class="heading-3 footer font-fun ">Community &amp; Social</h3>
 
             <a href="https://discord.gg/mUPRJbpMsG" target="_blank" class="footer-link">BAYC Market Discord</a>
+            <a href="https://swampz.io" target="_blank" class="footer-link">Swampz Toadz Exchange</a>
 
            
           
