@@ -106,7 +106,8 @@ var fallingDrops = [];
         var canvas = document.getElementById('canvasRegn');
         let windowWidth = window.innerWidth
 
-        console.log(windowWidth)
+        if(!canvas) return 
+ 
         canvas.width = 600 
 
          if( (windowWidth ) < 700){

@@ -10,6 +10,9 @@
  
 - build a bot that can be run locally (easily) with html frontend for placing bids on certain types of toadz 
  
+
+ mogrify -resize 631x631 ./*.jpg
+
  
 
 ### Development commands
