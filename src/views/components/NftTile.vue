@@ -5,7 +5,7 @@
     
      <router-link v-bind:to="getLinkUrl()" class=" cursor-pointer select-none inline-block m-4 mb-0 relative"   >
 
-          <img v-bind:src="getImageURL()" width="128" height="128"  />
+          <img loading="lazy"  v-bind:src="getImageURL()" width="128" height="128"  />
 
      </router-link>
 

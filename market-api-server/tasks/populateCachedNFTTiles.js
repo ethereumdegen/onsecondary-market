@@ -26,7 +26,7 @@ let tokenDataArray = []
   
 
 for(let [tokenId,traitsArray] of Object.entries(outputConfig)){
- 
+   
 
     let contractAddress = AppHelper.contractCollectionNameToContractAddress(collectionName)
     contractAddress = AppHelper.toChecksumAddress(contractAddress)
@@ -45,9 +45,11 @@ for(let [tokenId,traitsArray] of Object.entries(outputConfig)){
 const nftTilesModel =  mongoInterface.cachedNFTTileModel
  
 
-  
+  try{
    let inserted = await nftTilesModel.insertMany(tokenDataArray,{ ordered: false })
-   
+  }catch(e){
+    console.log('WARN: Could not insert nft tiles.  (They already exist?)')
+  }
 
 
   let tilesMissingContractAddress = await nftTilesModel.find({contractAddress: {$exists:false}})

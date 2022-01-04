@@ -37,17 +37,15 @@ let dataghostConfig = dataghostConfigFile[envmode]
 
     await GenerateContractDataLookupTask.runTask( )
     
-    try{
+ 
     await PopulateTraitsTask.runTask({collectionName:'boredapes'},mongoInterface)
     await PopulateCachedNFTTilesTask.runTask({collectionName:'boredapes'},mongoInterface)
 
+  
+  
     await PopulateTraitsTask.runTask({collectionName:'mutantapes'},mongoInterface)
     await PopulateCachedNFTTilesTask.runTask({collectionName:'mutantapes'},mongoInterface)
-    }catch(e){
-      console.log(e)
-      console.error('could not run all initial db tasks ')
-    }
-
+   
     console.log('boot vibegraph interface ', dataghostConfig.vibeGraphConfig.dbName)
 
     let vibegraphInterface =  new MongoInterface() 
