@@ -15,7 +15,7 @@ static async runTask( inputs, mongoInterface ){
 let collectionName = inputs.collectionName 
 
  try{
-  outputConfig = FileHelper.readJSONFile(`./market-api-server/assetdata/${collectionName.toLowerCase()}.json`)
+    outputConfig = FileHelper.readJSONFile(`./market-api-server/assetdata/${collectionName.toLowerCase()}.json`)
  }catch(e){
      console.error(e)
      return 
