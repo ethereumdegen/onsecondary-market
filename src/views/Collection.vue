@@ -29,8 +29,11 @@
             
             </div>
           <div class="md:col-span-3 p-2"> 
-            
-            
+
+                <LoadingSpinner
+                  v-if="isLoading"
+                 />
+
                 <TiledTokenBrowser
                   ref="TokenBrowser"  
                   v-bind:collectionName="collectionName"
@@ -83,7 +86,7 @@ import Footer from './components/Footer.vue';
 import TreeList from './components/TreeList.vue';
 
 import TiledTokenBrowser from './components/TiledTokenBrowser.vue';
- 
+ import LoadingSpinner from './components/Loading-Spinner.vue'
  
 import StarflaskApiHelper from '../js/starflask-api-helper.js'
 
@@ -94,7 +97,7 @@ const FrontendConfig = require('../config/FrontendConfig.json')[envName]
 export default {
   name: 'Home',
   props: [],
-  components: {Navbar, Footer,TreeList,TiledTokenBrowser},
+  components: {Navbar, Footer,TreeList,TiledTokenBrowser,LoadingSpinner},
   data() {
     return {
       collectionName: 'boredapes',
@@ -105,7 +108,8 @@ export default {
       filterTraitsList: {},
       tokenBrowserFilter: {},
 
-      currentPage: 1
+      currentPage: 1,
+      isLoading: true
     }
   },
 
@@ -149,9 +153,11 @@ export default {
   
 
   },
-  mounted: function () {
+  mounted: async function () {
     
-      this.fetchTraits()
+      await this.fetchTraits()
+
+      this.isLoading = false 
    
   }, 
   methods: {
