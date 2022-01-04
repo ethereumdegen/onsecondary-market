@@ -23,6 +23,7 @@ npm run dev  (in terminal 2 - frontend server)
 ```
 npm install
 npm run build
+NODE_OPTIONS=--max_old_space_size=4096 npm run build
 npm run server
 ```
  
