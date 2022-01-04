@@ -1,6 +1,6 @@
-# BAYC Market Web
+# Doodles Market Web
  
- Deployed at https://baycmarket.io
+ Deployed at https://doodles.onsecondary.com
  
   
  
@@ -8,9 +8,7 @@
 
 ### TODO  
  
-- build a bot that can be run locally (easily) with html frontend for placing bids on certain types of toadz 
  
- - update mayc config so it has 20k - 30k 
 
  mogrify -resize 631x631 ./*.jpg
 
@@ -32,8 +30,8 @@ npm run server
  
 ## copy images to dist 
 cd dist/images
-cp -r ../../../images/boredapes/* boredapes/
-cp -r ../../../images/mutantapes/* mutantapes/
+cp -r ../../../images/doodles/* doodles/
+cp -r ../../../images/coolcats/* coolcats/
 
 
 
