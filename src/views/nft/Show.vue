@@ -311,7 +311,7 @@ export default {
 
      
       getImageURL(){
-        if(!this.imagesReadyToLoad)return ''
+       
 
         return AssetDataHelper.getImageURL(this.collectionName,this.nftTokenId) 
  
