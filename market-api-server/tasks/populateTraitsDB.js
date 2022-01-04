@@ -14,9 +14,12 @@ static async runTask( inputs, mongoInterface ){
  
 let collectionName = inputs.collectionName 
 
- 
-    outputConfig = FileHelper.readJSONFile(`./market-api-server/assetdata/${collectionName.toLowerCase()}.json`)
- 
+ try{
+  outputConfig = FileHelper.readJSONFile(`./market-api-server/assetdata/${collectionName.toLowerCase()}.json`)
+ }catch(e){
+     console.error(e)
+     return 
+ }
 
 
 let traitsTokenIdMap = { } 
