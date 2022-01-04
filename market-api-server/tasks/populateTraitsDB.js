@@ -15,7 +15,7 @@ static async runTask( inputs, mongoInterface ){
 let collectionName = inputs.collectionName 
 
  
-    outputConfig = FileHelper.readJSONFile(`./market-api-server/config/${collectionName.toLowerCase()}.json`)
+    outputConfig = FileHelper.readJSONFile(`./market-api-server/assetdata/${collectionName.toLowerCase()}.json`)
  
 
 

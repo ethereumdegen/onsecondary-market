@@ -39,7 +39,7 @@ let failedRequestIds = []
 let traitsMap = {} 
   
 
-for(let tokenId=0; tokenId<totalSupply; tokenId+=1){
+for(let tokenId=0; tokenId<=totalSupply; tokenId+=1){
 
     let metadataIPFSHash = 'QmPMc4tcBsMqLRuCQtPmPe84bpSjrC3Ky7t3JWuHXYB4aS'
    
