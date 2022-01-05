@@ -155,7 +155,15 @@ export default class NFTTileManager  {
     let ownedTokenIds = erc721Balance.tokenIds
 
 
-    for(let tokenId of ownedTokenIds){
+    //faster 
+    let update = await this.mongoInterface.cachedNFTTileModel.updateMany(
+      {collectionName: collectionName , tokenId: {$in: ownedTokenIds}, ownerPublicAddress: {$not:ownerAddress } },
+      {ownerPublicAddress: ownerAddress}
+     )
+
+     console.log('updated ',update)
+
+    /*for(let tokenId of ownedTokenIds){
 
       let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel.findOne({collectionName: collectionName , tokenId: tokenId })
       
@@ -167,8 +175,9 @@ export default class NFTTileManager  {
        if( ownerAddress != AppHelper.toChecksumAddress(matchingNFTTile.ownerPublicAddress) ){
         let tileUpdate = await this.mongoInterface.cachedNFTTileModel.updateOne({_id: matchingNFTTile._id}, {ownerPublicAddress: ownerAddress})
         console.log('tileUpdate',collectionName,tokenId,tileUpdate)
-      }
-    } 
+      } 
+
+    } */
 
   }
 
