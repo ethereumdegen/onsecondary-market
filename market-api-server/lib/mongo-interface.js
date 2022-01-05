@@ -168,6 +168,9 @@ const ERC721BalancesSchema = new Schema({
   tokenIds: {
     type: [Number]
   },
+  lastUpdatedAt:{
+    type: Number
+  },
   lastPolledAt:{
     type: Number
   } 

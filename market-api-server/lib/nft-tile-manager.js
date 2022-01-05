@@ -52,6 +52,8 @@ export default class NFTTileManager  {
  
  
           this.pollNextERC721Balance() 
+
+          this.pollNextRecentlyUpdatedERC721Balance() 
       
           this.pollNextMarketOrder()
       
@@ -105,6 +107,38 @@ export default class NFTTileManager  {
         
 
     }
+
+
+
+    async pollNextRecentlyUpdatedERC721Balance(){
+
+      const STALE_TIME = 90 * 1000;
+
+      let beforeTime = (Date.now() - STALE_TIME)
+
+      let nextERC721Balance = await this.vibegraphInterface.erc721BalancesModel.findOne( {   lastPolledAt:  {$not: {$gte: beforeTime }}, lastUpdatedAt:  {$lte:   beforeTime  } })
+       
+        
+      if(nextERC721Balance){ 
+        console.log('poll recent balance')
+         
+         await this.updateNftTilesFromERC721Balance(nextERC721Balance)
+        
+         await this.vibegraphInterface.erc721BalancesModel.updateOne({_id: nextERC721Balance._id}, {lastPolledAt: Date.now()})
+
+         setTimeout( this.pollNextERC721Balance.bind(this), 0)
+
+      }else{
+        console.log('poll recent balance - none')
+
+        setTimeout( this.pollNextERC721Balance.bind(this), 200)
+      }
+
+    }
+
+
+
+
 
     //there are too many erc721 balance   !!
     async pollNextERC721Balance( ){
