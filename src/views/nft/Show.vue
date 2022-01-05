@@ -324,11 +324,11 @@ export default {
         let typeName = this.getCollectionName()
         let tokenId = this.nftTokenId
 
-
-        if(typeName == 'boredapes'){typeName = 'Bored Ape'}
-        if(typeName == 'mutantapes'){typeName = 'Mutant Ape'}
+        let assetName = AssetDataHelper.collectionNameToAssetName( typeName  )
         
-        return typeName + ' ' + '#' + tokenId
+
+        
+        return assetName + ' ' + '#' + tokenId
 
         //return 'unknown asset'
       },
@@ -372,8 +372,7 @@ export default {
       },
 
       async onOrderSubmitted(){
-
-        // await this.fetchTokenData() 
+ 
 
         await this.fetchOrdersForToken()
 

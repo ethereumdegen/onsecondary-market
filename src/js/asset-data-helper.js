@@ -5,18 +5,24 @@ const assetLookup = require('../config/generated/contractlookup.json')
 
 const envName = process.env.NODE_ENV
 const FrontendConfig = require('../config/FrontendConfig.json')[envName]
-  
-/*
-const assetLookup = {
-
-    "0x1CB1A5e65610AEFF2551A50f76a87a7d3fB649C6":{name:"Cryptoadz",chainId:1}, 
-  
-    "0x70BC4cCb9bC9eF1B7E9dc465a38EEbc5d73740FB":{name:"Cryptoadz",chainId:4} 
    
-} */
+
 
 
 export default class AssetDataHelper {
+
+  static collectionNameToAssetName(name){
+    
+    if(name == 'boredapes'){name = 'Bored Ape'}
+    if(name == 'mutantapes'){name = 'Mutant Ape'}
+    if(name == 'coolcats'){name = 'Cool Cat'}
+    if(name == 'doodles'){name = 'Doodle'}
+    if(name == 'cryptoadz'){name = 'Cryptoadz'}
+    if(name == 'cryptoflyz'){name = 'Cryptoflyz'}
+
+    return name
+
+  }
 
 
   static getCollectionNameForContractAddress(contractAddress, chainId){
@@ -34,9 +40,7 @@ export default class AssetDataHelper {
         
         let assetLookupData = assetLookup[contractAddress]
 
-
-        //console.log('alalla2',assetLookupData)
-
+ 
         if(assetLookupData){
             let contractName = assetLookupData.name 
 
@@ -58,7 +62,7 @@ export default class AssetDataHelper {
   }  
 
   static getImageFolderNameFromCollectionName(cName){
-  //  if( cName && cName.toLowerCase() == 'mutantapes' ) return 'mutantapes'
+   
 
     return cName.toLowerCase()
   } 
@@ -91,25 +95,7 @@ export default class AssetDataHelper {
 
     return {name: AssetDataHelper.getProjectNameForProjectId(projectId) }
 
-  }
-/*
-  static async fetchProjectDataForProjectId(projectId){
-    let previewTokenId = projectId * 1000000 
-
-    return await  AssetDataHelper.fetchProjectDataForTokenId( previewTokenId  )
-
-    
-    }
-
-
-  static async fetchProjectDataForTokenId(tokenId){
-
-    return axios.get(`https://token.artblocks.io/${tokenId}`);
-
-  }*/
- 
-
-
+  } 
 
 
 
