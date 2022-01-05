@@ -28,10 +28,12 @@ async function runTask(){
     let totalSupply = 30000
 
     const myArgs = process.argv.slice(2);
-
+ 
     if(myArgs[0] == 'images'){
         downloadImages = true
     }
+    console.log('download images: ', downloadImages)
+
 
     let tokenIds = [] 
     let failedRequestIds = []

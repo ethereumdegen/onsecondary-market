@@ -32,6 +32,8 @@ async function runTask(){
     if(myArgs[0] == 'images'){
         downloadImages = true
     }
+    console.log('download images: ', downloadImages)
+    
 
     let totalSupply = 10000
     
