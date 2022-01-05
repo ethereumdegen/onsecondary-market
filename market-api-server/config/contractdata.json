@@ -7,7 +7,7 @@
       "blockstore":{"name":"blockstore", "address":"0x0419732028fa499200a0e36972e4c139e98d28e1"}, 
 
       "cryptoadz":{"name":"Cryptoadz","address":"0x1CB1A5e65610AEFF2551A50f76a87a7d3fB649C6"}, 
-      "cryptoflyz":{"name":"Cryptoflyz","address":"0xf8b0a49da21e6381f1cd3cf43445800abe852179"}, 
+      "cryptoflyz":{"name":"Cryptoflyz","address":"0xf8b0a49dA21e6381f1cd3CF43445800abe852179"}, 
      
       "boredapes":{"name":"boredapes","address":"0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d"}, 
       "mutantapes":{"name":"mutantapes","address":"0x60e4d786628fea6478f785a6d7e704777c86a7c6"} ,
