@@ -12,7 +12,7 @@
 
          <div> 
            <div v-for="offer of validBuyOffers" v-bind:key="offer.signature" class="px-2 border-2 border-gray-300" > 
-              <div class="autospacing w-container flex">
+              <div class="autospacing w-container flex text-black">
                      <div class="truncate " style="max-width:50%"> Bid from {{ offer.orderCreator  }} </div> 
                         
                       <div class="flex-grow"> </div>
