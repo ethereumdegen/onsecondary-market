@@ -437,6 +437,8 @@
 
             let RECENT_TIME = Date.now() - ONE_MONTH 
 
+            console.log('find recent activity in ', filterContractAddresses)
+
             let allOrders = await mongoInterface.marketOrdersModel
             .find({nftContractAddress: {$in: filterContractAddresses}, createdAt: {$gte: RECENT_TIME} })
             .sort({'createdAt': -1}) //sort DESC 
