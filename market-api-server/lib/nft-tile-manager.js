@@ -85,7 +85,7 @@ export default class NFTTileManager  {
         
         if(nextMarketOrder){ 
           //console.log('pollNextMarketOrder',nextMarketOrder)
-
+          console.log('pne')
           
           await this.updateMarketOrderStatus(nextMarketOrder)
           await this.updateNftTilesFromMarketOrder(nextMarketOrder)
@@ -96,6 +96,7 @@ export default class NFTTileManager  {
           setTimeout( this.pollNextMarketOrder.bind(this), 10)
 
         }else{
+          console.log('pne - none')
           //none found 
           //return
 
