@@ -29,7 +29,7 @@ async function runTask(){
 
     const myArgs = process.argv.slice(2);
 
-    if(myArgs[0] == '--images'){
+    if(myArgs[0] == 'images'){
         downloadImages = true
     }
 
