@@ -1,5 +1,5 @@
  
-import FileHelper from '../lib/file-helper.js'
+import FileHelper from '../market-api-server/lib/file-helper.js'
  
 import fs from 'fs'
 import path from 'path'
@@ -40,8 +40,8 @@ static async runTask( ){
    let dataLookup =  GenerateContractDataLookupTask.generateAssetDataLookup(assetDataTable)
    
 
-  // fs.writeFileSync( path.join ( "./src/config/generated/contractlookup.json" ) , JSON.stringify( dataLookup ) );
-   fs.writeFileSync( path.join ( "./market-api-server/config/generated/contractlookup.json" ) , JSON.stringify( dataLookup ) );
+     fs.writeFileSync( path.join ( "./src/config/generated/contractlookup.json" ) , JSON.stringify( dataLookup ) );
+   //fs.writeFileSync( path.join ( "./market-api-server/config/generated/contractlookup.json" ) , JSON.stringify( dataLookup ) );
   
    console.log(`generateAssetDataLookup: task complete.`) 
      

@@ -2,6 +2,7 @@
 node_modules
 /dist
 
+src/assets/config/generated/*
 
 public/images/boredapes/*
 public/images/mutantapes/* 

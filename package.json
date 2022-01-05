@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "node tasks/buildWebAssets.js && vue-cli-service build",
     "deploy": "node deploy.js",
 
     "api": "NODE_ENV=production node market-api-server/apiserver.js",
