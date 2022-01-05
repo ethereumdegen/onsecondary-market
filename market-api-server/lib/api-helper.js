@@ -500,6 +500,7 @@
             return tile
         }
 
+        
         static async findAllNFTTilesByTraitValue(collectionName,traitName,traitValue, currentPage, maxItemsPerPage,  mongoInterface){
             
             let allTiles = []
@@ -524,17 +525,19 @@
             }
   
 
-             allTiles = await mongoInterface.cachedNFTTileModel.find({collectionName: collectionName, tokenId: {$in:filterArray} }).sort({buyoutPriceFromOrderId:1 ,lowestBuyoutPriceWei:-1}).skip(startIndex).limit( maxItemsPerPage )
+             allTiles = await mongoInterface.cachedNFTTileModel.find({collectionName: collectionName, tokenId: {$in:filterArray} }).sort({buyoutPriceSort: -1  }).skip(startIndex).limit( maxItemsPerPage )
              totalGroupLength = filterArray.length
             }else{
            
-            allTiles = await mongoInterface.cachedNFTTileModel.find({collectionName: collectionName  }).sort({buyoutPriceFromOrderId:1 , lowestBuyoutPriceWei:-1}).skip(startIndex).limit( maxItemsPerPage )
+            allTiles = await mongoInterface.cachedNFTTileModel.find({collectionName: collectionName  }).sort({ buyoutPriceSort: -1}).skip(startIndex).limit( maxItemsPerPage )
             totalGroupLength = await mongoInterface.cachedNFTTileModel.count({collectionName: collectionName  })
            }
            
           
+
             return {tiles: allTiles, totalTilesInGroup: totalGroupLength }
         }   
+
 
         static async findAllNFTTilesByOwner(ownerAddress, filterNFTCollections, mongoInterface){
             ownerAddress = AppHelper.toChecksumAddress(ownerAddress)
