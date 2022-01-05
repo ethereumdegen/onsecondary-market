@@ -4,8 +4,8 @@
             "contracts":[
           
                 {"address":"0x843f116649dda1222812ed6881175bd4206e1fad","startBlock":9300000, "type":"BlockStore"},
-                {"address":"0x70BC4cCb9bC9eF1B7E9dc465a38EEbc5d73740FB","name":"toadz","startBlock":9228750  , "type":"ERC721" },
-                {"address":"0xfc957dcbe0785ababa07429e4fffe8ad58bd612d","name":"flyz","startBlock":9463481   , "type":"ERC721" }  
+                {"address":"0x70BC4cCb9bC9eF1B7E9dc465a38EEbc5d73740FB","name":"toadz","startBlock":9228750  , "type":"ERC721Custom" },
+                {"address":"0xfc957dcbe0785ababa07429e4fffe8ad58bd612d","name":"flyz","startBlock":9463481   , "type":"ERC721Custom" }  
             
             ],
             "fineBlockGap":15,
@@ -21,8 +21,8 @@
         "vibeGraphConfig":{
             "contracts":[
                 {"address":"0x843f116649dda1222812ed6881175bd4206e1fad","startBlock":9300000, "type":"BlockStore"},
-                {"address":"0x70BC4cCb9bC9eF1B7E9dc465a38EEbc5d73740FB","name":"toadz","startBlock":9228750  , "type":"ERC721" },
-                {"address":"0xfc957dcbe0785ababa07429e4fffe8ad58bd612d","name":"flyz","startBlock":9463481   , "type":"ERC721" }  
+                {"address":"0x70BC4cCb9bC9eF1B7E9dc465a38EEbc5d73740FB","name":"toadz","startBlock":9228750  , "type":"ERC721Custom" },
+                {"address":"0xfc957dcbe0785ababa07429e4fffe8ad58bd612d","name":"flyz","startBlock":9463481   , "type":"ERC721Custom" }  
             
 
             ],
@@ -44,14 +44,14 @@
             
                 {"address":"0x0419732028fa499200a0e36972e4c139e98d28e1","startBlock":13244370, "type":"BlockStore"}, 
 
-                {"address":"0x1CB1A5e65610AEFF2551A50f76a87a7d3fB649C6","name":"cryptoadz","startBlock":  13186834  , "type":"ERC721" } ,
-                {"address":"0xf8b0a49da21e6381f1cd3cf43445800abe852179","name":"cryptoflyz","startBlock": 13422086  , "type":"ERC721" }  ,
+                {"address":"0x1CB1A5e65610AEFF2551A50f76a87a7d3fB649C6","name":"cryptoadz","startBlock":  13186834  , "type":"ERC721Custom" } ,
+                {"address":"0xf8b0a49da21e6381f1cd3cf43445800abe852179","name":"cryptoflyz","startBlock": 13422086  , "type":"ERC721Custom" }  ,
 
-                {"address":"0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d","name":"boredapes","startBlock":  12287507  , "type":"ERC721" } ,
-                {"address":"0x60e4d786628fea6478f785a6d7e704777c86a7c6","name":"mutantapes","startBlock": 13117018  , "type":"ERC721" }  ,
+                {"address":"0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d","name":"boredapes","startBlock":  12287507  , "type":"ERC721Custom" } ,
+                {"address":"0x60e4d786628fea6478f785a6d7e704777c86a7c6","name":"mutantapes","startBlock": 13117018  , "type":"ERC721Custom" }  ,
 
-                {"address":"0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e","name":"doodles","startBlock": 13430097   , "type":"ERC721" } ,
-                {"address":"0x1a92f7381b9f03921564a437210bb9396471050c","name":"coolcats","startBlock": 12715198  , "type":"ERC721" }  
+                {"address":"0x8a90CAb2b38dba80c64b7734e58Ee1dB38B8992e","name":"doodles","startBlock": 13430097   , "type":"ERC721Custom" } ,
+                {"address":"0x1a92f7381b9f03921564a437210bb9396471050c","name":"coolcats","startBlock": 12715198  , "type":"ERC721Custom" }  
 
 
             ],

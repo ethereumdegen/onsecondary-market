@@ -4,7 +4,7 @@ import FileHelper from './file-helper.js'
 import VibeGraph from 'vibegraph'
 
 import IndexerBlockStore from './IndexerBlockStore.js' 
-  
+import IndexerERC721Custom from './IndexerERC721Custom.js'
 
 import Web3 from 'web3'
 
@@ -14,6 +14,7 @@ let envmode = process.env.NODE_ENV
 let dataghostConfigFile = FileHelper.readJSONFile('./market-api-server/config/dataghostconfig.json')
 let dataghostConfig = dataghostConfigFile[envmode]
 
+let ERC721ABI = FileHelper.readJSONFile('./src/contracts/ERC721ABI.json')
 let BlockStoreABI = FileHelper.readJSONFile('./src/contracts/BlockStoreABI.json')
  
  
@@ -43,7 +44,11 @@ export default class DataGhost  {
           type:'BlockStore', 
           abi: BlockStoreABI ,  
           handler: IndexerBlockStore 
-       }]
+       },{
+        type:'ERC721Custom', 
+        abi: ERC721ABI ,  
+        handler: IndexerERC721Custom 
+     }]
   }  
 
     let vibeGraph = new VibeGraph()
