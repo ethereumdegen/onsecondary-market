@@ -157,7 +157,7 @@ export default class NFTTileManager  {
 
     //faster 
     let update = await this.mongoInterface.cachedNFTTileModel.updateMany(
-      {collectionName: collectionName , tokenId: {$in: ownedTokenIds}, ownerPublicAddress: {$not:ownerAddress } },
+      {collectionName: collectionName , tokenId: {$in: ownedTokenIds}, ownerPublicAddress: {$ne:ownerAddress } },
       {ownerPublicAddress: ownerAddress}
      )
 
