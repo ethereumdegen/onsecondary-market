@@ -174,6 +174,8 @@ export default class NFTTileManager  {
         return
       }
 
+      collectionName = collectionName.toLowerCase()
+
       if(!currentBlockNumber){
         console.log('WARN: no block number to update market order status')
         return
@@ -221,6 +223,8 @@ export default class NFTTileManager  {
       if(!orderCollectionName){ 
         return
       }
+
+      orderCollectionName = orderCollectionName.toLowerCase()
 
       let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel.findOne({collectionName: orderCollectionName , tokenId: marketOrder.nftTokenId })
 
