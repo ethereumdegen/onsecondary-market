@@ -252,6 +252,8 @@ export default {
 
     this.collectionName = this.$route.params.collectionName
 
+    this.collectionName = this.collectionName.toLowerCase()
+
       
    // this.nftContractAddress = FrontendHelper.getContractAddressFromCollectionName(collectionName)
     this.nftTokenId = parseInt( this.$route.params.tokenId )
