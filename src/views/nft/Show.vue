@@ -66,6 +66,8 @@
 
          <div class="col-span-2 p-2">
 
+           
+
           <div class="py-2">
 
             <div class="text-lg"> {{getAssetName() }} </div>
@@ -80,6 +82,16 @@
             </div>
 
           </div>
+
+           <div> 
+              <a :href="getEtherscanURL()"  target="_blank" class="inline-block px-1" >
+                <img src="@/assets/images/etherscan.png" style="width:22px" />
+              </a>
+
+              <a :href="getOpenseaURL()"  target="_blank" class="inline-block px-1">
+                <img src="@/assets/images/opensea.png" style="width:22px" />
+              </a>
+            </div>
 
         <div class="my-32">
            <div class="py-2" v-if="ownedByLocalUser()">
@@ -587,6 +599,14 @@ export default {
 
         return null 
 
+      },
+
+      getEtherscanURL(){
+        return "https://etherscan.io/address/".concat(this.nftContractAddress)
+      },
+
+      getOpenseaURL(){
+        return "https://opensea.io/assets/".concat(this.nftContractAddress).concat('/').concat(this.nftTokenId)
       }
 
 
