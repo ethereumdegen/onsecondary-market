@@ -160,8 +160,10 @@ export default class NFTTileManager  {
       {collectionName: collectionName , tokenId: {$in: ownedTokenIds}, ownerPublicAddress: {$ne:ownerAddress } },
       {ownerPublicAddress: ownerAddress}
      )
-
-     console.log('updated ',update)
+      if(update.matchedCount > 0){
+        console.log('updated ',update)
+      }
+     
 
     /*for(let tokenId of ownedTokenIds){
 
