@@ -1,8 +1,8 @@
  {
     "apps" : [
         {
-          "name": "SwampzServer",
-          "script": "market-api-server/server.js",
+          "name": "OnSecondaryApiServer",
+          "script": "market-api-server/apiserver.js",
           "watch": false,
           "env": { 
               "NODE_ENV": "development"
