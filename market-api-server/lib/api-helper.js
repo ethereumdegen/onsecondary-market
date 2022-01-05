@@ -398,7 +398,7 @@
             let RECENT_TIME = Date.now() - ONE_DAY 
 
             let allSales = await vibegraphInterface.nftSalesModel
-            .find({nftContractAddress: {$in: filterContractAddresses}, createdAt: {$gte: RECENT_TIME} })
+            .find({nftContractAddress: {$in: filterContractAddresses}, status: 'valid' , createdAt: {$gte: RECENT_TIME} })
             .sort({'createdAt': -1}) //sort DESC 
             .limit(100)
 
@@ -416,12 +416,12 @@
             let RECENT_TIME = Date.now() - ONE_MONTH 
 
             let allSalesFrom = await vibegraphInterface.nftSalesModel
-            .find({nftContractAddress: {$in: filterContractAddresses}, sellerAddress: publicAddress, createdAt: {$gte: RECENT_TIME} })
+            .find({nftContractAddress: {$in: filterContractAddresses}, sellerAddress: publicAddress, status: 'valid' , createdAt: {$gte: RECENT_TIME} })
             .sort({'createdAt': -1}) //sort DESC 
             .limit(100)
 
             let allSalesTo = await vibegraphInterface.nftSalesModel
-            .find({nftContractAddress: {$in: filterContractAddresses}, buyerAddress: publicAddress, createdAt: {$gte: RECENT_TIME} })
+            .find({nftContractAddress: {$in: filterContractAddresses}, buyerAddress: publicAddress, status: 'valid' , createdAt: {$gte: RECENT_TIME} })
             .sort({'createdAt': -1}) //sort DESC 
             .limit(100)
 
@@ -440,7 +440,7 @@
             console.log('find recent activity in ', filterContractAddresses)
 
             let allOrders = await mongoInterface.marketOrdersModel
-            .find({nftContractAddress: {$in: filterContractAddresses}, createdAt: {$gte: RECENT_TIME} })
+            .find({nftContractAddress: {$in: filterContractAddresses}, createdAt: {$gte: RECENT_TIME}, status: 'valid' })
             .sort({'createdAt': -1}) //sort DESC 
             .limit(100)
 

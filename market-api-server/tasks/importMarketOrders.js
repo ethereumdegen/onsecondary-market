@@ -40,6 +40,7 @@ for(let order of marketOrders){
         expires: order.expires,
         signature: order.signature,
         lastPolledAt: order.lastPolledAt,
+        createdAt: order.createdAt,
         status: order.status 
 
     })
