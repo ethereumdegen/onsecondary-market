@@ -35,7 +35,7 @@
 
            for(let [contractName,data] of Object.entries(contractDataForNetwork)){
                  
-               if( collectionName && collectionName.toLowerCase() == data.name.toLowerCase()   ){
+               if( data.name && collectionName && collectionName.toLowerCase() == data.name.toLowerCase()   ){
                    return data.address
                } 
            } 
