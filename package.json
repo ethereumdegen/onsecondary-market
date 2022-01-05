@@ -38,7 +38,10 @@
     "fetchMAYCData": "node market-api-server/tasks/fetchCollectionDataMAYC.js",
 
     "fetchDoodlesData": "node market-api-server/tasks/fetchCollectionDataDoodles.js",
-    "fetchCoolcatsData": "node market-api-server/tasks/fetchCollectionDataCoolcats.js"
+    "fetchCoolcatsData": "node market-api-server/tasks/fetchCollectionDataCoolcats.js",
+
+    "exportMarketOrders": "node market-api-server/tasks/exportMarketOrders.js",
+    "importMarketOrders": "node market-api-server/tasks/importMarketOrders.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
