@@ -18,7 +18,7 @@
    <div class="section  bg-white border-b-2 border-black">
      <div class="margin-center  container mb-32">
         
-       
+
 
 
       <div class="w-column text-center py-8"   >
@@ -26,6 +26,12 @@
  
          
        </div>
+
+
+        <LoadingSpinner
+          v-if="isLoading"
+          />
+
 
 
 
@@ -125,6 +131,9 @@ import Navbar from './components/Navbar.vue';
 import Footer from './components/Footer.vue'; 
 import GenericTable from './components/GenericTable.vue';
  
+import LoadingSpinner from './components/Loading-Spinner.vue'
+ 
+
 import Web3Plug from '../js/web3-plug.js'
 
 const envName = process.env.NODE_ENV
@@ -141,11 +150,12 @@ import StarflaskAPIHelper from '../js/starflask-api-helper'
 export default {
   name: 'RecentActivity',
   props: [],
-  components: {Navbar, Footer,   GenericTable },
+  components: {Navbar, Footer,   GenericTable, LoadingSpinner },
   data() {
     return {
       
       web3Plug: new Web3Plug() ,
+      isLoading: true,
 
       recentOffersArray: [],
       recentBidsArray: [],
@@ -193,6 +203,8 @@ export default {
              "input":{  "filterCollections": filterCollections  }  }   )
 
             console.log('results',results )
+
+            this.isLoading = false
  
 
             for(let result of results.output.recentOrders){ 
@@ -246,7 +258,8 @@ export default {
              "input": {  "filterCollections": filterCollections  } }  )
 
             console.log('results',results )
- 
+
+             this.isLoading = false
 
             for(let result of results.output.recentSales){ 
 

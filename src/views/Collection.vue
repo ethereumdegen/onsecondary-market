@@ -86,7 +86,7 @@ import Footer from './components/Footer.vue';
 import TreeList from './components/TreeList.vue';
 
 import TiledTokenBrowser from './components/TiledTokenBrowser.vue';
- import LoadingSpinner from './components/Loading-Spinner.vue'
+import LoadingSpinner from './components/Loading-Spinner.vue'
  
 import StarflaskApiHelper from '../js/starflask-api-helper.js'
 

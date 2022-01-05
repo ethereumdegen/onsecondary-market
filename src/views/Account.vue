@@ -30,6 +30,10 @@
  
 
           
+          <LoadingSpinner
+            v-if="isLoading"
+            />
+
 
           </div>
 
@@ -166,10 +170,10 @@ import Web3Plug from '../js/web3-plug.js'
 
 import Navbar from './components/Navbar.vue';
  
-import Footer from './components/Footer.vue';
-import TabsBar from './components/TabsBar.vue';
+import Footer from './components/Footer.vue'; 
 import GenericTable from './components/GenericTable.vue';
 
+import LoadingSpinner from './components/Loading-Spinner.vue'
  
  
  import MathHelper from '../js/math-helper.js'
@@ -191,10 +195,12 @@ import NftTile from './components/NftTile.vue'
 export default {
   name: 'Account',
   props: [],
-  components: {Navbar, Footer, TabsBar, GenericTable,NftTile, NotConnectedToWeb3},
+  components: {Navbar, Footer, LoadingSpinner, GenericTable,NftTile, NotConnectedToWeb3},
   data() {
     return {
       web3Plug: new Web3Plug() ,
+      isLoading: true,
+
       activePanelId: null,
       selectedTab:"bids",
       activeBidRowsArray:[],
@@ -285,6 +291,7 @@ export default {
             let results = await StarflaskAPIHelper.resolveStarflaskQuery(  FrontendConfig.marketApiRoot+ '/api/v1/apikey', {"requestType": "NFTTiles_by_owner", "input":{"publicAddress": this.profileAccountAddress, "filterNFTcontracts": filterCollections }  }   )
 
             console.log('results',results )
+            this.isLoading = false
 
             this.allOwnedNFTs = []
 
@@ -313,6 +320,7 @@ export default {
              "input":inputRequest }   )
 
             console.log('findPersonalActivity',results )
+            this.isLoading = false
 
             this.personalSellOrders = []
             this.personalBidOrders = []
