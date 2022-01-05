@@ -154,7 +154,11 @@ export default class NFTTileManager  {
     for(let tokenId of ownedTokenIds){
 
       let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel.findOne({collectionName: collectionName , tokenId: tokenId })
-     
+      
+      if(!matchingNFTTile){
+        console.log("WARN: no matching nft tile ", collectionName, tokenId)
+      }
+
        if(matchingNFTTile && ownerAddress != AppHelper.toChecksumAddress(matchingNFTTile.ownerPublicAddress)){
         let tileUpdate = await this.mongoInterface.cachedNFTTileModel.updateOne({_id: matchingNFTTile._id}, {ownerPublicAddress: ownerAddress})
         console.log('tileUpdate',tileUpdate)
