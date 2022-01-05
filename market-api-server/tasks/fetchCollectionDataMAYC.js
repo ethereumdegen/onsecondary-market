@@ -98,7 +98,7 @@ runTask()
 async function  downloadImage(tokenId, url){
   
     
-    let image_path = path.join ( `./market-api-server/output/images/${tokenId}.jpg` )
+    let image_path = path.join ( `./market-api-server/output/images/${collectionName}/${tokenId}.jpg` )
 
 
         

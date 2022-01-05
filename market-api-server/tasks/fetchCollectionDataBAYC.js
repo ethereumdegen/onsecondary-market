@@ -112,7 +112,7 @@ async function  downloadImage(tokenId, url){
    // if(tokenId == 2484 || tokenId== 3875 || tokenId == 2160 || tokenId == 4700 
    //     || tokenId == 2841) return 
 
-    let image_path = path.join ( `./market-api-server/output/images/${tokenId}.jpg` )
+    let image_path = path.join ( `./market-api-server/output/images/${collectionName}/${tokenId}.jpg` )
 
 
         
