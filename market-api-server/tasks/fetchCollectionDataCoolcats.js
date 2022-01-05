@@ -30,7 +30,7 @@ async function runTask(){
     }
     console.log('download images: ', downloadImages)
 
-    let startIndex = 9930
+    let startIndex = 0
     let totalSupply = 10000
 
     let tokenIds = [] 
