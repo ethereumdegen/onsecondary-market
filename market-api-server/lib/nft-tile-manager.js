@@ -183,9 +183,13 @@ export default class NFTTileManager  {
       //if not , it is an invalid order to make it as such 
       let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel.findOne({collectionName: collectionName , tokenId: marketOrder.nftTokenId })
       
+      if(!matchingNFTTile){
+        console.log('WARN: no matching nft tile ',collectionName,marketOrder.nftTokenId  )
+      }
+
 
       //if the order would revert in solidity we mark is as not valid 
-      if(marketOrder.isSellOrder && matchingNFTTile.ownerPublicAddress && orderCreator != AppHelper.toChecksumAddress(matchingNFTTile.ownerPublicAddress)   ){
+      if(matchingNFTTile && marketOrder.isSellOrder && matchingNFTTile.ownerPublicAddress && orderCreator != AppHelper.toChecksumAddress(matchingNFTTile.ownerPublicAddress)   ){
         newMarketOrderStatus = 'ownerAddressMismatched'
       }
 
