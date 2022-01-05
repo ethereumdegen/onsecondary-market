@@ -119,6 +119,7 @@ const MarketOrdersSchema = new Schema({
   lastPolledAt:{
     type: Number
   },
+  
   status:{
     type: String, index: true
   },

@@ -56,6 +56,8 @@ export default class NFTTileManager  {
           this.pollNextRecentlyUpdatedERC721Balance() 
       
           this.pollNextMarketOrder()
+
+          this.pollNewMarketOrders()
       
 
      
@@ -80,7 +82,7 @@ export default class NFTTileManager  {
     async pollNextMarketOrder( ){
         
       
-        const STALE_TIME = 360  * 1000;
+        const STALE_TIME = 1200  * 1000;
 
         let nextMarketOrder = await this.mongoInterface.marketOrdersModel.findOne({lastPolledAt: {$not: {$gte: (Date.now() - STALE_TIME) }}  })
 
@@ -97,9 +99,7 @@ export default class NFTTileManager  {
           setTimeout( this.pollNextMarketOrder.bind(this), 10)
 
         }else{
-         // console.log('pne - none')
-          //none found 
-          //return
+         
 
           setTimeout( this.pollNextMarketOrder.bind(this), 200)
         }
@@ -107,6 +107,38 @@ export default class NFTTileManager  {
         
 
     }
+
+    async pollNewMarketOrders( ){
+        
+      
+      const STALE_TIME = 60  * 1000;
+      let beforeTime = (Date.now() - STALE_TIME)
+
+      let nextMarketOrder = await this.mongoInterface.marketOrdersModel
+      .findOne({  lastPolledAt:  {$not: {$gte: beforeTime }} ,  createdAt:  {$gte: beforeTime }  })      
+      .sort( { createdAt: 1  } )  //sort ASC  - grab the oldest one  
+
+      
+      if(nextMarketOrder){ 
+
+        
+        await this.updateMarketOrderStatus(nextMarketOrder)
+        await this.updateNftTilesFromMarketOrder(nextMarketOrder)
+        
+        await this.mongoInterface.marketOrdersModel.updateOne({_id: nextMarketOrder._id}, {lastPolledAt: Date.now()})
+
+
+        setTimeout( this.pollNewMarketOrders.bind(this), 10)
+
+      }else{
+      
+
+        setTimeout( this.pollNewMarketOrders.bind(this), 200)
+      }
+
+      
+
+  }
 
 
 
