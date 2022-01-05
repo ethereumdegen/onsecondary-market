@@ -149,7 +149,9 @@ export default {
         {title:'Cryptoadz', name:'cryptoadz', imgurl: 'cryptoad.png'},
         {title:'Cryptoflyz', name:'cryptoflyz', imgurl: 'cryptofly.png'},
         {title:'Bored Apes', name:'boredapes', imgurl: 'boredape.png'},
-        {title:'Mutant Apes', name:'mutantapes', imgurl: 'mutantape.png'} 
+        {title:'Mutant Apes', name:'mutantapes', imgurl: 'mutantape.png'} ,
+        {title:'Cool Cats', name:'coolcats', imgurl: 'coolcat.png'} ,
+        {title:'Doodles', name:'doodles', imgurl: 'doodle.png'} 
 
       ]
         
