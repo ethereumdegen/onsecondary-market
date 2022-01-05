@@ -52,23 +52,24 @@ export default {
 
         let typeName = this.nftData.collectionName
 
-        if(typeName == 'boredapes'){typeName = 'Bored Ape'}
-        if(typeName == 'mutantapes'){typeName = 'Mutant Ape'}
+       
+
+        let assetName = AssetDataHelper.collectionNameToAssetName( typeName  )
+       
         
 
-        return typeName.concat(' #').concat(this.nftTokenId)
+        return assetName.concat(' #').concat(this.nftTokenId)
 
        }
           return ''
       },
       
-      getLinkUrl(){
+      getLinkUrl(){ 
 
-        //return `https://artblocks.io/token/${this.nftTokenId}.png` 
+
         return `/collection/${this.collectionName}/${this.nftTokenId}` 
       },
-
-
+ 
 
       getImageURL(){
 
