@@ -526,10 +526,14 @@ export default {
         
          let ordersForNFT = response.output.slice(0,5000)
 
+
+         let tokenOwnerAddress = this.tokenOwnerAddress
+
+         if( tokenOwnerAddress){ 
+            tokenOwnerAddress = tokenOwnerAddress.toLowerCase()  
+         }
           
-          
-         let ordersFromOwner = ordersForNFT.filter(x => x.orderCreator.toLowerCase() == this.tokenOwnerAddress.toLowerCase()  )
-        
+         let ordersFromOwner = ordersForNFT.filter(x => x.orderCreator.toLowerCase() == tokenOwnerAddress  ) 
  
 
          let buyOrders = ordersFromOwner.filter(x => x.isSellOrder == false  )
