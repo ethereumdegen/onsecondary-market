@@ -23,7 +23,7 @@
  
 
 
- -write a custom ERC721 indexer for vibegraph that will build mini-nft tiles as it goes , so i never need to poll ERC721 balance records . this will enable me to add many more NFT projects without detriment to polling 
+ BUG: posting a new order -> it does not show up on tile . Only after clearing that new orders's LastPolledAt will the tile update .   .. odd
 
 ### Development commands
 ```

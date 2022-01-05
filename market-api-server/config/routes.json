@@ -1,6 +1,6 @@
 [
   ["get /ping", "pong"],
-  ["post /mint", "mint"],
+  ["post /", "mint"],
   ["get /tokens", "getTokens"],
   ["get /token/:tokenId/uri", "getTokenURI"],
   ["get /token/:tokenId/metadata", "getTokenMetadata"],
