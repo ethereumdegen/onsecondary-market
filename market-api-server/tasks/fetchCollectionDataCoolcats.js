@@ -30,6 +30,7 @@ async function runTask(){
     }
     console.log('download images: ', downloadImages)
 
+    let startIndex = 9930
     let totalSupply = 10000
 
     let tokenIds = [] 
@@ -38,7 +39,7 @@ async function runTask(){
     let traitsMap = {} 
     
 
-    for(let tokenId=0; tokenId<=totalSupply; tokenId+=1){
+    for(let tokenId=startIndex; tokenId<=totalSupply; tokenId+=1){
 
     
         //let URI = `https://api.opensea.io/api/v1/assets?order_direction=desc&offset=${offset}&limit=50&collection=${collectionName}`
@@ -98,7 +99,10 @@ async function  downloadImage(tokenId, url){
     
     let image_path = path.join ( `./market-api-server/output/images/${collectionName}/${tokenId}.jpg` )
 
-
+    if(!url) { 
+        console.log('WARN image url is ', url)
+        return
+     }
         
     let existingImage = fs.existsSync(image_path ); 
     if(existingImage) { 
