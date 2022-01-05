@@ -14,6 +14,13 @@
          
          
           <div class="" style="min-height:400px">
+
+             <LoadingSpinner
+                  v-if="isLoading"
+                 />
+
+
+
               <NftTile
                 v-for="tokenData in activeNFTDataArray"
                 v-bind:key="tokenData.tokenId"
@@ -72,6 +79,7 @@ export default {
     return {
      // collectionName: null,
        
+      isLoading: true,
 
       tilesDataArray : [],
    
@@ -102,7 +110,7 @@ export default {
   methods: {
       async fetchFilteredTokensArray(){
         console.log('fetching results  - new current filter ', this.currentFilter)
-        // this.currentFilter 
+       
 
          let uri = FrontendConfig.marketApiRoot+'/api/v1/apikey'
           
@@ -114,12 +122,14 @@ export default {
           
           }, this.currentFilter   )
 
- 
+          this.isLoading=true
+
          let result = await StarflaskApiHelper.resolveStarflaskQuery(uri,{"requestType": "NFTTiles_by_trait_value", "input": inputQuery})
            
            let input = result.input 
            let output = result.output  
-         
+
+            this.isLoading=false
  
            if(input && input.traitValue == this.currentFilter.traitValue && output){
                

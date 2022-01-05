@@ -30,10 +30,7 @@
             </div>
           <div class="md:col-span-3 p-2"> 
 
-                <LoadingSpinner
-                  v-if="isLoading"
-                 />
-
+               
                 <TiledTokenBrowser
                   ref="TokenBrowser"  
                   v-bind:collectionName="collectionName"
