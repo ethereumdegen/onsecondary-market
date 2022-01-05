@@ -268,7 +268,7 @@ export default {
               let decimals = 18 
               let currencyAmountFormatted = MathHelper.rawAmountToFormatted(result.currencyTokenAmount,decimals)
                 currencyAmountFormatted = MathHelper.formatFloat(currencyAmountFormatted)
-                currencyAmountFormatted = currencyAmountFormatted.toString().concat(' ♦')
+                currencyAmountFormatted = currencyAmountFormatted.toString().concat(' Ξ')
 
                let iconURL = AssetDataHelper.getImageURL(collectionName,result.nftTokenId) 
 
