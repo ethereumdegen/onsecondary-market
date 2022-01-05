@@ -227,6 +227,7 @@ export default class NFTTileManager  {
       let currentBlockNumber = this.blockNumber 
 
       if(!collectionName){ 
+        console.log('WARN: could not update market order ', collectionName )
         return
       }
 
@@ -277,6 +278,7 @@ export default class NFTTileManager  {
       let orderCollectionName = AppHelper.contractAddressToCollectionName(marketOrder.nftContractAddress)
 
       if(!orderCollectionName){ 
+        console.log('Warn: could not update nft tile from market order ', orderCollectionName )
         return
       }
 
@@ -304,12 +306,8 @@ export default class NFTTileManager  {
 
         if(matchingNFTTile && matchingNFTTile.buyoutPriceFromOrderId && AppHelper.mongoIdToNumber(marketOrder._id) == matchingNFTTile.buyoutPriceFromOrderId){
           
-
-          
-
              await this.mongoInterface.cachedNFTTileModel.findOneAndUpdate({_id: matchingNFTTile._id},   {buyoutPriceSort: null, lowestBuyoutPriceWei: null, buyoutPriceFromOrderId:null} )
           
-             
 
         }
 
