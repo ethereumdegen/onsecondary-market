@@ -148,7 +148,7 @@ export default class NFTTileManager  {
     }
 
     collectionName = collectionName.toLowerCase()
-    
+
 
     let ownerAddress = AppHelper.toChecksumAddress(erc721Balance.accountAddress)
     let ownedTokenIds = erc721Balance.tokenIds
@@ -164,7 +164,7 @@ export default class NFTTileManager  {
 
        if(matchingNFTTile && ownerAddress != AppHelper.toChecksumAddress(matchingNFTTile.ownerPublicAddress)){
         let tileUpdate = await this.mongoInterface.cachedNFTTileModel.updateOne({_id: matchingNFTTile._id}, {ownerPublicAddress: ownerAddress})
-        console.log('tileUpdate',tileUpdate)
+        console.log('tileUpdate',collectionName,tokenId,tileUpdate)
       }
     } 
 
