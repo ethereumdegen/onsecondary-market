@@ -22,16 +22,19 @@ let BlockStoreABI = FileHelper.readJSONFile('./src/contracts/BlockStoreABI.json'
 export default class DataGhost  {
 
 
-  async init(web3){
+  async init(web3, customDBName){
 
     console.log('dataghost config: ',dataghostConfig)
 
+    if(!customDBName){
+      customDBName = dataghostConfig.vibeGraphConfig.dbName
+    }
  
    
     let vibeGraphConfig = {  
       contracts:dataghostConfig.vibeGraphConfig.contracts,
        
-      dbName: dataghostConfig.vibeGraphConfig.dbName,
+      dbName: customDBName,
       //url: web3Config.dbURI,
       //port: parseInt(web3Config.dbPort),
       indexRate: 10*1000,
