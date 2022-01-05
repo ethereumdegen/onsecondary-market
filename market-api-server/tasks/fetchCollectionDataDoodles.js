@@ -33,7 +33,7 @@ async function runTask(){
         downloadImages = true
     }
     console.log('download images: ', downloadImages)
-    
+
 
     let totalSupply = 10000
     
@@ -108,6 +108,7 @@ async function  downloadImage(tokenId, url){
     let existingImage = fs.existsSync(image_path ); 
     if(existingImage) { 
         console.log(tokenId,' already exists')
+        return
      }
 
 

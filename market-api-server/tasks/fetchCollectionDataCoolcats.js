@@ -103,6 +103,7 @@ async function  downloadImage(tokenId, url){
     let existingImage = fs.existsSync(image_path ); 
     if(existingImage) { 
         console.log(tokenId,' already exists')
+        return
      }
 
 
