@@ -147,6 +147,9 @@ export default class NFTTileManager  {
       return
     }
 
+    collectionName = collectionName.toLowerCase()
+    
+
     let ownerAddress = AppHelper.toChecksumAddress(erc721Balance.accountAddress)
     let ownedTokenIds = erc721Balance.tokenIds
 
