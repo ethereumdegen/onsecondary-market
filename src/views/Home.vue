@@ -77,9 +77,13 @@
               
 
                  <div class="pt-8 relative pb-2 mb-2" style="min-height:100px">
-                         
-                      <div  class="   text-white text-3xl p-2" style="   " > On Secondary </div>
 
+                           <img src="@/assets/images/onsecondlogo_md.png" style="max-height:50px; margin:0 auto;" />
+
+
+                      <div  class="   text-white text-md p-2 font-boring " style="   " > (On Secondary) </div>
+
+                        
                 </div>
 
               
