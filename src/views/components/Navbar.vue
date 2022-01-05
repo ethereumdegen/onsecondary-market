@@ -7,7 +7,7 @@
         
         </div>
         <router-link to="/" class='brand w-nav-brand w--current flex-grow inline text-xl text-gray-200 font-bold no-underline'>
-           <img src="@/assets/images/onsecondlogo_md.png" style="max-height:50px" />
+           <img src="@/assets/images/on2logo_md.png" style="max-height:50px" />
         </router-link>
 
  

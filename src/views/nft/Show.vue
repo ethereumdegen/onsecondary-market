@@ -33,6 +33,13 @@
 
 
           <div class="m-4 p-4 border-2 border-gray-500 font-boring" style="min-height:50px; "> 
+
+
+          <LoadingSpinner
+            v-if="isLoading"
+            />
+
+
             <table class="table-auto" > 
 
               <thead>
@@ -231,6 +238,9 @@ export default {
   data() {
     return {
       web3Plug: new Web3Plug() ,
+
+      isLoading: true, 
+
       nftContractAddress: null,
       nftTokenId: null,
       tokenOwnerAddress: null,
@@ -495,6 +505,8 @@ export default {
               this.tokenOwnerAddress = output.ownerPublicAddress
 
               this.nftTraitsArray = output.nftTraits
+
+              this.isLoading = false 
             }
             
 
