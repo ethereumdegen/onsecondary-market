@@ -22,9 +22,6 @@
 
           <div class="bg-gray-200 p-2 border-4 border-black text-gray-800" style="min-height:500px">
 
-                  <LoadingSpinner
-                  v-if="isLoading"
-                 />
 
 
 
@@ -32,6 +29,10 @@
                   v-bind:inputArray="filterTraitsList"
                   v-bind:onClickCallback="onClickTraitCallback"
                 /> 
+ 
+                  <LoadingSpinner
+                  v-if="isLoading"
+                 />
             
             </div>
           <div class="md:col-span-3 p-2"> 
