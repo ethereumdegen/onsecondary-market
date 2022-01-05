@@ -11,14 +11,11 @@ import axios from 'axios'
 
 import fs from 'fs'
 import path from 'path'
- 
-import FileHelper from '../lib/file-helper.js'
+  
  
 let downloadImages = true 
 let writeTraitsFile = true 
- 
-let fetchConfig = FileHelper.readJSONFile('./market-api-server/tasks/fetchConfig.json')
- 
+  
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
  
 let collectionName = 'boredapes'
