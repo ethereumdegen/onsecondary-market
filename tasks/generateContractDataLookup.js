@@ -4,7 +4,7 @@ import FileHelper from '../market-api-server/lib/file-helper.js'
 import fs from 'fs'
 import path from 'path'
 
-const assetDataTable =FileHelper.readJSONFile('./src/config/contractdata.json')
+const assetDataTable = FileHelper.readJSONFile('./shared/contractdata.json')
 
 
  

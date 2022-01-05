@@ -6,7 +6,7 @@ import BigNumber from 'bignumber.js'
 
 import FileHelper from './file-helper.js'
 
-const contractData = FileHelper.readJSONFile('./src/config/contractdata.json')
+const contractData = FileHelper.readJSONFile('./shared/contractdata.json')
 const tokenContractABI = FileHelper.readJSONFile('./src/contracts/ERC20ABI.json')
 const nftContractABI = FileHelper.readJSONFile('./src/contracts/ERC721ABI.json')
 

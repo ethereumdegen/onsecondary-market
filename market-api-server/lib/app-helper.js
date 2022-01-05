@@ -6,7 +6,7 @@
  
 
     const envmode = process.env.NODE_ENV
-   const contractData = FileHelper.readJSONFile('./market-api-server/config/contractdata.json')
+   const contractData = FileHelper.readJSONFile('./shared/contractdata.json')
    const contractLookup = FileHelper.readJSONFile('./market-api-server/config/generated/contractlookup.json')
          
    
