@@ -12,7 +12,7 @@ const FrontendConfig = require('../config/FrontendConfig.json')[envName]
 export default class AssetDataHelper {
 
   static collectionNameToAssetName(name){
-    
+
     if(name == 'boredapes'){name = 'Bored Ape'}
     if(name == 'mutantapes'){name = 'Mutant Ape'}
     if(name == 'coolcats'){name = 'Cool Cat'}
@@ -62,7 +62,8 @@ export default class AssetDataHelper {
   }  
 
   static getImageFolderNameFromCollectionName(cName){
-   
+    if(!cName) return cName
+    
 
     return cName.toLowerCase()
   } 
