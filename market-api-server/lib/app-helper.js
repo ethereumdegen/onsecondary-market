@@ -39,7 +39,7 @@
                    return data.address
                } 
            } 
-
+ 
            console.error('ERROR: could not resolve contract address ',collectionName )
 
            return  null
