@@ -237,8 +237,12 @@ export default class NFTTileManager  {
       }else{ 
           
           
-      
-        if(matchingNFTTile.buyoutPriceFromOrderId && AppHelper.mongoIdToNumber(marketOrder._id) == matchingNFTTile.buyoutPriceFromOrderId){
+        if(!matchingNFTTile){
+            console.log('WARN: no matching nft tile ', orderCollectionName, marketOrder.nftTokenId )
+        }
+
+
+        if(matchingNFTTile && matchingNFTTile.buyoutPriceFromOrderId && AppHelper.mongoIdToNumber(marketOrder._id) == matchingNFTTile.buyoutPriceFromOrderId){
           
 
           
