@@ -41,9 +41,7 @@ export default {
       searchQuery:''
     }
   },
-  mounted() {
-     
-  },
+ 
   methods: {
     updatedSearchQuery: function()
     {

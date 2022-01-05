@@ -189,12 +189,15 @@ export default {
             for(let trait of filterTraitsList){
               if(!map[trait.traitType]) map[trait.traitType] = [] 
               map[trait.traitType].push( trait.value )
-            }
+            } 
 
             let output = []
    
             for(let key of Object.keys(map)){
-              output.push(  {title: key,  children:  map[key].map(v =>  ({"title": v}) ) }  )
+              let allChildren = map[key].map(v =>  ({"title": v}) )
+               allChildren.sort( (a, b) => a.title.localeCompare(b.title) )
+
+              output.push(  {title: key,  children:  allChildren }  )
             }
             
             return  {title:"All Traits", children: output}

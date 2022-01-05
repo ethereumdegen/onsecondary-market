@@ -57,6 +57,8 @@ export default {
           }
         }
   },
+  
+  
   methods: {
     setCollapsed: function(collapsed){
         this.collapsed=collapsed
