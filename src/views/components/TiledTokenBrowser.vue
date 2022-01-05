@@ -15,7 +15,7 @@
          
           <div class="" style="min-height:400px">
 
-             <LoadingSpinner
+                <LoadingSpinner
                   v-if="isLoading"
                  />
 
@@ -122,9 +122,10 @@ export default {
           
           }, this.currentFilter   )
 
+          this.activeNFTDataArray = []
           this.isLoading=true
 
-         let result = await StarflaskApiHelper.resolveStarflaskQuery(uri,{"requestType": "NFTTiles_by_trait_value", "input": inputQuery})
+           let result = await StarflaskApiHelper.resolveStarflaskQuery(uri,{"requestType": "NFTTiles_by_trait_value", "input": inputQuery})
            
            let input = result.input 
            let output = result.output  

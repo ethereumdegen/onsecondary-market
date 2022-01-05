@@ -21,7 +21,13 @@
  
 
           <div class="bg-gray-200 p-2 border-4 border-black text-gray-800" style="min-height:500px">
-            
+
+                  <LoadingSpinner
+                  v-if="isLoading"
+                 />
+
+
+
                 <TreeList 
                   v-bind:inputArray="filterTraitsList"
                   v-bind:onClickCallback="onClickTraitCallback"
@@ -154,7 +160,7 @@ export default {
     
       await this.fetchTraits()
 
-      this.isLoading = false 
+    
    
   }, 
   methods: {
@@ -162,9 +168,13 @@ export default {
           async fetchTraits( ){
 
               let uri = FrontendConfig.marketApiRoot+'/api/v1/apikey'
-              
+
+                this.isLoading = true 
+
               let result = await StarflaskApiHelper.resolveStarflaskQuery(uri,{"requestType": "all_collection_traits", "input": {collectionName: this.collectionName}})
- 
+
+                this.isLoading = false 
+
 
               this.filterTraitsList = this.computeFilterTraitsList(  result.output  )
               console.log('this.filterTraitsList',this.filterTraitsList)
