@@ -112,11 +112,13 @@ export default class NFTTileManager  {
 
     async pollNextRecentlyUpdatedERC721Balance(){
 
-      const STALE_TIME = 90 * 1000;
+      const STALE_TIME = 900 * 1000;
 
       let beforeTime = (Date.now() - STALE_TIME)
 
-      let nextERC721Balance = await this.vibegraphInterface.erc721BalancesModel.findOne( {   lastPolledAt:  {$not: {$gte: beforeTime }}, lastUpdatedAt:  {$lte:   beforeTime  } })
+      let nextERC721Balance = await this.vibegraphInterface.erc721BalancesModel
+      .findOne( {    lastUpdatedAt:  {$gte:   beforeTime  } })
+      .sort( { lastUpdatedAt: 1  } )  //sort ASC  - grab the oldest one  
        
         
       if(nextERC721Balance){ 
@@ -126,12 +128,12 @@ export default class NFTTileManager  {
         
          await this.vibegraphInterface.erc721BalancesModel.updateOne({_id: nextERC721Balance._id}, {lastPolledAt: Date.now()})
 
-         setTimeout( this.pollNextERC721Balance.bind(this), 0)
+         setTimeout( this.pollNextRecentlyUpdatedERC721Balance.bind(this), 0)
 
       }else{
         console.log('poll recent balance - none')
 
-        setTimeout( this.pollNextERC721Balance.bind(this), 200)
+        setTimeout( this.pollNextRecentlyUpdatedERC721Balance.bind(this), 200)
       }
 
     }
