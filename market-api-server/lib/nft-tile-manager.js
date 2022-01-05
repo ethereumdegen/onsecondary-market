@@ -84,8 +84,7 @@ export default class NFTTileManager  {
 
         
         if(nextMarketOrder){ 
-          //console.log('pollNextMarketOrder',nextMarketOrder)
-          //console.log('pne')
+
           
           await this.updateMarketOrderStatus(nextMarketOrder)
           await this.updateNftTilesFromMarketOrder(nextMarketOrder)
@@ -107,16 +106,16 @@ export default class NFTTileManager  {
 
     }
 
-
+    //there are too many erc721 balance   !!
     async pollNextERC721Balance( ){
         
      
 
-      const STALE_TIME = 360*1000;
+      const STALE_TIME = 900 * 1000;
 
       let beforeTime = (Date.now() - STALE_TIME)
 
-      let nextERC721Balance = await this.vibegraphInterface.erc721BalancesModel.findOne( {  /*tokenIds:{$not:  {$size:0}},*/  tokenIds:6 , lastPolledAt:  {$not: {$gte: beforeTime }} })
+      let nextERC721Balance = await this.vibegraphInterface.erc721BalancesModel.findOne( {  /*tokenIds:{$not:  {$size:0}},*/  lastPolledAt:  {$not: {$gte: beforeTime }} })
       
        
         
