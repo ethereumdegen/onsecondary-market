@@ -128,7 +128,7 @@ export default class NFTTileManager  {
          await this.vibegraphInterface.erc721BalancesModel.updateOne({_id: nextERC721Balance._id}, {lastPolledAt: Date.now()})
 
 
-         setTimeout( this.pollNextERC721Balance.bind(this), 10)
+         setTimeout( this.pollNextERC721Balance.bind(this), 0)
 
       }else{
         console.log('poll balance - none')
@@ -162,9 +162,10 @@ export default class NFTTileManager  {
       
       if(!matchingNFTTile){
         console.log("WARN: no matching nft tile ", collectionName, tokenId)
+        continue
       }
 
-       if(matchingNFTTile && ownerAddress != AppHelper.toChecksumAddress(matchingNFTTile.ownerPublicAddress)){
+       if( ownerAddress != AppHelper.toChecksumAddress(matchingNFTTile.ownerPublicAddress) ){
         let tileUpdate = await this.mongoInterface.cachedNFTTileModel.updateOne({_id: matchingNFTTile._id}, {ownerPublicAddress: ownerAddress})
         console.log('tileUpdate',collectionName,tokenId,tileUpdate)
       }
