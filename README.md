@@ -12,6 +12,10 @@
 
  mogrify -resize 631x631 ./*.jpg
 
+
+ -- need to be able to easily do 'GenerateContractDataLookupTask' on web server 
+-- failed doodles -> [ 183, 184, 185, 186, 187, 4398 ]
+
  
 
 ### Development commands

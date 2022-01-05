@@ -37,7 +37,7 @@ let sharedConfig =  FileHelper.readJSONFile('./shared/sharedconfig.json')
     let mongoInterface = new MongoInterface() 
     await mongoInterface.init(  serverConfig.dbName )
 
-    await GenerateContractDataLookupTask.runTask( )
+     await GenerateContractDataLookupTask.runTask( )
     
 
     
