@@ -85,7 +85,7 @@ export default class NFTTileManager  {
         
         if(nextMarketOrder){ 
           //console.log('pollNextMarketOrder',nextMarketOrder)
-          console.log('pne')
+          //console.log('pne')
           
           await this.updateMarketOrderStatus(nextMarketOrder)
           await this.updateNftTilesFromMarketOrder(nextMarketOrder)
@@ -96,7 +96,7 @@ export default class NFTTileManager  {
           setTimeout( this.pollNextMarketOrder.bind(this), 10)
 
         }else{
-          console.log('pne - none')
+         // console.log('pne - none')
           //none found 
           //return
 
@@ -121,9 +121,9 @@ export default class NFTTileManager  {
        
         
       if(nextERC721Balance){ 
-
+        console.log('poll balance')
          
-        await this.updateNftTilesFromERC721Balance(nextERC721Balance)
+         await this.updateNftTilesFromERC721Balance(nextERC721Balance)
         
          await this.vibegraphInterface.erc721BalancesModel.updateOne({_id: nextERC721Balance._id}, {lastPolledAt: Date.now()})
 
@@ -131,7 +131,7 @@ export default class NFTTileManager  {
          setTimeout( this.pollNextERC721Balance.bind(this), 10)
 
       }else{
-        
+        console.log('poll balance - none')
 
         setTimeout( this.pollNextERC721Balance.bind(this), 200)
       }
@@ -145,6 +145,7 @@ export default class NFTTileManager  {
     let collectionName = AppHelper.contractAddressToCollectionName(erc721Balance.contractAddress)
 
     if(!collectionName){ 
+      console.log('warn: cname', collectionName)
       return
     }
 
