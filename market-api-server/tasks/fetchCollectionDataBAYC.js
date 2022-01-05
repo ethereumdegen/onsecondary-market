@@ -14,81 +14,86 @@ import path from 'path'
  
 import FileHelper from '../lib/file-helper.js'
  
- const downloadImages = true 
- const writeTraitsFile = true 
+let downloadImages = true 
+let writeTraitsFile = true 
  
 let fetchConfig = FileHelper.readJSONFile('./market-api-server/tasks/fetchConfig.json')
  
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
  
-
+let collectionName = 'boredapes'
 
 async function runTask(){
 
+    const myArgs = process.argv.slice(2);
 
-
-let totalSupply = 10000
- 
- 
-let contractData
-
-
-let tokenIds = [] 
-let failedRequestIds = []
-
-let traitsMap = {} 
-  
-
-for(let tokenId=0; tokenId<totalSupply; tokenId+=1){
-
-
-    //let URI = `https://api.opensea.io/api/v1/assets?order_direction=desc&offset=${offset}&limit=50&collection=${collectionName}`
-
-
-    let URI = `https://ipfs.io/ipfs/QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/${tokenId}`
-    console.log(URI)
-
-    try{
-        await delay(1000)
-
-        const res = await axios.get( URI )
-
-        console.log(res.data) 
-
-       // for(let asset of res.data.assets){ 
-            
-            tokenIds.push(tokenId)
-
-            if(downloadImages){
-                let imageIPFSHash = res.data.image.split('://')[1]
-
-                let imageURL = `https://ipfs.io/ipfs/${imageIPFSHash}`
-                await downloadImage(tokenId, imageURL)
-            } 
-        
-            traitsMap[tokenId] = res.data.attributes 
-
-
-       // }
-
-        /*if(!contractData){
-            contractData = res.data.assets[0].asset_contract
-
-            console.log(contractData)
-        }*/
-    }catch(e){
-        failedRequestIds.push(tokenId)
-        console.log(e)
+    if(myArgs[0] == '--images'){
+        downloadImages = true
     }
+
+    let totalSupply = 10000
+    
+    
+    let contractData
+
+
+    let tokenIds = [] 
+    let failedRequestIds = []
+
+    let traitsMap = {} 
+    
+
+    for(let tokenId=0; tokenId<totalSupply; tokenId+=1){
+
+
+        //let URI = `https://api.opensea.io/api/v1/assets?order_direction=desc&offset=${offset}&limit=50&collection=${collectionName}`
+
+
+        let URI = `https://ipfs.io/ipfs/QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/${tokenId}`
+        console.log(URI)
+
+        try{
+            await delay(1000)
+
+            const res = await axios.get( URI )
+
+            console.log(res.data) 
+
+        // for(let asset of res.data.assets){ 
+                
+                tokenIds.push(tokenId)
+
+                if(downloadImages){
+                    let imageIPFSHash = res.data.image.split('://')[1]
+
+                    let imageURL = `https://ipfs.io/ipfs/${imageIPFSHash}`
+                    await downloadImage(tokenId, imageURL)
+                } 
+            
+                traitsMap[tokenId] = res.data.attributes 
+
+
+        // }
+
+            /*if(!contractData){
+                contractData = res.data.assets[0].asset_contract
+
+                console.log(contractData)
+            }*/
+        }catch(e){
+            failedRequestIds.push(tokenId)
+            console.log(e)
+        }
 
 } 
  
 
 
-if(writeTraitsFile)
-{
-    fs.writeFileSync( path.join ( "./market-api-server/output/outputconfig.json" ) , JSON.stringify( traitsMap ) );
-}
+    if(writeTraitsFile)
+    {
+        fs.writeFileSync( path.join ( `./market-api-server/output/${collectionName}.json` ) , JSON.stringify( traitsMap ) );
+    }
+    
  
 console.log('failed:',failedRequestIds)
 

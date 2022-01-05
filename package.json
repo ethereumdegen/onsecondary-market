@@ -31,9 +31,14 @@
     "lint": "vue-cli-service lint",
     "test": "NODE_ENV=test mocha 'tests/**/*.js' --timeout 25000",
     "test:frontend": "vue-cli-service test:unit",
+    
+    "populateTraitsDB": "node market-api-server/tasks/populateTraitsDB.js",
+
+    "fetchBAYCData": "node market-api-server/tasks/fetchCollectionDataBAYC.js",
+    "fetchMAYCData": "node market-api-server/tasks/fetchCollectionDataMAYC.js",
+
     "fetchDoodlesData": "node market-api-server/tasks/fetchCollectionDataDoodles.js",
-    "fetchCoolcatsData": "node market-api-server/tasks/fetchCollectionDataCoolcats.js",
-    "populateTraitsDB": "node market-api-server/tasks/populateTraitsDB.js"
+    "fetchCoolcatsData": "node market-api-server/tasks/fetchCollectionDataCoolcats.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",

@@ -1,0 +1,14 @@
+server {
+  listen 80;
+  listen [::]:80;
+
+  server_name localhost;
+
+  location / {
+        root  /home/andy/deploy/onsecondary-market/dist;
+        try_files $uri $uri/ /index.html;
+        index  index.html index.htm;
+    }
+
+
+}

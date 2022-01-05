@@ -34,6 +34,9 @@ cp -r ../../../images/doodles/* doodles/
 cp -r ../../../images/coolcats/* coolcats/
 
 
+## run fetch scripts 
+npm run fetchCoolcatsData -- images
+
 
 
  ### Start with pm2 
