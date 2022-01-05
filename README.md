@@ -1,6 +1,6 @@
 # Onsecondary Market  
  
- Deployed at https://doodles.onsecondary.com
+ Deployed at https://market.onsecondary.com
  
   
  Monolithic repo for api server, image server, web server 
@@ -8,7 +8,11 @@
 
 ### TODO  
  
+ -build a bot for api (like genie ) 
+ -implement all mutant images 
  
+
+
 
  mogrify -resize 631x631 ./*.jpg
 
