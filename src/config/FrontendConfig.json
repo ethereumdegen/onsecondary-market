@@ -2,7 +2,7 @@
     "development":{
          
         "marketApiRoot":"http://localhost:4000" ,
-        "imageApiRoot":"http://localhost:4000" 
+        "imageApiRoot":"https://images.onsecondary.com" 
     },
     "production":{
         
