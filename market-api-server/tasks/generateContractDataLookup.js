@@ -24,7 +24,7 @@ static generateAssetDataLookup(dataTable){
   
         let contractAddress = contractInfo.address.toLowerCase()
   
-          records[contractAddress] = {name: contractInfo.name, address: contractInfo.address, networkName: networkName}
+          records[contractAddress] = {name: contractInfo.name, address: contractInfo.address , networkName: networkName}
   
       }  
    

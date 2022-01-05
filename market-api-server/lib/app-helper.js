@@ -48,10 +48,7 @@
          
         static contractAddressToCollectionName(contractAddress){
             if(!contractAddress) return contractAddress
-             //let networkName = AppHelper.getNetworkName() 
- 
-
-            //let contractDataForNetwork = contractData[networkName].contracts
+          
 
             let matchingContract = contractLookup[ contractAddress.toLowerCase()  ]
 
