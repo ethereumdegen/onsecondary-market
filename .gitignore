@@ -4,6 +4,7 @@ node_modules
 
 src/assets/config/generated/*
 
+images/*
 public/images/boredapes/*
 public/images/mutantapes/* 
 market-api-server/output/*

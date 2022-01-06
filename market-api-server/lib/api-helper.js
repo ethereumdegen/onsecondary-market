@@ -23,6 +23,18 @@
            
             let inputData = request.body 
 
+            if(inputData.requestType == 'server_data'){
+ 
+                let inputParameters = inputData.input
+   
+                let results =  {}                 
+
+                results.latestBlockNumber = await APIHelper.getCurrentBlockNumber(mongoInterface)
+
+                return {success:true, input: inputParameters, output: results  }
+            } 
+
+
 
             if(inputData.requestType == 'recent_activity'){
  
