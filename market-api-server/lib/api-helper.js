@@ -412,9 +412,12 @@
             let RECENT_TIME = Date.now() - ONE_MONTH 
 
             let allSales = await vibegraphInterface.nftSalesModel
-            .find({nftContractAddress: {$in: filterContractAddresses}, status: 'valid' , createdAt: {$gte: RECENT_TIME} })
+            .find({nftContractAddress: {$in: filterContractAddresses},   createdAt: {$gte: RECENT_TIME} })
             .sort({'createdAt': -1}) //sort DESC 
             .limit(100)
+
+           
+
 
             return {recentSales: allSales} 
         }
@@ -430,16 +433,26 @@
             let RECENT_TIME = Date.now() - ONE_MONTH 
 
             let allSalesFrom = await vibegraphInterface.nftSalesModel
-            .find({nftContractAddress: {$in: filterContractAddresses}, sellerAddress: publicAddress, status: 'valid' , createdAt: {$gte: RECENT_TIME} })
+            .find({nftContractAddress: {$in: filterContractAddresses}, sellerAddress: publicAddress,   createdAt: {$gte: RECENT_TIME} })
             .sort({'createdAt': -1}) //sort DESC 
             .limit(100)
 
             let allSalesTo = await vibegraphInterface.nftSalesModel
-            .find({nftContractAddress: {$in: filterContractAddresses}, buyerAddress: publicAddress, status: 'valid' , createdAt: {$gte: RECENT_TIME} })
+            .find({nftContractAddress: {$in: filterContractAddresses}, buyerAddress: publicAddress, createdAt: {$gte: RECENT_TIME} })
             .sort({'createdAt': -1}) //sort DESC 
             .limit(100)
 
-            return {recentSales: allSalesFrom.concat(allSalesTo)} 
+            let allSales = []
+            if(allSalesFrom){
+                allSales = allSales.concat(allSalesFrom)
+            }
+            if(allSalesTo){
+                allSales = allSales.concat(allSalesTo)
+            }
+
+
+            //allSalesFrom.concat(allSalesTo)
+            return {recentSales:  allSales  } 
         }
 
         static async findRecentActivity(filterCollections, mongoInterface){
@@ -453,15 +466,28 @@
 
             console.log('find recent activity in ', filterContractAddresses)
 
-            let allOrders = await mongoInterface.marketOrdersModel
-            .find({nftContractAddress: {$in: filterContractAddresses}, createdAt: {$gte: RECENT_TIME}, status: 'valid' })
+            let allBids = await mongoInterface.marketOrdersModel
+            .find({nftContractAddress: {$in: filterContractAddresses}, createdAt: {$gte: RECENT_TIME}, isSellOrder:false, status: 'valid' })
             .sort({'createdAt': -1}) //sort DESC 
             .limit(100)
 
-            console.log('allOrders ', allOrders)
+            let allOffers = await mongoInterface.marketOrdersModel
+            .find({nftContractAddress: {$in: filterContractAddresses}, createdAt: {$gte: RECENT_TIME}, isSellOrder:true, status: 'valid' })
+            .sort({'createdAt': -1}) //sort DESC 
+            .limit(100)
+
+            /*let allOrders = []
+            if(allBids){
+                allOrders = allOrders.concat(allBids)
+            }
+            if(allOffers){
+                allOrders = allOrders.concat(allOffers)
+            }
+
+            console.log('allOrders ', allOrders)*/
 
 
-            return {recentOrders: allOrders}
+            return {recentOrders: allBids.concat(allOffers)}
         }
 
 
@@ -479,9 +505,7 @@
             .find({status:'valid', isSellOrder:true, orderCreator:publicAddress,nftContractAddress: {$in: filterContractAddresses}, createdAt: {$gte: RECENT_TIME} })
             .sort({'createdAt': -1}) //sort DESC 
             .limit(100)
-
-
-
+ 
 
             let ownedAssetIds = await APIHelper.getAllOwnedAssetIds( publicAddress,mongoInterface )
 
@@ -490,6 +514,7 @@
             .find({status:'valid', isSellOrder:false, combinedAssetId: {$in: ownedAssetIds}  , createdAt: {$gte: RECENT_TIME} })
             .sort({'createdAt': -1}) //sort DESC 
             .limit(100)
+
 
             return {recentOrders: personalSellOrders.concat(personalBidOrders)   }
         }
