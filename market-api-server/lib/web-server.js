@@ -14,7 +14,7 @@ import https from 'https'
 
 export default class ExpressServer  {
 
-    constructor( serverConfig ){
+    constructor( serverConfig ,customFolderName ){
       
         this.serverConfig=serverConfig;
 
@@ -45,20 +45,23 @@ export default class ExpressServer  {
   
  
 
-        this.startWebServer(app, apiPort)
+        this.startWebServer(app, apiPort, customFolderName)
  
       
     }
 
 
-    async startWebServer(app, apiPort){
+    async startWebServer(app, apiPort, customFolderName){
 
      
       app.use(express.json());
 
-  
+      
+      if(!customFolderName){
+        customFolderName = 'dist'
+      }
  
-      app.use(express.static('dist'))
+      app.use(express.static(customFolderName))
      
 
       app.listen(apiPort, () => {

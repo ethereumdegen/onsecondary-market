@@ -16,10 +16,11 @@ let serverConfig = serverConfigFile[envmode]
   async function start(){
  
       
-    console.log('server config: ',serverConfig)
- 
+     console.log('server config: ',serverConfig)
 
-     let webServer = new WebServer(serverConfig )
+     let customFolderName = 'images' 
+
+     let webServer = new WebServer(serverConfig, customFolderName )
       
       
 
