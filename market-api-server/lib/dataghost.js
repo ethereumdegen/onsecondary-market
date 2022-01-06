@@ -29,6 +29,12 @@ export default class DataGhost  {
     if(!customDBName){
       customDBName = dataghostConfig.vibeGraphConfig.dbName
     }
+
+
+    const performDBSetup = async function(mongoInterface){
+      console.log('performing db setup')
+      await mongoInterface.createUniqueDualIndexOnCollection('erc721_token', 'contractAddress', 'tokenId')
+    }
  
    
     let vibeGraphConfig = {  
@@ -42,16 +48,13 @@ export default class DataGhost  {
       courseBlockGap: dataghostConfig.vibeGraphConfig.courseBlockGap,
       logging: dataghostConfig.vibeGraphConfig.logging,
       subscribe:true,
+      databaseSetupCallback: performDBSetup,
        
       customIndexers:[{
           type:'BlockStore', 
           abi: BlockStoreABI ,  
           handler: IndexerBlockStore 
-       },{
-        type:'ERC721Custom', 
-        abi: ERC721ABI ,  
-        handler: IndexerERC721Custom 
-     }]
+       } ]
   }  
 
     let vibeGraph = new VibeGraph()

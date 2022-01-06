@@ -91,14 +91,21 @@ export default class IndexerERC721Custom{
 
     static async setOwnerOfERC721Token( accountAddress ,contractAddress , tokenId  ,mongoInterface){
         tokenId = parseInt(tokenId)
+
+        await mongoInterface.updateOne('erc721_token', 
+        {tokenId: tokenId, contractAddress: contractAddress },
+        {tokenId: tokenId, contractAddress: contractAddress, ownerAddress: accountAddress , lastUpdatedAt: Date.now()  }, 
+        {upsert:true } )
         
+        
+        /*
         let existingEntry = await mongoInterface.findOne('erc721_token', {tokenId: tokenId, contractAddress: contractAddress }  )
 
         if(existingEntry){ 
             await mongoInterface.updateOne('erc721_token', {tokenId: tokenId, contractAddress: contractAddress}, {ownerAddress: accountAddress , lastUpdatedAt: Date.now()  } )
         }else{
             await mongoInterface.insertOne('erc721_token', {tokenId: tokenId, contractAddress: contractAddress, ownerAddress: accountAddress , lastUpdatedAt: Date.now()  }   )
-        }
+        }*/
     }
 
 

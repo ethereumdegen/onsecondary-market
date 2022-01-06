@@ -59,7 +59,7 @@
     "socket.io": "^3.1.1",
     "socket.io-client": "^3.1.1",
     "tailwindcss": "^1.0.0-beta.4",
-    "vibegraph": "^0.28.4",
+    "vibegraph": "^0.29.0",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vue-tailwind": "^1.2.6",
