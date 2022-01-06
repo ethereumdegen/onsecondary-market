@@ -8,18 +8,18 @@
 
 ### TODO  
  
- -build a bot for api (like genie ) 
- -implement all mutant images 
  
-
+-use a script to cull expired orders 
 
 
  mogrify -resize 631x631 ./*.jpg
 
 
- -- need to be able to easily do 'GenerateContractDataLookupTask' on web server 
+ 
 -- failed doodles -> [ 183, 184, 185, 186, 187, 4398 ]
 
+ 
+ -build a bot for api (like genie ) 
  
 
 
