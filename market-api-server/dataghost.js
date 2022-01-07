@@ -27,7 +27,9 @@ let dataghostConfig = dataghostConfigFile[envmode]
 
 
     let customDBName = dataghostConfig.vibeGraphConfig.dbName 
- 
+    
+    customDBName = "vibegraph_prod3"
+    
    
     console.log('boot vibegraph interface ', customDBName)
 
