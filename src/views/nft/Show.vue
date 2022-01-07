@@ -115,6 +115,10 @@
              <div v-if="!bestSellOrder " class='my-2'>
                 <div class="p-2 border-2 border-black inline cursor-pointer rounded hover:bg-purple-200 select-none" @click="interactionMode='makeSellOrder'"> Sell This Item </div>
             </div>
+
+             <div   class='my-6'>
+                <div class="p-2 border-2 border-black  text-sm inline cursor-pointer rounded hover:bg-purple-200 select-none" @click="interactionMode='performTransfer'"> Transfer This Item </div>
+            </div>
           </div>
 
            <div class="py-2" v-if="!ownedByLocalUser()">
@@ -163,7 +167,7 @@
 
        </div>
 
-         <div class="  m-4 p-4 bg-gray-200 rounded" v-if="interactionMode=='makeSellOrder' || interactionMode=='lowerPrice' || interactionMode=='makeBuyOrder'">
+         <div class="  m-4 p-4 bg-gray-200 rounded" v-if="interactionMode=='makeSellOrder' || interactionMode=='lowerPrice' || interactionMode=='makeBuyOrder' || interactionMode =='performTransfer'">
 
           <div class="py-2 " v-if="interactionMode=='makeSellOrder' || interactionMode=='lowerPrice'">
 
@@ -191,6 +195,19 @@
             />
 
            
+             
+
+          </div>
+
+           <div class="py-2" v-if="interactionMode=='performTransfer'">
+ 
+            <TransferForm 
+            v-bind:web3Plug="web3Plug"
+            v-bind:nftContractAddress="nftContractAddress"
+            v-bind:nftTokenId="nftTokenId"
+            v-bind:txSubmittedCallback="txSubmittedCallback"
+            
+            /> 
              
 
           </div>
@@ -225,7 +242,8 @@ import Footer from '../components/Footer.vue';
 import OffersList from '../components/OffersList.vue'
 
 import BuyOrderForm from '../components/BuyOrderForm.vue'
-import SellOrderForm from '../components/SellOrderForm.vue';
+import SellOrderForm from '../components/SellOrderForm.vue' 
+import TransferForm from '../components/TransferForm.vue'
 
 import StarflaskAPIHelper from '../../js/starflask-api-helper'
 import AssetDataHelper from '../../js/asset-data-helper'
@@ -246,7 +264,7 @@ const StoreContractABI = require( '../../contracts/BlockStoreABI.json'  )
 export default {
   name: 'Show',
   props: [],
-  components: {Navbar, Footer, SellOrderForm, BuyOrderForm, OffersList},
+  components: {Navbar, Footer, SellOrderForm, BuyOrderForm, TransferForm, OffersList},
   data() {
     return {
       web3Plug: new Web3Plug() ,
@@ -400,6 +418,10 @@ export default {
 
         await this.fetchOrdersForToken()
 
+      },
+
+      async onTxSubmitted(){
+          //nothing 
       },
 
 
