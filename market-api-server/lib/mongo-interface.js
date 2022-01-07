@@ -119,10 +119,7 @@ const MarketOrdersSchema = new Schema({
   lastPolledAt:{
     type: Number
   },
-  
-  status:{
-    type: String, index: true
-  },
+ 
   
   createdAt:{
     type: Number
@@ -132,6 +129,16 @@ const MarketOrdersSchema = new Schema({
   combinedAssetId:{
     type: String, index: true
   },
+
+
+  //created, valid, expired, burnedNonce 
+  status:{
+    type: String, index: true
+  },
+  
+
+
+
  
 })
 
@@ -158,6 +165,42 @@ const NFTSalesSchema = new Schema({
     type: Number 
   }
 })
+
+
+ 
+const ERC721TransfersSchema = new Schema({
+  contractAddress: {
+    type: String, index: true
+  },
+  from: {
+    type: String, index: true
+  } ,
+  to: {
+    type: String, index: true
+  } ,
+  tokenId: {
+    type: Number
+  },
+  blockNumber: {
+    type: Number
+  },
+  transactionIndex: {
+    type: Number
+  },
+  lastUpdatedAt:{
+    type: Number
+  },
+  createdAt:{
+    type: Number
+  } ,
+
+  lastAppliedAt:{
+    type: Number
+  } 
+   
+ 
+})
+
 
 const ERC721BalancesSchema = new Schema({
   contractAddress: {
@@ -204,15 +247,14 @@ const ContractStateSchema = new Schema({
    
  
 })
-
-
-
+ 
 
 const BurnedNoncesSchema = new Schema({
   orderCreator: String,
   nonce:String,
-  hasBeenApplied:Boolean,
-  createdAt:Number
+  //hasBeenApplied:Boolean,
+  createdAt:Number,
+  lastPolledAt: Number
 })
 
 
@@ -318,7 +360,7 @@ export default class MongoInterface  {
 
         //PART OF VIBEGRAPH 
         this.erc721BalancesModel = this.connection.model('erc721_balances', ERC721BalancesSchema)
-
+        this.erc721TransfersModel = this.connection.model('erc721_transfer', ERC721TransfersSchema)
         this.nftSalesModel = this.connection.model('nft_sale', NFTSalesSchema)
 
         this.contractStateModel = this.connection.model('contract_state', ContractStateSchema)

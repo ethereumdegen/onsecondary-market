@@ -290,7 +290,7 @@
                 signature: inputParameters.signature.toString()            
             } 
 
-            newOrderData.status = 'valid'
+            newOrderData.status = 'created'
             newOrderData.createdAt = Date.now()
             newOrderData.combinedAssetId = AppHelper.getCombinedAssetId( newOrderData.nftContractAddress, newOrderData.nftTokenId  )
 
