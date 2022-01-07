@@ -18,7 +18,7 @@ import AppHelper from './app-helper.js'
  
 */
 
-const DEBUG = true 
+const DEBUG = false 
 
 export default class NFTTileManager  {
 
@@ -125,8 +125,22 @@ export default class NFTTileManager  {
       return
     }
 
-    await this.mongoInterface.marketOrdersModel
-    .updateMany({status:'valid',expires: {$lt: currentBlockNumber}}, {status: 'expired'})
+    let ordersToExpire = this.mongoInterface.marketOrdersModel
+    .find({status:'valid',expires: {$lt: currentBlockNumber}} )
+
+    if(ordersToExpire && ordersToExpire.length >0){
+      for(let order of ordersToExpire){
+
+        /*await this.mongoInterface.marketOrdersModel
+          .updateOne({_id: order._id}, {status: 'expired'})*/
+  
+        await this.updateMarketOrderStatus(order)
+         
+      }
+    }
+  
+
+    
 
  
 
@@ -167,10 +181,17 @@ export default class NFTTileManager  {
 
   async invalidateAllMarketOrdersWithNonce(nonce){
 
-    await this.mongoInterface.marketOrdersModel
-    .updateMany({nonce:nonce, status:'valid' }, {status:'nonceBurned'})
- 
- 
+    let burnedOrders = await this.mongoInterface.marketOrdersModel
+    .find({nonce:nonce, status:'valid' } )
+    
+    if(burnedOrders && burnedOrders.length >0){
+      for(let order of burnedOrders){
+  
+        await this.updateMarketOrderStatus(order)
+        
+      }
+    }
+
   }
 
 
@@ -192,21 +213,24 @@ export default class NFTTileManager  {
        
         
       if(nextERC721Transfer){ 
-        if(DEBUG){
+        
           console.log('poll xfer ', nextERC721Transfer.blockNumber)
-        }
+       
       
          
          await this.updateNftTileFromERC721Transfer(nextERC721Transfer)
          await this.updateMarketOrdersFromERC721Transfer(nextERC721Transfer)
         
-         await this.vibegraphInterface.erc721TransfersModel.updateOne({_id: nextERC721Transfer._id}, {lastAppliedAt: Date.now()})
+         await this.vibegraphInterface.erc721TransfersModel
+         .updateOne({_id: nextERC721Transfer._id}, {lastAppliedAt: Date.now()})
 
 
          setTimeout( this.pollNextERC721Transfer.bind(this), 0)
 
       }else{
-        console.log('poll xfer - none')
+        if(DEBUG){
+          console.log('poll xfer - none')
+        }
 
         setTimeout( this.pollNextERC721Transfer.bind(this), 200)
       }
@@ -299,7 +323,7 @@ export default class NFTTileManager  {
 
       let newMarketOrderStatus = 'valid'
       //let collectionName = AppHelper.contractAddressToCollectionName(marketOrder.nftContractAddress)
-      let orderCreator = AppHelper.toChecksumAddress(marketOrder.orderCreator)
+      //let orderCreator = AppHelper.toChecksumAddress(marketOrder.orderCreator)
       let currentBlockNumber = this.blockNumber 
 
       /*if(!collectionName){ 
@@ -316,11 +340,11 @@ export default class NFTTileManager  {
 
       //find matching nft, make sure the owner is equal to this market order owner 
       //if not , it is an invalid order to make it as such 
-      let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel.findOne({contractAddress: marketOrder.nftContractAddress , tokenId: marketOrder.nftTokenId })
+      /*let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel.findOne({contractAddress: marketOrder.nftContractAddress , tokenId: marketOrder.nftTokenId })
       
       if(!matchingNFTTile){
         console.log('WARN: no matching nft tile ',marketOrder  )
-      }
+      }*/
 
 
       //if the order would revert in solidity we mark is as not valid 
@@ -339,9 +363,11 @@ export default class NFTTileManager  {
       }
 
 
-      await this.mongoInterface.marketOrdersModel.updateOne({_id: marketOrder._id}, {status: newMarketOrderStatus})
-    
-      await this.updateNftTilesFromMarketOrder(marketOrder)
+      
+      
+      let updatedMarketOrder = await this.mongoInterface.marketOrdersModel.findOneAndUpdate({_id: marketOrder._id}, {status: newMarketOrderStatus}, {returnNewDocument: true })
+
+      await this.updateNftTilesFromMarketOrder(updatedMarketOrder)
     }
 
     /*
@@ -357,7 +383,7 @@ export default class NFTTileManager  {
       //make sure currency token address is weth ?? --
 
      // let orderCreator = AppHelper.toChecksumAddress(marketOrder.orderCreator)
-      let orderBuyoutPriceWei = marketOrder.currencyTokenAmount
+     // let orderBuyoutPriceWei = marketOrder.currencyTokenAmount
      // let orderCollectionName = AppHelper.contractAddressToCollectionName(marketOrder.nftContractAddress)
 
       let nftContractAddress = AppHelper.toChecksumAddress(marketOrder.nftContractAddress)
@@ -369,7 +395,8 @@ export default class NFTTileManager  {
 
       orderCollectionName = orderCollectionName.toLowerCase()*/
 
-      let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel.findOne({contractAddress:  nftContractAddress , tokenId: marketOrder.nftTokenId })
+      let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel
+      .findOne({contractAddress:  nftContractAddress , tokenId: marketOrder.nftTokenId })
 
 
       if(!matchingNFTTile){
@@ -378,13 +405,17 @@ export default class NFTTileManager  {
      }
 
 
-      let ownerAddress = AppHelper.toChecksumAddress(matchingNFTTile.ownerPublicAddress)
+      /*let ownerAddress = AppHelper.toChecksumAddress(matchingNFTTile.ownerPublicAddress)
 
       let marketOrderSeller = AppHelper.toChecksumAddress(marketOrder.orderCreator)
 
-      let orderIsFromSeller = (ownerAddress == marketOrderSeller)
+      let orderIsFromSeller = (ownerAddress == marketOrderSeller)*/
 
-      if(marketOrder.status == 'valid' && orderIsFromSeller){  
+      await this.clearBuyoutPriceIfLinkedMarketOrderIsNowInvalid( marketOrder.nftContractAddress, marketOrder.nftTokenId  )
+      await this.findBestFallbackBuyoutPriceForNftTile(  marketOrder.nftContractAddress, marketOrder.nftTokenId )
+
+
+     /* if(marketOrder.status == 'valid' && orderIsFromSeller){  
            
             if( (!matchingNFTTile.buyoutPriceSort || !matchingNFTTile.lowestBuyoutPriceWei || !matchingNFTTile.buyoutPriceFromOrderId || matchingNFTTile.lowestBuyoutPriceWei > orderBuyoutPriceWei )){
               await this.mongoInterface.cachedNFTTileModel.updateOne({_id: matchingNFTTile._id}, 
@@ -401,7 +432,7 @@ export default class NFTTileManager  {
                 await this.findBestFallbackBuyoutPriceForNftTile(  marketOrder.nftContractAddress, marketOrder.nftTokenId )
              }
  
-      } 
+      } */
 
     }
 
@@ -425,9 +456,9 @@ export default class NFTTileManager  {
       let ownerAddress = AppHelper.toChecksumAddress(matchingNFTTile.ownerPublicAddress)
 
       let marketOrder = await this.mongoInterface.marketOrdersModel
-      .findOne({nftContractAddress:  nftContractAddress, nftTokenId: nftTokenId, status: 'valid', orderCreator: ownerAddress })
+      .findOne({nftContractAddress:  nftContractAddress, nftTokenId: nftTokenId, status: 'valid', isSellOrder:true,  orderCreator: ownerAddress })
       .sort( {currencyTokenAmount: 1}  )
-      //fidn the one with the lowest price 
+      //find the one with the lowest price and link it 
 
       if(marketOrder){
 
@@ -439,6 +470,39 @@ export default class NFTTileManager  {
       }
     
 
+
+    }
+
+
+
+    async clearBuyoutPriceIfLinkedMarketOrderIsNowInvalid(nftContractAddress,nftTokenId){
+
+
+      let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel
+      .findOne({contractAddress:  nftContractAddress , tokenId: nftTokenId })
+
+
+      if(!matchingNFTTile){
+        console.log('WARN: no matching nft tile ',  nftContractAddress,nftTokenId )
+        return 
+      }
+
+      if(! matchingNFTTile.buyoutPriceFromOrderId){ 
+        return 
+      }
+
+     let linkedMarketOrderId = AppHelper.numberToMongoId(  matchingNFTTile.buyoutPriceFromOrderId  )
+
+     let linkedMarketOrder = await this.mongoInterface.marketOrdersModel.findOne({_id: linkedMarketOrderId})
+
+     
+     let ownerAddress = AppHelper.toChecksumAddress(matchingNFTTile.ownerPublicAddress)
+      let marketOrderSeller = AppHelper.toChecksumAddress(linkedMarketOrder.orderCreator)
+      let orderIsFromSeller = (ownerAddress == marketOrderSeller)
+
+     if(linkedMarketOrder.status != 'valid' || !orderIsFromSeller){ 
+         await this.mongoInterface.cachedNFTTileModel.findOneAndUpdate({_id: matchingNFTTile._id},   {buyoutPriceSort: null, lowestBuyoutPriceWei: null, buyoutPriceFromOrderId:null} )
+     }
 
     }
     
