@@ -14,6 +14,18 @@ static async runTask( inputs, mongoInterface ){
  
 let collectionName = inputs.collectionName 
 
+
+const traitsModel =  mongoInterface.traitsModel
+
+let count = await traitsModel.count({collectionName:  collectionName})
+  if(count > 0){
+    console.log("Found existing nft traits of type: ", collectionName, ". Not regenerating.")
+    return 
+  }
+
+
+
+
  try{
     outputConfig = FileHelper.readJSONFile(`./market-api-server/assetdata/${collectionName.toLowerCase()}.json`)
  }catch(e){
@@ -51,7 +63,7 @@ for(let [tokenId,traitsArray] of Object.entries(outputConfig)){
 
 }   
  
-const traitsModel =  mongoInterface.traitsModel
+
 await traitsModel.deleteMany({collectionName: collectionName})
 
 

@@ -14,6 +14,15 @@ static async runTask(inputs, mongoInterface ){
  let collectionName = inputs.collectionName 
 
 
+ const nftTilesModel =  mongoInterface.cachedNFTTileModel
+
+
+ let count = await nftTilesModel.count({collectionName:  collectionName})
+  if(count > 0){
+    console.log("Found existing nft tiles of type: ", collectionName, ". Not regenerating.")
+    return 
+  }
+
 
  try{
  outputConfig = FileHelper.readJSONFile(`./market-api-server/assetdata/${collectionName.toLowerCase()}.json`)
@@ -42,7 +51,7 @@ static async runTask(inputs, mongoInterface ){
   }   
  
   
-  const nftTilesModel =  mongoInterface.cachedNFTTileModel
+  
   
 
   try{
