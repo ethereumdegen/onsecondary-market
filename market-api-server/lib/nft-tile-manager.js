@@ -148,7 +148,7 @@ export default class NFTTileManager  {
 
 
     let nextBurnedNonce = await this.vibegraphInterface.burnedNoncesModel
-    .findOne({   lastPolledAt:  {$exists:false} })      
+    .findOne({   lastPolledAt:  {$not: {$gt:0}} })      
     .sort( { createdAt: 1  } )  //sort ASC  - grab the oldest one  ++
 
  
