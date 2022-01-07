@@ -1,23 +1,10 @@
-
  
-  /*
-
-    Packet status:
-    active - normal, works
-    suspended - invalid token balance or approval (recoverable)
-    expired - expired
-    burned - sig has burned 
-
-
-  */
 
     import BigNumber from 'bignumber.js' 
 
 import Web3Helper from './web3-helper.js'
-import BidPacketUtils from '../../src/js/bidpacket-utils.js'
-
-import FileHelper from './file-helper.js'
-import APIHelper from './api-helper.js'
+ 
+ 
 import AppHelper from './app-helper.js'
  
 
@@ -38,10 +25,7 @@ export default class NFTTileManager  {
         this.vibegraphInterface = vibegraphInterface;
         this.web3 = web3;
         this.serverConfig = serverConfig
-
-
-        this.pollMarketOrders = true
-        this.pollERC721Balances = true
+ 
 
         this.init() 
 
@@ -92,41 +76,6 @@ export default class NFTTileManager  {
      
 
   }
-
-    /*
-  Deprecated 
-    */
-   /*
-    async pollNextValidMarketOrder( ){
-        
-      
-        const STALE_TIME = 1200  * 1000;
-
-        let nextMarketOrder = await this.mongoInterface.marketOrdersModel
-        .findOne({lastPolledAt: {$not: {$gte: (Date.now() - STALE_TIME) }}  })
-
-        
-        if(nextMarketOrder){ 
-
-          
-         // await this.updateMarketOrderStatus(nextMarketOrder)
-          //await this.updateNftTilesFromMarketOrder(nextMarketOrder)
-          
-          await this.mongoInterface.marketOrdersModel.updateOne({_id: nextMarketOrder._id}, {lastPolledAt: Date.now()})
-
-
-          setTimeout( this.pollNextValidMarketOrder.bind(this), 10)
-
-        }else{
-         
-
-          setTimeout( this.pollNextValidMarketOrder.bind(this), 200)
-        }
-
-        
-
-    }
-*/
 
     /*
     Find orders with state of 'created' 
@@ -224,38 +173,6 @@ export default class NFTTileManager  {
   }
 
 
-  /*
-  deprecated
-  */
- /*
-    async pollNextRecentlyUpdatedERC721Balance(){
-
-      const STALE_TIME = 900 * 1000;
-
-      let beforeTime = (Date.now() - STALE_TIME)
-
-      let nextERC721Balance = await this.vibegraphInterface.erc721BalancesModel
-      .findOne( {  tokenIds:{$not:  {$size:0}},   lastPolledAt:  {$not: {$gte: beforeTime }} ,  lastUpdatedAt:  {$gte:   beforeTime  } })
-      .sort( { lastUpdatedAt: 1  } )  //sort ASC  - grab the oldest one  
-       
-        
-      if(nextERC721Balance){ 
-        console.log('poll recent balance')
-         
-         await this.updateNftTilesFromERC721Balance(nextERC721Balance)
-        
-         await this.vibegraphInterface.erc721BalancesModel.updateOne({_id: nextERC721Balance._id}, {lastPolledAt: Date.now()})
-
-         setTimeout( this.pollNextRecentlyUpdatedERC721Balance.bind(this), 0)
-
-      }else{
-        console.log('poll recent balance - none')
-
-        setTimeout( this.pollNextRecentlyUpdatedERC721Balance.bind(this), 200)
-      }
-
-    }*/
-
 
 
     /*
@@ -293,72 +210,6 @@ export default class NFTTileManager  {
 
   }
 
-
-
-    /*
-      deprecated 
-    *//*
-    async pollNextERC721Balance( ){
-        
-     
-
-      const STALE_TIME = 6000 * 1000;
-
-      let beforeTime = (Date.now() - STALE_TIME)
-
-      let nextERC721Balance = await this.vibegraphInterface.erc721BalancesModel.findOne( {   tokenIds:{$not:  {$size:0}},   lastPolledAt:  {$not: {$gte: beforeTime }} })
-      
-       
-        
-      if(nextERC721Balance){ 
-        console.log('poll balance')
-         
-         await this.updateNftTilesFromERC721Balance(nextERC721Balance)
-        
-         await this.vibegraphInterface.erc721BalancesModel.updateOne({_id: nextERC721Balance._id}, {lastPolledAt: Date.now()})
-
-
-         setTimeout( this.pollNextERC721Balance.bind(this), 0)
-
-      }else{
-        console.log('poll balance - none')
-
-        setTimeout( this.pollNextERC721Balance.bind(this), 200)
-      }
- 
-
-  }*/
-
-  //deprecated
-  /*
-  async updateNftTilesFromERC721Balance(erc721Balance){
-      
-    let collectionName = AppHelper.contractAddressToCollectionName(erc721Balance.contractAddress)
-
-    if(!collectionName){ 
-      console.log('warn: cname', collectionName)
-      return
-    }
-
-    collectionName = collectionName.toLowerCase()
-
-
-    let ownerAddress = AppHelper.toChecksumAddress(erc721Balance.accountAddress)
-    let ownedTokenIds = erc721Balance.tokenIds
-
-
-    //faster 
-    let update = await this.mongoInterface.cachedNFTTileModel.updateMany(
-      {collectionName: collectionName , tokenId: {$in: ownedTokenIds}, ownerPublicAddress: {$ne:ownerAddress } },
-      {ownerPublicAddress: ownerAddress}
-     )
-      if(update.matchedCount > 0){
-        console.log('updated ',update)
-      }
-     
- 
-
-  }*/
 
   /*
   Update the owner of the nft tile 
@@ -584,5 +435,142 @@ export default class NFTTileManager  {
     }
     
   
+
+
+    /*
+  Deprecated 
+    */
+   /*
+    async pollNextValidMarketOrder( ){
+        
+      
+        const STALE_TIME = 1200  * 1000;
+
+        let nextMarketOrder = await this.mongoInterface.marketOrdersModel
+        .findOne({lastPolledAt: {$not: {$gte: (Date.now() - STALE_TIME) }}  })
+
+        
+        if(nextMarketOrder){ 
+
+          
+         // await this.updateMarketOrderStatus(nextMarketOrder)
+          //await this.updateNftTilesFromMarketOrder(nextMarketOrder)
+          
+          await this.mongoInterface.marketOrdersModel.updateOne({_id: nextMarketOrder._id}, {lastPolledAt: Date.now()})
+
+
+          setTimeout( this.pollNextValidMarketOrder.bind(this), 10)
+
+        }else{
+         
+
+          setTimeout( this.pollNextValidMarketOrder.bind(this), 200)
+        }
+
+        
+
+    }
+*/
+
+
+  /*
+  deprecated
+  */
+ /*
+    async pollNextRecentlyUpdatedERC721Balance(){
+
+      const STALE_TIME = 900 * 1000;
+
+      let beforeTime = (Date.now() - STALE_TIME)
+
+      let nextERC721Balance = await this.vibegraphInterface.erc721BalancesModel
+      .findOne( {  tokenIds:{$not:  {$size:0}},   lastPolledAt:  {$not: {$gte: beforeTime }} ,  lastUpdatedAt:  {$gte:   beforeTime  } })
+      .sort( { lastUpdatedAt: 1  } )  //sort ASC  - grab the oldest one  
+       
+        
+      if(nextERC721Balance){ 
+        console.log('poll recent balance')
+         
+         await this.updateNftTilesFromERC721Balance(nextERC721Balance)
+        
+         await this.vibegraphInterface.erc721BalancesModel.updateOne({_id: nextERC721Balance._id}, {lastPolledAt: Date.now()})
+
+         setTimeout( this.pollNextRecentlyUpdatedERC721Balance.bind(this), 0)
+
+      }else{
+        console.log('poll recent balance - none')
+
+        setTimeout( this.pollNextRecentlyUpdatedERC721Balance.bind(this), 200)
+      }
+
+    }*/
+
+
+    /*
+      deprecated 
+    *//*
+    async pollNextERC721Balance( ){
+        
+     
+
+      const STALE_TIME = 6000 * 1000;
+
+      let beforeTime = (Date.now() - STALE_TIME)
+
+      let nextERC721Balance = await this.vibegraphInterface.erc721BalancesModel.findOne( {   tokenIds:{$not:  {$size:0}},   lastPolledAt:  {$not: {$gte: beforeTime }} })
+      
+       
+        
+      if(nextERC721Balance){ 
+        console.log('poll balance')
+         
+         await this.updateNftTilesFromERC721Balance(nextERC721Balance)
+        
+         await this.vibegraphInterface.erc721BalancesModel.updateOne({_id: nextERC721Balance._id}, {lastPolledAt: Date.now()})
+
+
+         setTimeout( this.pollNextERC721Balance.bind(this), 0)
+
+      }else{
+        console.log('poll balance - none')
+
+        setTimeout( this.pollNextERC721Balance.bind(this), 200)
+      }
+ 
+
+  }*/
+
+  //deprecated
+  /*
+  async updateNftTilesFromERC721Balance(erc721Balance){
+      
+    let collectionName = AppHelper.contractAddressToCollectionName(erc721Balance.contractAddress)
+
+    if(!collectionName){ 
+      console.log('warn: cname', collectionName)
+      return
+    }
+
+    collectionName = collectionName.toLowerCase()
+
+
+    let ownerAddress = AppHelper.toChecksumAddress(erc721Balance.accountAddress)
+    let ownedTokenIds = erc721Balance.tokenIds
+
+
+    //faster 
+    let update = await this.mongoInterface.cachedNFTTileModel.updateMany(
+      {collectionName: collectionName , tokenId: {$in: ownedTokenIds}, ownerPublicAddress: {$ne:ownerAddress } },
+      {ownerPublicAddress: ownerAddress}
+     )
+      if(update.matchedCount > 0){
+        console.log('updated ',update)
+      }
+     
+ 
+
+  }*/
+
+
 
 }

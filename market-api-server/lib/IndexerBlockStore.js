@@ -64,7 +64,7 @@ export default class IndexerBlockStore{
        let existing = await mongoInterface.findOne(collectionName, {orderCreator: orderCreator, nonce:nonce }  )
 
        if(!existing){            
-           await mongoInterface.insertOne(collectionName, {orderCreator: orderCreator, nonce:nonce, hasBeenApplied: false, createdAt: Date.now()  }   )
+           await mongoInterface.insertOne(collectionName, {orderCreator: orderCreator, nonce:nonce, createdAt: Date.now()  }   )
        }
    }
 
