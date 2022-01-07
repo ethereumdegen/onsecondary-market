@@ -1,6 +1,6 @@
 <template>
  
-  <nav role="navigation" class="w-full m-2 p-2 flex flex-row">
+  <nav role="navigation" class="w-full m-2 p-2 flex flex-row font-serious">
  
     <div class="w-full lg:w-auto block lg:inline-block" v-for="item in navConfig.dropdowns" :key="item.title">
     <t-dropdown  class="w-full" >
@@ -65,7 +65,7 @@
 
           <span class="  " style="max-width:120px">
 
-            <router-link :to="'/account/'+web3Plug.getActiveAccountAddress()"> {{web3Plug.getActiveAccountAddress()}} </router-link>
+            <router-link class="text-gray-100" :to="'/account/'+web3Plug.getActiveAccountAddress()"> {{web3Plug.getActiveAccountAddress()}} </router-link>
           
          </span>
          </div>

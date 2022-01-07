@@ -10,7 +10,7 @@
      </router-link>
 
     <div class="mb-2 text-sm px-2 text-gray-800 font-boring"  > 
-      <div class="text-center">  {{getTitle()}} </div>  
+      <div class="text-center font-serious font-bold">  {{getTitle()}} </div>  
       <div> Owned By <a v-bind:href="getOwnerURL()">{{getOwnerName()}} </a> </div>  
       <div class="text-right"> 
         <router-link v-bind:to="getLinkUrl()" class=" cursor-pointer select-none inline-block"   >

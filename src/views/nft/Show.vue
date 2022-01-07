@@ -72,9 +72,9 @@
 
             <div class="text-lg"> {{getAssetName() }} </div>
 
-            <a class="text-sm font-bold" v-bind:href="getProjectURL()"> {{getCollectionName() }} </a>
+            <a class="text-sm font-bold font-serious capitalize" v-bind:href="getProjectURL()"> {{getCollectionName() }} </a>
 
-            <div v-if="getOwnerAddress()"> 
+            <div v-if="getOwnerAddress()" class="font-serious capitalize"> 
               Owned By 
               
               <router-link  :to="'/account/'+tokenOwnerAddress"  >  {{getOwnerAddress()}}   </router-link> 
@@ -97,27 +97,27 @@
            <div class="py-2" v-if="ownedByLocalUser()">
 
                 <div v-if="bestSellOrder " class='my-2'>
-                    <div class="p-2 border-2 border-black inline-block rounded bg-gray-700 text-white hover:bg-gray-600  select-none"  > For Sale: <span class="wide-letters">{{ getBuyoutPrice() }}</span> ETH </div>
+                    <div class="font-serious p-2 border-2 border-black inline-block rounded bg-gray-700 text-white hover:bg-gray-600  select-none"  > For Sale: <span class="wide-letters">{{ getBuyoutPrice() }}</span> ETH </div>
           
                   
                  </div>
 
                   <div v-if="bestSellOrder " class='my-2'>
                    
-                  <div class=" p-1 border-2 border-black cursor-pointer inline-block rounded bg-red-500 text-white hover:bg-red-400  select-none" @click="cancelBuyout( bestSellOrder )"  > Cancel </div>
+                  <div class="font-serious  p-1 border-2 border-black cursor-pointer inline-block rounded bg-red-500 text-white hover:bg-red-400  select-none" @click="cancelBuyout( bestSellOrder )"  > Cancel </div>
 
-                   <div class="mx-2 p-2 border-2 border-black inline cursor-pointer rounded hover:bg-purple-200 select-none" @click="interactionMode='lowerPrice'"> Lower Price </div>
+                   <div class="font-serious mx-2 p-2 border-2 border-black inline cursor-pointer rounded hover:bg-purple-200 select-none" @click="interactionMode='lowerPrice'"> Lower Price </div>
           
                  </div>
                  
 
 
              <div v-if="!bestSellOrder " class='my-2'>
-                <div class="p-2 border-2 border-black inline cursor-pointer rounded hover:bg-purple-200 select-none" @click="interactionMode='makeSellOrder'"> Sell This Item </div>
+                <div class=" font-serious p-2 border-2 border-black inline cursor-pointer rounded hover:bg-purple-200 select-none" @click="interactionMode='makeSellOrder'"> Sell This Item </div>
             </div>
 
              <div   class='my-6'>
-                <div class="p-2 border-2 border-black  text-sm inline cursor-pointer rounded hover:bg-purple-200 select-none" @click="interactionMode='performTransfer'"> Transfer This Item </div>
+                <div class="font-serious p-2 border-2 border-black  text-sm inline cursor-pointer rounded hover:bg-purple-200 select-none" @click="interactionMode='performTransfer'"> Transfer This Item </div>
             </div>
           </div>
 
@@ -125,12 +125,12 @@
 
 
             <div v-if="bestSellOrder && getBuyoutPrice()" class='my-2'>
-               <div class="p-2 border-2 border-black inline-block cursor-pointer rounded bg-blue-500 text-white hover:bg-blue-400  select-none"  @click="buyoutNow"> Buyout For <span class="wide-letters">{{ getBuyoutPrice() }}</span> ETH </div>
+               <div class="font-serious p-2 border-2 border-black inline-block cursor-pointer rounded bg-blue-500 text-white hover:bg-blue-400  select-none"  @click="buyoutNow"> Buyout For <span class="wide-letters">{{ getBuyoutPrice() }}</span> ETH </div>
             </div>
  
 
             
-                <div class="p-2 my-2 border-2 border-black inline-block cursor-pointer rounded hover:bg-purple-200  select-none"  @click="interactionMode='makeBuyOrder'"> Bid For This Item </div>
+                <div class="font-serious p-2 my-2 border-2 border-black inline-block cursor-pointer rounded hover:bg-purple-200  select-none"  @click="interactionMode='makeBuyOrder'"> Bid For This Item </div>
    
            
           </div>

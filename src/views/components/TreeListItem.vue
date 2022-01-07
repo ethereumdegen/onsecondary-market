@@ -12,7 +12,7 @@
 						</svg> </span>
 
 
-           <span class="hover:bg-gray-500 w-full"  :class="{'inline-block': !isFolder()}"  >   {{ itemData.title  }} </span>
+           <span class="hover:bg-gray-500 w-full font-serious text-lg"  :class="{'inline-block': !isFolder()}"  >   {{ itemData.title  }} </span>
 
       </div>
       <div class="tree-list-children pl-2" v-if="itemData.children && !collapsed">

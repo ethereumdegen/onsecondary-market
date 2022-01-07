@@ -33,7 +33,7 @@
 
                  <div class="pt-8 relative pb-2 mb-2" style="min-height:100px">
                          
-                      <div  class="   text-white text-3xl p-2" style="   " > Most Popular Collections </div>
+                      <div  class=" font-serious  text-white text-3xl p-2" style="   " > Most Popular Collections </div>
 
                 </div>
 
@@ -49,7 +49,7 @@
                       <div class="border-gray-200 border-2   p-2 m-2 "  > 
                          <img :src="getImageURL(item.imgurl)" style="max-width:200px" />
 
-                         <div class="text-center text-white"> {{item.title}} </div>
+                         <div class="text-center text-white font-serious"> {{item.title}} </div>
                       </div>  
 
 
@@ -89,7 +89,7 @@
               
                  <div class=" relative pb-2 mb-12" style="min-height:200px">
                        
-                    <div  class="   text-white text-2xl p-2" style="  background: #222b" > Open Source NFT Marketplace </div>
+                    <div  class=" font-serious  text-white text-2xl p-2" style="  background: #222b" > Open Source NFT Marketplace </div>
 
 
                 </div>
@@ -98,7 +98,7 @@
  
 
                      <div class="w-row text-center my-8"> 
-                        <router-link to="/activity" class='text-orange-600 text-xl block'> View Recent Activity</router-link>
+                        <router-link to="/activity" class='font-serious text-orange-600 text-xl block'> View Recent Activity</router-link>
                     </div>
 
 

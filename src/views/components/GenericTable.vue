@@ -23,7 +23,7 @@
           </tbody>
         </table>
 
-        <div v-if="!rowsArray || rowsArray.length == 0" v-cloak  >
+        <div v-if="!rowsArray || rowsArray.length == 0" v-cloak class="font-serious" >
           No records found.
         </div>
   </div>

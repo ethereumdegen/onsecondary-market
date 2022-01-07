@@ -22,7 +22,7 @@
 
 
       <div class="w-column text-center py-8"   >
-           <div class="text-lg font-bold text-black"> Recent Activity  </div>
+           <div class="text-lg font-bold text-black font-serious"> Recent Activity  </div>
  
          
        </div>

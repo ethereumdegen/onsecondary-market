@@ -10,7 +10,7 @@
               <label   class="block text-md font-medium font-bold text-gray-800  ">Recipient Address</label>
 
               <div class="flex flex-row">
-                <div class="  px-4">
+                <div class="  py-2">
                     <input type="string" v-on:blur="handleAmountBlur()"  v-model="formInputs.recipientAddress"  class="text-gray-900 border-2 border-black font-bold px-4 text-md focus:ring-indigo-500 focus:border-indigo-500 block w-full py-4 pl-7 pr-12   border-gray-300 rounded-md" placeholder="0x..">
                 </div>  
               </div>
@@ -133,7 +133,7 @@ export default {
           let to = this.formInputs.recipientAddress
           let tokenId = this.nftTokenId
 
-          let xferMethod = nftContract.methods.transferFrom(from, to, tokenId )  
+          let xferMethod = nftContract.methods.safeTransferFrom(from, to, tokenId )  
  
           let result = await xferMethod.send({from: from})
 

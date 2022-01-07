@@ -30,7 +30,7 @@
 
 
               <div class="flex flex-row"> 
-                <div class="w-1/2 px-4">
+                <div class="w-1/2 py-2">
                     <input type="number"   v-on:blur="handleAmountBlur()" v-model="formInputs.currencyAmountFormatted"  class="text-gray-900 border-2 border-black font-bold px-4 text-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full py-4 pl-7 pr-12   border-gray-300 rounded-md" placeholder="0">
                 </div>  
               </div>
@@ -42,7 +42,7 @@
               <label   class="block text-md font-medium font-bold text-gray-800  ">Blocks until offer expiration  (~{{getDaysFromBlocks(formInputs.expiresInBlocks)}}  days) </label>
 
               <div class="flex flex-row">
-                  <div class="w-1/2 px-4">
+                  <div class="w-1/2 py-2">
                       <input type="number"   v-model="formInputs.expiresInBlocks"  class="text-gray-900 border-2 border-black font-bold px-4 text-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full py-4 pl-7 pr-12   border-gray-300 rounded-md" placeholder="10000">
                   </div>
 

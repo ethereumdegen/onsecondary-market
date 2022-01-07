@@ -1,5 +1,5 @@
 <template>
-  <nav role="navigation" class="w-full m-2 p-2 inline-block">
+  <nav role="navigation" class="w-full m-2 p-2 inline-block font-serious">
 
     <div class=" ">
       <div v-if="web3Plug.connectedToWeb3() == false" @click="connectToWeb3" class="button text-center bg-blue-500 hover:bg-blue-700 text-white font-bold my-2 py-2 px-4 rounded cursor-pointer">Login with Web3</div>
