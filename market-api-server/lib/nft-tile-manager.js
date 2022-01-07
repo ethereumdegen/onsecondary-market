@@ -379,6 +379,7 @@ export default class NFTTileManager  {
       let marketOrder = await this.mongoInterface.marketOrdersModel
       .findOne({nftContractAddress:  nftContractAddress, nftTokenId: nftTokenId, status: 'valid', isSellOrder:true,  orderCreator: ownerAddress })
       .sort( {currencyTokenAmount: 1}  )
+      .collation({locale: "en_US", numericOrdering: true})
       //find the one with the lowest price and link it 
 
       if(marketOrder){
@@ -386,7 +387,7 @@ export default class NFTTileManager  {
         let orderBuyoutPriceWei = marketOrder.currencyTokenAmount
 
         await this.mongoInterface.cachedNFTTileModel.updateOne({_id: matchingNFTTile._id}, 
-        {buyoutPriceSort: -1*orderBuyoutPriceWei , lowestBuyoutPriceWei: orderBuyoutPriceWei, buyoutPriceFromOrderId: AppHelper.mongoIdToNumber(marketOrder._id) })
+        {buyoutPriceSort: -1*orderBuyoutPriceWei , lowestBuyoutPriceWei: orderBuyoutPriceWei, buyoutPriceFromOrderUUID: marketOrder.orderUUID })
       
       }
     
@@ -408,13 +409,16 @@ export default class NFTTileManager  {
         return 
       }
 
-      if(! matchingNFTTile.buyoutPriceFromOrderId){ 
+      if(! matchingNFTTile.buyoutPriceFromOrderUUID){ 
         return 
       }
 
-     let linkedMarketOrderId = AppHelper.numberToMongoId(  matchingNFTTile.buyoutPriceFromOrderId  )
 
-     let linkedMarketOrder = await this.mongoInterface.marketOrdersModel.findOne({_id: linkedMarketOrderId})
+      console.log('buyout price from ',  matchingNFTTile.buyoutPriceFromOrderUUID)
+
+     let linkedMarketOrderId = matchingNFTTile.buyoutPriceFromOrderUUID   
+
+     let linkedMarketOrder = await this.mongoInterface.marketOrdersModel.findOne({orderUUID: linkedMarketOrderId})
 
      
      let ownerAddress = AppHelper.toChecksumAddress(matchingNFTTile.ownerPublicAddress)
@@ -422,7 +426,7 @@ export default class NFTTileManager  {
       let orderIsFromSeller = (ownerAddress == marketOrderSeller)
 
      if(linkedMarketOrder.status != 'valid' || !orderIsFromSeller){ 
-         await this.mongoInterface.cachedNFTTileModel.findOneAndUpdate({_id: matchingNFTTile._id},   {buyoutPriceSort: null, lowestBuyoutPriceWei: null, buyoutPriceFromOrderId:null} )
+         await this.mongoInterface.cachedNFTTileModel.findOneAndUpdate({_id: matchingNFTTile._id},   {buyoutPriceSort: null, lowestBuyoutPriceWei: null, buyoutPriceFromOrderUUID:null} )
      }
 
     }

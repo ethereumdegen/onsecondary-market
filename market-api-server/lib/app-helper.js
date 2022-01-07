@@ -67,14 +67,18 @@
 
             return 'rinkeby'
         }
+
+        static generateRandomUUID(){
+            return web3utils.randomHex(32).toString()
+        }
         
         
-        static mongoIdToNumber(mongoId){
+       /* static mongoIdToNumber(mongoId){
             return mongoId.valueOf()
 
         }
 
         static numberToMongoId(n){
             return ObjectId(n)
-        }
+        }*/
     }

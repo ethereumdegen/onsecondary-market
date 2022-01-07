@@ -12,7 +12,7 @@ import ApiServer from './lib/api-server.js'
 import PopulateTraitsTask from './tasks/populateTraitsDB.js'
 import PopulateCachedNFTTilesTask from './tasks/populateCachedNFTTiles.js'
 import GenerateContractDataLookupTask from './tasks/generateContractDataLookup.js'
- 
+ import AddUUIDToAllMarketOrders from './tasks/addUUIDToAllMarketOrders.js'
 
 import Web3 from 'web3'
 import NFTTileManager from './lib/nft-tile-manager.js'
@@ -38,6 +38,8 @@ let sharedConfig =  FileHelper.readJSONFile('./shared/sharedconfig.json')
     await mongoInterface.init(  serverConfig.dbName )
 
      await GenerateContractDataLookupTask.runTask( )
+
+     await AddUUIDToAllMarketOrders.runTask( )
     
 
     

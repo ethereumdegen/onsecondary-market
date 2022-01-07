@@ -41,7 +41,8 @@ for(let order of marketOrders){
         signature: order.signature,
         lastPolledAt: order.lastPolledAt,
         createdAt: order.createdAt,
-        status: order.status 
+        status: order.status ,
+        orderUUID: order.orderUUID
 
     })
 

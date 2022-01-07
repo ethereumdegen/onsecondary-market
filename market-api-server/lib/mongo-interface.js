@@ -68,7 +68,7 @@ const CachedNFTTileSchema = new Schema({
   buyoutPriceSort: {
     type: Number
   },
-  buyoutPriceFromOrderId: {
+  buyoutPriceFromOrderUUID: {
     type: String
   },
 
@@ -82,6 +82,10 @@ CachedNFTTileSchema.index({ collectionName: 1, tokenId: -1 }, {unique:true} );
 
 
 const MarketOrdersSchema = new Schema({ 
+  orderUUID: {
+    type: String, index: true, unique:true
+  },
+
   chainId: {
     type: Number
   },
