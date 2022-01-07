@@ -1,6 +1,6 @@
  
 
-    import BigNumber from 'bignumber.js' 
+//import BigNumber from 'bignumber.js' 
 
 import Web3Helper from './web3-helper.js'
  
@@ -17,6 +17,8 @@ import AppHelper from './app-helper.js'
   -ownerAddressMismatched is no longer a status -> convert that over to 'valid' state 
  
 */
+
+const DEBUG = true 
 
 export default class NFTTileManager  {
 
@@ -124,7 +126,7 @@ export default class NFTTileManager  {
     }
 
     await this.mongoInterface.marketOrdersModel
-    .updateMany({expires: {$le: currentBlockNumber}}, {status: 'expired'})
+    .updateMany({expires: {$lt: currentBlockNumber}}, {status: 'expired'})
 
  
 
@@ -186,12 +188,15 @@ export default class NFTTileManager  {
       //let beforeTime = (Date.now() - STALE_TIME)
 
       let nextERC721Transfer = await this.vibegraphInterface.erc721TransfersModel
-      .findOne( {  lastAppliedAt:  {$exists: false} }).
+      .findOne( {  lastAppliedAt:  {$not: {$gt:0}} }).
       sort( {  blockNumber: 1,  transactionIndex: 1 } ) ///ascending for both 
        
         
       if(nextERC721Transfer){ 
-         console.log('poll xfer ', nextERC721Transfer.blockNumber)
+        if(DEBUG){
+          console.log('poll xfer ', nextERC721Transfer.blockNumber)
+        }
+      
          
          await this.updateNftTileFromERC721Transfer(nextERC721Transfer)
          await this.updateMarketOrdersFromERC721Transfer(nextERC721Transfer)
@@ -216,15 +221,17 @@ export default class NFTTileManager  {
 
   */
   async updateNftTileFromERC721Transfer(erc721Transfer){
+
+    let nftContractAddress = AppHelper.toChecksumAddress(erc721Transfer.contractAddress)
       
-    let collectionName = AppHelper.contractAddressToCollectionName(erc721Transfer.contractAddress)
+    /*let collectionName = AppHelper.contractAddressToCollectionName(erc721Transfer.contractAddress)
 
     if(!collectionName){ 
       console.log('warn: cname', collectionName)
       return
     }
 
-    collectionName = collectionName.toLowerCase() 
+    collectionName = collectionName.toLowerCase() */
 
     let newOwnerAddress = AppHelper.toChecksumAddress(erc721Transfer.to)
     let tokenId = erc721Transfer.tokenId 
@@ -235,7 +242,7 @@ export default class NFTTileManager  {
 
     //faster 
     let update = await this.mongoInterface.cachedNFTTileModel.updateOne(
-      {collectionName: collectionName , tokenId: tokenId  },
+      {contractAddress: nftContractAddress , tokenId: tokenId  },
       {ownerPublicAddress: newOwnerAddress}
      )
 
@@ -292,16 +299,16 @@ export default class NFTTileManager  {
     async updateMarketOrderStatus(marketOrder){
 
       let newMarketOrderStatus = 'valid'
-      let collectionName = AppHelper.contractAddressToCollectionName(marketOrder.nftContractAddress)
+      //let collectionName = AppHelper.contractAddressToCollectionName(marketOrder.nftContractAddress)
       let orderCreator = AppHelper.toChecksumAddress(marketOrder.orderCreator)
       let currentBlockNumber = this.blockNumber 
 
-      if(!collectionName){ 
+      /*if(!collectionName){ 
         console.log('WARN: could not update market order ', collectionName )
         return
       }
 
-      collectionName = collectionName.toLowerCase()
+      collectionName = collectionName.toLowerCase()*/
 
       if(!currentBlockNumber){
         console.log('WARN: no block number to update market order status')
@@ -310,10 +317,10 @@ export default class NFTTileManager  {
 
       //find matching nft, make sure the owner is equal to this market order owner 
       //if not , it is an invalid order to make it as such 
-      let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel.findOne({collectionName: collectionName , tokenId: marketOrder.nftTokenId })
+      let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel.findOne({contractAddress: marketOrder.nftContractAddress , tokenId: marketOrder.nftTokenId })
       
       if(!matchingNFTTile){
-        console.log('WARN: no matching nft tile ',collectionName,marketOrder.nftTokenId  )
+        console.log('WARN: no matching nft tile ',marketOrder  )
       }
 
 
@@ -352,20 +359,22 @@ export default class NFTTileManager  {
 
      // let orderCreator = AppHelper.toChecksumAddress(marketOrder.orderCreator)
       let orderBuyoutPriceWei = marketOrder.currencyTokenAmount
-      let orderCollectionName = AppHelper.contractAddressToCollectionName(marketOrder.nftContractAddress)
+     // let orderCollectionName = AppHelper.contractAddressToCollectionName(marketOrder.nftContractAddress)
 
-      if(!orderCollectionName){ 
+      let nftContractAddress = AppHelper.toChecksumAddress(marketOrder.nftContractAddress)
+
+     /* if(!orderCollectionName){ 
         console.log('Warn: could not update nft tile from market order ', orderCollectionName )
         return
       }
 
-      orderCollectionName = orderCollectionName.toLowerCase()
+      orderCollectionName = orderCollectionName.toLowerCase()*/
 
-      let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel.findOne({collectionName: orderCollectionName , tokenId: marketOrder.nftTokenId })
+      let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel.findOne({contractAddress:  nftContractAddress , tokenId: marketOrder.nftTokenId })
 
 
       if(!matchingNFTTile){
-        console.log('WARN: no matching nft tile ', orderCollectionName, marketOrder.nftTokenId )
+        console.log('WARN: no matching nft tile ',    marketOrder )
         return 
      }
 
@@ -400,17 +409,17 @@ export default class NFTTileManager  {
 
     async findBestFallbackBuyoutPriceForNftTile(nftContractAddress,nftTokenId){
 
-      let collectionName = AppHelper.contractAddressToCollectionName(nftContractAddress)
+    /*  let collectionName = AppHelper.contractAddressToCollectionName(nftContractAddress)
 
       if(!collectionName){ 
         console.log('Warn: could not update nft tile for fallback buyout price', collectionName )
         return
-      } 
+      } */
 
-      let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel.findOne({collectionName: collectionName , tokenId:  nftTokenId })
+      let matchingNFTTile = await this.mongoInterface.cachedNFTTileModel.findOne({contractAddress: nftContractAddress , tokenId:  nftTokenId })
   
       if(!matchingNFTTile){
-        console.log('WARN: no matching nft tile ', collectionName,  nftTokenId )
+        console.log('WARN: no matching nft tile ', nftContractAddress,  nftTokenId )
         return 
      }
 
