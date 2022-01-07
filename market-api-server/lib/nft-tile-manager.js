@@ -126,7 +126,7 @@ export default class NFTTileManager  {
     }
 
     await this.mongoInterface.marketOrdersModel
-    .updateMany({expires: {$lt: currentBlockNumber}}, {status: 'expired'})
+    .updateMany({status:'valid',expires: {$lt: currentBlockNumber}}, {status: 'expired'})
 
  
 
@@ -168,10 +168,9 @@ export default class NFTTileManager  {
   async invalidateAllMarketOrdersWithNonce(nonce){
 
     await this.mongoInterface.marketOrdersModel
-    .updateMany({nonce:nonce}, {status:'nonceBurned'})
-
-
-
+    .updateMany({nonce:nonce, status:'valid' }, {status:'nonceBurned'})
+ 
+ 
   }
 
 
