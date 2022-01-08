@@ -33,7 +33,7 @@ export default class DataGhost  {
 
     const performDBSetup = async function(mongoInterface){
       console.log('performing db setup')
-      await mongoInterface.createUniqueDualIndexOnCollection('erc721_token', 'contractAddress', 'tokenId')
+      await mongoInterface.createUniqueDualIndexOnCollection('erc721_token', 'contractAddress', 'tokenId') 
     }
  
    

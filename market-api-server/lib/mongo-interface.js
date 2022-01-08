@@ -108,7 +108,7 @@ const MarketOrdersSchema = new Schema({
     type: String
   },
   currencyTokenAmount: {
-    type: String
+    type: String 
   },
   nonce: {
     type: String, index: true
@@ -146,8 +146,10 @@ const MarketOrdersSchema = new Schema({
  
 })
 
+MarketOrdersSchema.index({  currencyTokenAmount:1 }, { collation: {locale: "en_US", numericOrdering: true} } )
+MarketOrdersSchema.index({ nftContractAddress: 1, nftTokenId: 1, orderCreator:1 }, {unique:false} );
+MarketOrdersSchema.index({ createdAt: 1  }, {unique:false} );
 
-CachedNFTTileSchema.index({ nftContractAddress: 1, nftTokenId: 1, orderCreator:1 }, {unique:false} );
 
 
 const NFTSalesSchema = new Schema({
@@ -190,10 +192,10 @@ const ERC721TransfersSchema = new Schema({
     type: Number
   },
   blockNumber: {
-    type: Number
+    type: Number, index: true
   },
   transactionIndex: {
-    type: Number
+    type: Number, index: true
   },
   lastUpdatedAt:{
     type: Number
@@ -208,6 +210,7 @@ const ERC721TransfersSchema = new Schema({
    
  
 })
+ERC721TransfersSchema.index({ blockNumber: 1, transactionIndex:1 }, {unique:false} );
 
 
 const ERC721BalancesSchema = new Schema({

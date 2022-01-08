@@ -14,11 +14,11 @@
     "build": "node tasks/buildWebAssets.js && vue-cli-service build",
     "deploy": "node deploy.js",
 
-    "api": "NODE_ENV=production node market-api-server/apiserver.js",
-    "api-staging": "NODE_ENV=staging node market-api-server/apiserver.js",
-    "api-dev": "NODE_ENV=development node market-api-server/apiserver.js",
+    "api": "NODE_ENV=production node market-api-server/monoserver.js",
+    "api-staging": "NODE_ENV=staging node market-api-server/monoserver.js",
+    "api-dev": "NODE_ENV=development node market-api-server/monoserver.js",
 
-  
+    
     
     "webserver": "NODE_ENV=production node market-api-server/webserver.js",
     "webserver-staging": "NODE_ENV=staging node market-api-server/webserver.js",
