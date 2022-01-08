@@ -69,7 +69,8 @@ npm run fetchCoolcatsData -- images
  ### Start with pm2 
  pm2 start pm2.api.config.json --env production 
  pm2 start pm2.tilemgmt.config.json --env production 
- 
+ pm2 start pm2.dataghost.config.json --env production 
+
  ## Useful Commands
  
 #resize image files 
