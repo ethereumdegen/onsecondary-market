@@ -114,7 +114,7 @@ const MarketOrdersSchema = new Schema({
     type: String, index: true
   },
   expires: {
-    type: Number
+    type: Number, index: true
   },
   signature: {
     type: String, index: true, unique:true 
