@@ -12,15 +12,15 @@
  
  
  
-### Deploying to the image server 
+#### Deploying to the image server 
 
 
 
-### Deploying to the web server 
+#### Deploying to the web server 
 
 
 
-$$$ Deploying to the api server
+#### Deploying to the api server
  
 
 
