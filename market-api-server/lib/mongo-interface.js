@@ -146,6 +146,10 @@ const MarketOrdersSchema = new Schema({
  
 })
 
+
+CachedNFTTileSchema.index({ nftContractAddress: 1, nftTokenId: 1, orderCreator:1 }, {unique:false} );
+
+
 const NFTSalesSchema = new Schema({
   sellerAddress: {
     type: String 
@@ -255,7 +259,9 @@ const ContractStateSchema = new Schema({
 
 const BurnedNoncesSchema = new Schema({
   orderCreator: String,
-  nonce:String,
+  nonce:{
+    type: String, index: true
+  },
   //hasBeenApplied:Boolean,
   createdAt:Number,
   lastPolledAt: Number
