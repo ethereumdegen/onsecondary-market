@@ -8,7 +8,19 @@
 
 ### Description
  
+ This NFT Marketplace is operated by three separate servers.  The API server, the HTML web server and the image server.  
  
+ 
+ 
+### Deploying to the image server 
+
+
+
+### Deploying to the web server 
+
+
+
+$$$ Deploying to the api server
  
 
 
