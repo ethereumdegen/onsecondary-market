@@ -18,7 +18,7 @@
 ### Development commands
 ```
 npm install
-npm run server-dev  (in terminal 1 - backend server)
+npm run api-dev  (in terminal 1 - backend server)
 npm run dev  (in terminal 2 - frontend server)
 ```
 
@@ -26,13 +26,10 @@ npm run dev  (in terminal 2 - frontend server)
 ```
 npm install
 npm run build
-npm run server
+npm run api
 ```
  
-## copy images to dist 
-cd dist/images
-cp -r ../../../images/doodles/* doodles/
-cp -r ../../../images/coolcats/* coolcats/
+
 
 
 ## run fetch scripts 
@@ -46,6 +43,10 @@ npm run fetchCoolcatsData -- images
  
  ## Useful Commands
  
- mogrify -resize 631x631 ./*.jpg
+#resize image files 
+mogrify -resize 631x631 ./*.jpg
 
-
+## copy images to dist 
+cd dist/images
+cp -r ../../../images/doodles/* doodles/
+cp -r ../../../images/coolcats/* coolcats/
