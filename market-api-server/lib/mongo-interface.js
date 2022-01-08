@@ -205,7 +205,7 @@ const ERC721TransfersSchema = new Schema({
   } ,
 
   lastAppliedAt:{
-    type: Number
+    type: Number, index: true
   } 
    
  
