@@ -111,7 +111,7 @@ const MarketOrdersSchema = new Schema({
     type: String
   },
   nonce: {
-    type: String
+    type: String, index: true
   },
   expires: {
     type: Number
