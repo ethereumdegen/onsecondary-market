@@ -13,7 +13,7 @@
  
  
 #### Deploying to the image server 
-
+Use the /nginx/static.txt configuration for Nginx to statically host NFT images from any folder on the server.  The images can be fetched manually by running the scripts in market-api-server/tasks.   They should be organized in folders by collection name and named '0.jpg' for token 0 and so on.  
 
 
 #### Deploying to the web server 
