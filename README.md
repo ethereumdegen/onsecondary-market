@@ -23,7 +23,7 @@
 
 
 #### Testing this code locally
-Clone this repo.  In one terminal,  run 'npm install' to intall packages then run 'npm run dev' to run the hot reloading web server on localhost:8080 and in the other, 'npm run api-dev' to boot a development API server on localhost:4000.   These will talk to one another automatically.  You will need to configure market-api-server/config/serverconfig.json with your RPC URL for web3 connection (rec. your own node, infura, or alchemyapi.)  
+Clone this repo.  In one terminal,  run 'npm install' to install packages then run 'npm run dev' to run the hot reloading web server on localhost:8080 and in the other, 'npm run api-dev' to boot a development API server on localhost:4000.   These will talk to one another automatically.  You will need to configure market-api-server/config/serverconfig.json with your RPC URL for web3 connection (rec. your own node, infura, or alchemyapi.)  
 
  
 #### Deploying to the image server 
