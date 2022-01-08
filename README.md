@@ -13,10 +13,17 @@
 
 
 #### Pre-requisites 
-Recommended: Linux OS
-NodeJS V14
-MongoDB 
 
+> Recommended: Linux OS
+
+> NodeJS V14
+
+> MongoDB 
+
+
+
+#### Testing this code locally
+Clone this repo.  In one terminal, run 'npm run dev' to run the hot reloading web server on localhost:8080 and in the other, 'npm run api-dev' to boot a development API server on localhost:4000.   These will talk to one another automatically.  You will need to configure market-api-server/config/serverconfig.json with your RPC URL for web3 connection (rec. your own node, infura, or alchemyapi.)  
 
  
 #### Deploying to the image server 
@@ -28,12 +35,12 @@ You must point the webcode at this image server (imageApiRoot) by using the conf
 
 #### Deploying to the api server
 The most complex server to commission and maintain, the api server is unique in that is runs active processes and scripts continuously.  
+Clone this repo and run the 'npm run api' command to boot the api server.  You will need to set up certain configuration files.
 
-
-
+You must point the webcode at this api server (marketApiRoot) by using the config file 'src/config/FrontEndConfig.json'.
 
 #### Deploying to the web server 
-run the 'npm run build' command to compile web code into /dist.  Use the /nginx/static.txt configuration for Nginx to statically host this /dist folder.
+Clone this repo and run the 'npm run build' command to compile web code into /dist.  Use the /nginx/static.txt configuration for Nginx to statically host this /dist folder.
   
   
 
