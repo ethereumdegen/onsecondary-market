@@ -66,24 +66,22 @@ let sharedConfig =  FileHelper.readJSONFile('./shared/sharedconfig.json')
     }));
 
 
-    //let dataghost = new DataGhost()
-    //dataghost.init(web3  ) 
+   // let dataghost = new DataGhost()
+   // dataghost.init(web3  ) 
 
     
 
-    //let nftTileManager = new NFTTileManager(web3,mongoInterface,vibegraphInterface,serverConfig)
-    //await nftTileManager.init() 
+    let nftTileManager = new NFTTileManager(web3,mongoInterface,vibegraphInterface,serverConfig)
+    await nftTileManager.init() 
 
 
     //TODO: DO NOT pass vibegraph interface into this -> use the nft-tile-manager to coalesce all of the data into mongoInterface 
-    let apiServer = new ApiServer(web3,mongoInterface,vibegraphInterface, serverConfig )
+  //  let apiServer = new ApiServer(web3,mongoInterface,vibegraphInterface, serverConfig )
       
     
-    console.log('web3 ready with provider ',serverConfig.web3provider )
+    console.log('tilemanager running with provider ',serverConfig.web3provider )
     
- 
-
-
+  
 }
 
  

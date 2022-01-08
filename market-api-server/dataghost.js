@@ -28,7 +28,7 @@ let dataghostConfig = dataghostConfigFile[envmode]
 
     let customDBName = dataghostConfig.vibeGraphConfig.dbName 
     
-    customDBName = "vibegraph_prod3"
+    //customDBName = "vibegraph_prod3"
     
    
     console.log('boot vibegraph interface ', customDBName)
@@ -50,7 +50,7 @@ let dataghostConfig = dataghostConfigFile[envmode]
     dataghost.init( web3 , customDBName ) 
  
 
-
+    console.log('dataghost ready with provider ',serverConfig.web3provider )
 }
 
  
