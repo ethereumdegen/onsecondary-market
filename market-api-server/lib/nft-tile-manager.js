@@ -199,8 +199,8 @@ export default class NFTTileManager  {
       //let beforeTime = (Date.now() - STALE_TIME)
 
       let nextERC721Transfer = await this.vibegraphInterface.erc721TransfersModel
-      .findOne( {  lastAppliedAt:  {$not: {$gt:0}} }).
-      sort( {  blockNumber: 1,  transactionIndex: 1 } ) ///ascending for both 
+      .findOne( {  lastAppliedAt:  {$not: {$gt:0}} })
+      .sort( {  blockNumber: 1,  transactionIndex: 1 } ) ///ascending for both 
        
         
       if(nextERC721Transfer){ 
