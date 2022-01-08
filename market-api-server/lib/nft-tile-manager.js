@@ -210,7 +210,7 @@ export default class NFTTileManager  {
       
          
          await this.updateNftTileFromERC721Transfer(nextERC721Transfer)
-         //await this.updateMarketOrdersFromERC721Transfer(nextERC721Transfer)
+         await this.updateMarketOrdersFromERC721Transfer(nextERC721Transfer)
         
          await this.vibegraphInterface.erc721TransfersModel
          .updateOne({_id: nextERC721Transfer._id}, {lastAppliedAt: Date.now()})
@@ -360,7 +360,7 @@ export default class NFTTileManager  {
 
  
 
-      await this.clearBuyoutPriceIfLinkedMarketOrderIsNowInvalid(matchingNFTTile._id, marketOrder.nftContractAddress, marketOrder.nftTokenId  )
+      await this.clearBuyoutPriceIfLinkedMarketOrderIsNowInvalid(matchingNFTTile._id   )
       await this.findBestFallbackBuyoutPriceForNftTile( matchingNFTTile._id  )
 
 
