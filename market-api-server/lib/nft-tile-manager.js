@@ -253,7 +253,7 @@ export default class NFTTileManager  {
      )
 
       if( update ){
-        console.log('updated ',update)
+        console.log('updated ',update.modifiedCount)
       }
      
     }
