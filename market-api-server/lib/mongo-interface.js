@@ -96,7 +96,7 @@ const MarketOrdersSchema = new Schema({
     type: String, index: true
   },
   isSellOrder: {
-    type: Boolean
+    type: Boolean, index: true
   },
   nftContractAddress: {
     type: String, index: true
