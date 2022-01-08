@@ -93,7 +93,7 @@ const MarketOrdersSchema = new Schema({
     type: String
   },
   orderCreator: {
-    type: String
+    type: String, index: true
   },
   isSellOrder: {
     type: Boolean
