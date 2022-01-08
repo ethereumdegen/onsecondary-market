@@ -6,17 +6,14 @@
  Monolithic repo for api server, image server, web server 
 
 
-### TODO  
+### Description
  
  
  
 
 
  
- 
-
-
- BUG: posting a new order -> it does not show up on tile . Only after clearing that new orders's LastPolledAt will the tile update .   .. odd
+  
 
 ### Development commands
 ```
