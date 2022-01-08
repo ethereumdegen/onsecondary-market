@@ -9,17 +9,10 @@
 ### TODO  
  
  
--use a script to cull expired orders 
-
-
- mogrify -resize 631x631 ./*.jpg
+ 
 
 
  
--- failed doodles -> [ 183, 184, 185, 186, 187, 4398 ]
-
- 
- -build a bot for api (like genie ) 
  
 
 
@@ -52,5 +45,10 @@ npm run fetchCoolcatsData -- images
 
  ### Start with pm2 
  pm2 start pm2.config.json --env production 
+ 
+ 
+ ## Useful Commands
+ 
+ mogrify -resize 631x631 ./*.jpg
 
 
