@@ -205,7 +205,7 @@ export default class NFTTileManager  {
         
       if(nextERC721Transfer){ 
         
-          console.log('poll xfer ', nextERC721Transfer.blockNumber)
+          //console.log('poll xfer ', nextERC721Transfer.blockNumber)
        
       
          
@@ -252,9 +252,9 @@ export default class NFTTileManager  {
       {ownerPublicAddress: newOwnerAddress}
      )
 
-      if( update ){
+      /*if( update ){
         console.log('updated ',update.modifiedCount)
-      }
+      }*/
      
     }
 
