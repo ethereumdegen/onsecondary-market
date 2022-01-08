@@ -66,7 +66,7 @@ npm run fetchCoolcatsData -- images
 
 
 
- ### Start with pm2 
+ ### Start with pm2  (these 3 services must run on your API server)
  pm2 start pm2.api.config.json --env production 
  pm2 start pm2.tilemgmt.config.json --env production 
  pm2 start pm2.dataghost.config.json --env production 
