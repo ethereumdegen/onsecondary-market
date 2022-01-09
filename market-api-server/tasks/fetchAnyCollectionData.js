@@ -15,6 +15,9 @@ import AppHelper from '../lib/app-helper.js'
 
 import Web3 from 'web3'
 import FileHelper from '../lib/file-helper.js'
+
+
+import svg2img from 'node-svg2img'
  
 let downloadImages = true 
 let writeTraitsFile = true 
@@ -68,10 +71,10 @@ async function runTask(){
 
 
 
-    let metadataURI = fetchMetadataURI( nftContractAddress, web3 )
+    let metadataURI = await fetchMetadataURI( nftContractAddress, web3 )
 
-    let totalSupply = fetchTotalSupply( nftContractAddress, web3)
-    
+    let totalSupply = await fetchTotalSupply( nftContractAddress, web3)
+ 
 
     for(let tokenId=0; tokenId<totalSupply; tokenId+=1){
 
@@ -84,22 +87,24 @@ async function runTask(){
         try{
             await delay(1000)
 
-            const res = await axios.get( URI )
+            //const res = await axios.get( URI )
 
-            console.log(res.data) 
+            //console.log(res.data) 
 
-        // for(let asset of res.data.assets){ 
-                
+            let metadata = await fetchMetadataBlob(  metadataURI  )
+
+            console.log('metadata blob ', metadata)
+ 
                 tokenIds.push(tokenId)
 
                 if(downloadImages){
-                    let imageIPFSHash = res.data.image.split('://')[1]
+                    let imageIPFSHash = metadata.image.split('://')[1]
 
                     let imageURL = `https://ipfs.io/ipfs/${imageIPFSHash}`
                     await downloadImage(nftContractAddress, tokenId, imageURL)
                 } 
             
-                traitsMap[tokenId] = res.data.attributes 
+                traitsMap[tokenId] = metadata.attributes 
 
 
         // }
@@ -144,6 +149,27 @@ async function fetchMetadataURI(nftContractAddress, web3){
     return result
 }
 
+async function fetchMetadataBlob( uri ){
+
+    if (typeof uri == 'string') {
+
+        console.log('metadata uri ', uri)
+        const isURL = /^(https?|ipfs):\/\//.test(uri)
+        if ( isURL ) {
+            console.log('using axios ')
+          return await readHTTPUrl( uri )
+        }
+  
+        //try to parse with base64
+        const split = uri.split('base64,')[1]
+        let base64data = split ? split : uri
+  
+        const output = Buffer.from(base64data, 'base64').toString('utf-8')
+  
+        return JSON.parse(output)
+      }
+}
+
 
 
 async function fetchTotalSupply(nftContractAddress, web3){
@@ -155,15 +181,39 @@ async function fetchTotalSupply(nftContractAddress, web3){
 
     return result
 }
+ 
+async function readHTTPUrl(url , tokenId )  {
+ 
+    const res = await axios.get( parseHTTPURI(url) )
+
+    return res.data
+}
+
+function parseHTTPURI(url , tokenID  ) {
+
+    if (url.startsWith("https://api.opensea.io/api/v1/metadata")) {
+        return url.replace("0x{id}", tokenID);
+      } else {
+        url = url.replace("{id}", tokenID);
+      } 
+
+      // https://ipfs.io/ipfs/
+      // https://gateway.pinata.cloud/ipfs/ 
+    return url.replace(/^ipfs:\/\/(ipfs\/)?/, 'https://ipfs.io/ipfs/')
+  }
 
 
 
-async function  downloadImage(nftContractAddress, tokenId, url){
+async function downloadImage(nftContractAddress, tokenId, url){
   
-   
+    
     let image_path = path.join ( `./market-api-server/output/images/${nftContractAddress}/${tokenId}.jpg` )
 
-
+    try{ 
+        fs.mkdirSync( path.join ( `./market-api-server/output/images/${nftContractAddress}` ))
+    }catch(e){
+        console.log(e)
+    }
         
     let existingImage = fs.existsSync(image_path ); 
     if(existingImage) { 
@@ -172,21 +222,63 @@ async function  downloadImage(nftContractAddress, tokenId, url){
      }
 
 
-    return new Promise(async (resolve, reject) => {
-        const writer = fs.createWriteStream(image_path)
+    const isData = /^data:.+/.test(url)
+    if(isData){
 
+        let imageBuffer = await new Promise((resolve, reject) => { 
+            let dataStr = url 
+            if (/^data:image\/svg\+xml;base64,/.test(dataStr)) {
+                svg2img(dataStr, { format: 'jpg' }, (err, buffer) => {
+                    if (err) return reject(err)
+        
+                resolve(buffer)
+                })
+                return
+            }
+                
          
-        const response = await axios({
-            url,
-            method: 'GET',
-            responseType: 'stream'
-        })
+            })
 
-        response.data.pipe(writer)
+        fs.writeFileSync(image_path, imageBuffer)
+            
+        return 
+    }
+
+    const isURL = /^(https?|ipfs):\/\//.test(url)
+    if(isURL){
+        console.log('using axios 2', url)
+
+        //FIX ME 
+        return new Promise(async (resolve, reject) => {
+            const writer = fs.createWriteStream(image_path)
     
+            writer.on('finish', () => resolve())
+            writer.on('error', reject)
 
-        writer.on('finish', () => resolve())
-        writer.on('error', reject)
-    })
+
+            const response =   axios({
+                url,
+                method: 'GET',
+                responseType: 'stream'
+            }).then(
+
+                resolve()
+                
+                
+            ).catch(
+
+                reject()
+
+
+            )
+
+            response.data.pipe(writer)  
+    
+            
+        })
+    }
+
+    console.error('unrecognized image url: ',url)
+    return 
 
 }

@@ -2,7 +2,7 @@
   "name": "onsecondary-market-web",
   "description": "NFT Exchange",
   "version": "0.2.0",
-  "type": "module", 
+  "type": "module",
   "postcss": {
     "plugins": {
       "tailwindcss": {},
@@ -13,35 +13,22 @@
     "dev": "vue-cli-service serve",
     "build": "node tasks/buildWebAssets.js && vue-cli-service build",
     "deploy": "node deploy.js",
-
     "api": "NODE_ENV=production node market-api-server/monoserver.js",
     "api-staging": "NODE_ENV=staging node market-api-server/monoserver.js",
     "api-dev": "NODE_ENV=development node market-api-server/monoserver.js",
-
-    
-    
     "webserver": "NODE_ENV=production node market-api-server/webserver.js",
     "webserver-staging": "NODE_ENV=staging node market-api-server/webserver.js",
     "webserver-dev": "NODE_ENV=development node market-api-server/webserver.js",
-
-
     "imageserver": "node market-api-server/imageserver.js",
-     
-     
     "lint": "vue-cli-service lint",
     "test": "NODE_ENV=test mocha 'tests/**/*.js' --timeout 25000",
     "test:frontend": "vue-cli-service test:unit",
-    
     "populateTraitsDB": "node market-api-server/tasks/populateTraitsDB.js",
-
     "fetchBAYCData": "node market-api-server/tasks/fetchCollectionDataBAYC.js",
     "fetchMAYCData": "node market-api-server/tasks/fetchCollectionDataMAYC.js",
-
     "fetchDoodlesData": "node market-api-server/tasks/fetchCollectionDataDoodles.js",
     "fetchCoolcatsData": "node market-api-server/tasks/fetchCollectionDataCoolcats.js",
-
     "fetchNFTData": "node market-api-server/tasks/fetchAnyCollectionData.js",
-
     "exportMarketOrders": "node market-api-server/tasks/exportMarketOrders.js",
     "importMarketOrders": "node market-api-server/tasks/importMarketOrders.js"
   },
@@ -55,9 +42,9 @@
     "eth-sig-util": "^3.0.1",
     "ethereumjs-abi": "^0.6.8",
     "ethereumjs-util": "^7.0.9",
-    
     "mongodb": "^3.6.5",
     "mongoose": "^6.0.12",
+    "node-svg2img": "^1.1.0",
     "socket.io": "^3.1.1",
     "socket.io-client": "^3.1.1",
     "tailwindcss": "^1.0.0-beta.4",
