@@ -63,6 +63,7 @@ npm run api
 
 ## run fetch scripts 
 npm run fetchCoolcatsData -- images
+npm run fetchNFTData -- 0x922dc160f2ab743312a6bb19dd5152c1d3ecca33 -- images
 
 
 

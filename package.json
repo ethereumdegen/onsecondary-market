@@ -40,6 +40,8 @@
     "fetchDoodlesData": "node market-api-server/tasks/fetchCollectionDataDoodles.js",
     "fetchCoolcatsData": "node market-api-server/tasks/fetchCollectionDataCoolcats.js",
 
+    "fetchNFTData": "node market-api-server/tasks/fetchAnyCollectionData.js",
+
     "exportMarketOrders": "node market-api-server/tasks/exportMarketOrders.js",
     "importMarketOrders": "node market-api-server/tasks/importMarketOrders.js"
   },
