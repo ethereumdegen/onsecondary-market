@@ -33,6 +33,7 @@ if(!envmode){
 }
 
 let resolution = 240
+let totalSupplyOverride = 5000
 
 let serverConfigFile = FileHelper.readJSONFile('./market-api-server/config/serverconfig.json')
 let serverConfig = serverConfigFile[envmode]
@@ -76,7 +77,10 @@ async function runTask(){
     
 
     let totalSupply = await fetchTotalSupply( nftContractAddress, web3)
- 
+    
+    if(totalSupplyOverride){
+        totalSupply = totalSupplyOverride
+    }
 
     for(let tokenId=0; tokenId<totalSupply; tokenId+=1){
 
