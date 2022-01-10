@@ -98,9 +98,12 @@ async function runTask(){
                 tokenIds.push(tokenId)
 
                 if(downloadImages){
-                    let imageIPFSHash = metadata.image.split('://')[1]
+                   // let imageIPFSHash = metadata.image.split('://')[1]
 
-                    let imageURL = `https://ipfs.io/ipfs/${imageIPFSHash}`
+                    //`https://ipfs.io/ipfs/${imageIPFSHash}`
+
+                    let imageURL = parseImageURI( metadata.image ) 
+
                     await downloadImage(nftContractAddress, tokenId, imageURL)
                 } 
             
@@ -203,8 +206,34 @@ function parseHTTPURI(url , tokenID  ) {
   }
 
 
+  function parseImageURI( url ){
+        // let imageIPFSHash = metadata.image.split('://')[1]
+
+                    //`https://ipfs.io/ipfs/${imageIPFSHash}`
+
+            const isData = /^data:.+/.test(url)
+            if(isData){
+                return url
+            }
+
+            const isURL = /^(https?|ipfs):\/\//.test(url)
+            if(isURL){
+                let imageIPFSHash = metadata.image.split('://')[1]
+                return `https://ipfs.io/ipfs/${imageIPFSHash}`
+
+            }
+
+            return url 
+  }
+
+
 
 async function downloadImage(nftContractAddress, tokenId, url){
+
+    if(typeof url == 'undefined'){
+        console.log('Not downloading image for ',tokenId, ' : url is ',url)
+        return 
+    }
   
     
     let image_path = path.join ( `./market-api-server/output/images/${nftContractAddress}/${tokenId}.jpg` )

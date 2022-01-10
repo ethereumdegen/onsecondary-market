@@ -47,7 +47,6 @@
     "node-svg2img": "^1.1.0",
     "socket.io": "^3.1.1",
     "socket.io-client": "^3.1.1",
-    "svg2img": "^0.9.4",
     "tailwindcss": "^1.0.0-beta.4",
     "vibegraph": "^0.29.1",
     "vue": "^2.6.6",
