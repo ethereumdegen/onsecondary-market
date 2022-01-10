@@ -87,10 +87,9 @@
                 </div>
 
               
-                 <div class=" relative pb-2 mb-12" style="min-height:200px">
+                <div class=" relative pb-2 mb-12" style="min-height:200px">
                        
-                    <div  class=" font-serious  text-white text-2xl p-2" style="  background: #222b" > Open Source NFT Marketplace </div>
-
+                  <div class="font-serious text-white text-2xl p-2" style="background: #222b"> Curated NFT Marketplace </div>
 
                 </div>
 
