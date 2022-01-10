@@ -44,7 +44,7 @@
     "ethereumjs-util": "^7.0.9",
     "mongodb": "^3.6.5",
     "mongoose": "^6.0.12",
-    "node-svg2img": "^1.1.0",
+    "node-svg2img": "git://github.com/admazzola/svg2img#master",
     "socket.io": "^3.1.1",
     "socket.io-client": "^3.1.1",
     "tailwindcss": "^1.0.0-beta.4",

@@ -32,6 +32,8 @@ if(!envmode){
     envmode = 'production'
 }
 
+let resolution = 240
+
 let serverConfigFile = FileHelper.readJSONFile('./market-api-server/config/serverconfig.json')
 let serverConfig = serverConfigFile[envmode]
 
@@ -71,18 +73,18 @@ async function runTask(){
 
 
 
-    let metadataURI = await fetchMetadataURI( nftContractAddress, web3 )
+    
 
     let totalSupply = await fetchTotalSupply( nftContractAddress, web3)
  
 
     for(let tokenId=0; tokenId<totalSupply; tokenId+=1){
 
-
+        let metadataURI = await fetchMetadataURI( nftContractAddress, tokenId, web3 )
         
 
-        let URI = `${metadataURI}/${tokenId}`
-        console.log(URI)
+        //let URI = `${metadataURI}`
+        //console.log(URI)
 
         try{
             await delay(1000)
@@ -122,15 +124,17 @@ async function runTask(){
             console.log(e)
         }
 
-} 
- 
 
 
     if(writeTraitsFile)
     {
         fs.writeFileSync( path.join ( `./market-api-server/output/${nftContractAddress}.json` ) , JSON.stringify( traitsMap ) );
     }
-    
+
+} 
+ 
+
+ 
  
 console.log('failed:',failedRequestIds)
 
@@ -142,14 +146,20 @@ runTask()
 
 
 
-async function fetchMetadataURI(nftContractAddress, web3){
+async function fetchMetadataURI(nftContractAddress, tokenId, web3){
     let nftContract = await new web3.eth.Contract(nftContractABI, nftContractAddress)
 
-    let result = await nftContract.methods.tokenURI( 1 ).call()
+    try{
+        let result = await nftContract.methods.tokenURI( tokenId ).call()
 
-    console.log('metadata uri ', result)
-
-    return result
+        console.log('metadata uri ', result)
+    
+        return result
+    }catch(e){
+        console.log(e)
+        return null
+    }
+    
 }
 
 async function fetchMetadataBlob( uri ){
@@ -171,6 +181,9 @@ async function fetchMetadataBlob( uri ){
   
         return JSON.parse(output)
       }
+
+
+      return null
 }
 
 
@@ -256,18 +269,26 @@ async function downloadImage(nftContractAddress, tokenId, url){
 
         let imageBuffer = await new Promise((resolve, reject) => { 
             let dataStr = url 
+            
+
             if (/^data:image\/svg\+xml;base64,/.test(dataStr)) {
-                svg2img(dataStr, { format: 'jpg' }, (err, buffer) => {
-                    if (err) return reject(err)
-        
-                resolve(buffer)
-                })
-                return
+
+                 // dataStr = dataStr.split('base64,')[1]
+                console.log('svg2img ', dataStr)
+
+                svg2img(dataStr, { format: 'jpg', width: resolution, height: resolution  }, (err, buffer) => {
+                    if (err) return reject(err) 
+                     
+                    resolve(buffer)
+                }) 
+                
+
             }
                 
          
             })
 
+        console.log('imageBuffer',imageBuffer)
         fs.writeFileSync(image_path, imageBuffer)
             
         return 
