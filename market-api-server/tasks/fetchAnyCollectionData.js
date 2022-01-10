@@ -19,7 +19,7 @@ import FileHelper from '../lib/file-helper.js'
 
 import svg2img from 'node-svg2img'
  
-let downloadImages = true 
+let downloadImages = false 
 let writeTraitsFile = true 
   
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
@@ -33,7 +33,7 @@ if(!envmode){
 }
 
 let resolution = 240
-let totalSupplyOverride = 5000
+let totalSupplyOverride = null
 
 let serverConfigFile = FileHelper.readJSONFile('./market-api-server/config/serverconfig.json')
 let serverConfig = serverConfigFile[envmode]
@@ -59,7 +59,7 @@ async function runTask(){
     let nftContractAddress = AppHelper.toChecksumAddress(myArgs[0])
 
 
-    if(myArgs[1] == 'images'){
+    if(myArgs[2] == 'images'){
         downloadImages = true
     }
     console.log('download images: ', downloadImages)
@@ -235,9 +235,9 @@ function parseHTTPURI(url , tokenID  ) {
 
             const isURL = /^(https?|ipfs):\/\//.test(url)
             if(isURL){
-                let imageIPFSHash = metadata.image.split('://')[1]
-                return `https://ipfs.io/ipfs/${imageIPFSHash}`
-
+                //let imageIPFSHash = url.split('://')[1]
+                //return `https://ipfs.io/ipfs/${imageIPFSHash}`
+                return url 
             }
 
             return url 
@@ -302,34 +302,30 @@ async function downloadImage(nftContractAddress, tokenId, url){
     if(isURL){
         console.log('using axios 2', url)
 
-        //FIX ME 
-        return new Promise(async (resolve, reject) => {
+         
+        try{ 
+        let result = await new Promise(async (resolve, reject) => {
             const writer = fs.createWriteStream(image_path)
     
-            writer.on('finish', () => resolve())
-            writer.on('error', reject)
+           
 
 
-            const response =   axios({
+            const response =  await axios({
                 url,
                 method: 'GET',
                 responseType: 'stream'
-            }).then(
-
-                resolve()
-                
-                
-            ).catch(
-
-                reject()
-
-
-            )
+            }) 
 
             response.data.pipe(writer)  
     
-            
+            writer.on('finish', () => resolve())
+            writer.on('error', reject)
         })
+    }catch(e){
+        console.error(e)
+    }
+
+        return  
     }
 
     console.error('unrecognized image url: ',url)
