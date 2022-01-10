@@ -224,7 +224,7 @@ function parseHTTPURI(url , tokenID  ) {
 
 
   function parseImageURI( url ){
-        // let imageIPFSHash = metadata.image.split('://')[1]
+            // let imageIPFSHash = metadata.image.split('://')[1]
 
                     //`https://ipfs.io/ipfs/${imageIPFSHash}`
 
@@ -303,27 +303,32 @@ async function downloadImage(nftContractAddress, tokenId, url){
         console.log('using axios 2', url)
 
          
-        try{ 
+         
         let result = await new Promise(async (resolve, reject) => {
             const writer = fs.createWriteStream(image_path)
     
            
+            let response = null 
 
+            try{ 
+                response =  await axios({
+                    url,
+                    method: 'GET',
+                    responseType: 'stream'
+                }) 
 
-            const response =  await axios({
-                url,
-                method: 'GET',
-                responseType: 'stream'
-            }) 
+                response.data.pipe(writer)  
+            }catch(e){
+                console.error(e)
+                reject()
+            }
 
-            response.data.pipe(writer)  
+            
     
             writer.on('finish', () => resolve())
             writer.on('error', reject)
         })
-    }catch(e){
-        console.error(e)
-    }
+  
 
         return  
     }
