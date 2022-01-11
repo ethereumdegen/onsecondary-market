@@ -3,10 +3,11 @@ import FileHelper from '../lib/file-helper.js'
  
 import fs from 'fs'
 import path from 'path'
+import AppHelper from '../lib/app-helper.js'
 
 const assetDataTable =FileHelper.readJSONFile('./shared/contractdata.json')
 
-
+let currentNetworkName = AppHelper.getNetworkName( )
  
 export default class GenerateContractDataLookupTask {
 
@@ -23,8 +24,12 @@ static generateAssetDataLookup(dataTable){
    
   
         let contractAddress = contractInfo.address.toLowerCase()
-  
+
+        if(networkName == currentNetworkName){
           records[contractAddress] = {name: contractInfo.name, address: contractInfo.address , networkName: networkName}
+        }
+  
+          
   
       }  
    
