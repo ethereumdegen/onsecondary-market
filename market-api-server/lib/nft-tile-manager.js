@@ -384,7 +384,7 @@ export default class NFTTileManager  {
         return 
      }
 
-     console.log('yo ',matchingNFTTile)
+    
 
       let ownerAddress = AppHelper.toChecksumAddress(matchingNFTTile.ownerPublicAddress)
       let nftContractAddress = AppHelper.toChecksumAddress(matchingNFTTile.contractAddress)

@@ -287,7 +287,7 @@ export default {
 
     }
   },
-  mounted:   function () {
+  mounted:  async function () {
 
 
     this.collectionName = this.$route.params.collectionName
@@ -302,9 +302,9 @@ export default {
       //assume network is mainnet 
      this.nftContractAddress = FrontendHelper.lookupContractAddress(  this.collectionName, this.web3Plug.getContractDataForNetworkID(1)  )
       
-      this.fetchTokenData() 
+      await this.fetchTokenData() 
 
-      this.fetchOrdersForToken()
+      await this.fetchOrdersForToken()
 
     
     
@@ -557,12 +557,16 @@ export default {
           console.log('addy is ', this.nftContractAddress)
         )
         
-        if(this.$refs.OffersList){
-          await this.$refs.OffersList.checkForApproval() 
+        try{
+          if(this.$refs.OffersList){
+            await this.$refs.OffersList.checkForApproval() 
 
-          //update the buy offers list 
-         await this.$refs.OffersList.fetchBuyOffers() 
+            //update the buy offers list 
+            await this.$refs.OffersList.fetchBuyOffers() 
 
+          }
+        }catch(e){
+          console.error(e)
         }
          
 
